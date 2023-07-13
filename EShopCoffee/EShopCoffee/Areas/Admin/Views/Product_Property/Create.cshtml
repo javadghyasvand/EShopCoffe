@@ -1,0 +1,40 @@
+﻿@model EShopCoffee.Models.DataLayer.Product_Property
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h4 class="text-center font-weight-bold mt-4">
+    افزودن ویژگی
+</h4>
+<hr/>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    @Html.LabelFor(model => model, "ویژگی", htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
+                </div>
+                @Html.EditorFor(model => model.Property_Title, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <p class="text-center">
+                @Html.ValidationMessageFor(model => model.Property_Title, "", new { @class = "text-danger" })
+            </p>
+        </div>
+        <div class="form-group text-center">
+            <div class="text-center">
+                <button type="submit" title="ذخیره" class="btn btn-success btn-block">
+                    <i class="fa fa-save fa-2x"></i>
+                </button>
+                <a href="@Url.Action("Index")" class="btn btn-info btn-block" title="بازگشت">
+                    <i class="fa fa-arrow-circle-left fa-2x"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+}

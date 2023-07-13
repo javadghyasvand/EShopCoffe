@@ -1,0 +1,88 @@
+﻿@model EShopCoffee.Models.DataLayer.Product_EShop
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Product_EShop</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Proudct_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Proudct_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_IsInStock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_IsInStock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Discription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Discription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_ImageName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_ImageName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Is_Delete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Is_Delete)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

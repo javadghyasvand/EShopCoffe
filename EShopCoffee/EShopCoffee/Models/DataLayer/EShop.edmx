@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EShopCoffe_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Product_EShop">
+          <Key>
+            <PropertyRef Name="Product_Id" />
+          </Key>
+          <Property Name="Product_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Proudct_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Product_Count" Type="bigint" Nullable="false" />
+          <Property Name="Product_IsInStock" Type="bit" Nullable="false" />
+          <Property Name="Product_Discription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Product_Price" Type="bigint" Nullable="false" />
+          <Property Name="Product_ImageName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Product_CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Product_Is_Delete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product_Galllery">
+          <Key>
+            <PropertyRef Name="Gallery_Id" />
+          </Key>
+          <Property Name="Gallery_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Id" Type="bigint" Nullable="false" />
+          <Property Name="Gallery_Image_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Gallery_Image_Name" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Product_Groups">
+          <Key>
+            <PropertyRef Name="Group_Id" />
+          </Key>
+          <Property Name="Group_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Group_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Parent_Id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Product_Property">
+          <Key>
+            <PropertyRef Name="Property_Id" />
+          </Key>
+          <Property Name="Property_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Property_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product_Select_Groups">
+          <Key>
+            <PropertyRef Name="Pro_Gro_Id" />
+          </Key>
+          <Property Name="Pro_Gro_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Id" Type="bigint" Nullable="false" />
+          <Property Name="Group_Id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product_Tags">
+          <Key>
+            <PropertyRef Name="Tag_Id" />
+          </Key>
+          <Property Name="Tag_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Id" Type="bigint" Nullable="false" />
+          <Property Name="Tag" Type="nvarchar" MaxLength="350" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Product_Galllery_Product_EShop">
+          <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+          <End Role="Product_Galllery" Type="Self.Product_Galllery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_EShop">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="Product_Galllery">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Groups_Product_Groups">
+          <End Role="Product_Groups" Type="Self.Product_Groups" Multiplicity="0..1" />
+          <End Role="Product_Groups1" Type="Self.Product_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Groups">
+              <PropertyRef Name="Group_Id" />
+            </Principal>
+            <Dependent Role="Product_Groups1">
+              <PropertyRef Name="Parent_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Select_Groups_Product_EShop">
+          <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+          <End Role="Product_Select_Groups" Type="Self.Product_Select_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_EShop">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="Product_Select_Groups">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Select_Groups_Product_Groups">
+          <End Role="Product_Groups" Type="Self.Product_Groups" Multiplicity="1" />
+          <End Role="Product_Select_Groups" Type="Self.Product_Select_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Groups">
+              <PropertyRef Name="Group_Id" />
+            </Principal>
+            <Dependent Role="Product_Select_Groups">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Tags_Product_EShop">
+          <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+          <End Role="Product_Tags" Type="Self.Product_Tags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_EShop">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="Product_Tags">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EShopCoffe_DBModelStoreContainer">
+          <EntitySet Name="Product_EShop" EntityType="Self.Product_EShop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Galllery" EntityType="Self.Product_Galllery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Groups" EntityType="Self.Product_Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Property" EntityType="Self.Product_Property" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Select_Groups" EntityType="Self.Product_Select_Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Tags" EntityType="Self.Product_Tags" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Product_Galllery_Product_EShop" Association="Self.FK_Product_Galllery_Product_EShop">
+            <End Role="Product_EShop" EntitySet="Product_EShop" />
+            <End Role="Product_Galllery" EntitySet="Product_Galllery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Groups_Product_Groups" Association="Self.FK_Product_Groups_Product_Groups">
+            <End Role="Product_Groups" EntitySet="Product_Groups" />
+            <End Role="Product_Groups1" EntitySet="Product_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Select_Groups_Product_EShop" Association="Self.FK_Product_Select_Groups_Product_EShop">
+            <End Role="Product_EShop" EntitySet="Product_EShop" />
+            <End Role="Product_Select_Groups" EntitySet="Product_Select_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Select_Groups_Product_Groups" Association="Self.FK_Product_Select_Groups_Product_Groups">
+            <End Role="Product_Groups" EntitySet="Product_Groups" />
+            <End Role="Product_Select_Groups" EntitySet="Product_Select_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Tags_Product_EShop" Association="Self.FK_Product_Tags_Product_EShop">
+            <End Role="Product_EShop" EntitySet="Product_EShop" />
+            <End Role="Product_Tags" EntitySet="Product_Tags" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EShopCoffe_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Product_EShop">
+          <Key>
+            <PropertyRef Name="Product_Id" />
+          </Key>
+          <Property Name="Product_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Proudct_Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Product_Count" Type="Int64" Nullable="false" />
+          <Property Name="Product_IsInStock" Type="Boolean" Nullable="false" />
+          <Property Name="Product_Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Product_Price" Type="Int64" Nullable="false" />
+          <Property Name="Product_ImageName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Product_CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Product_Is_Delete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Product_Galllery" Relationship="Self.FK_Product_Galllery_Product_EShop" FromRole="Product_EShop" ToRole="Product_Galllery" />
+          <NavigationProperty Name="Product_Select_Groups" Relationship="Self.FK_Product_Select_Groups_Product_EShop" FromRole="Product_EShop" ToRole="Product_Select_Groups" />
+          <NavigationProperty Name="Product_Tags" Relationship="Self.FK_Product_Tags_Product_EShop" FromRole="Product_EShop" ToRole="Product_Tags" />
+        </EntityType>
+        <EntityType Name="Product_Galllery">
+          <Key>
+            <PropertyRef Name="Gallery_Id" />
+          </Key>
+          <Property Name="Gallery_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Id" Type="Int64" Nullable="false" />
+          <Property Name="Gallery_Image_Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gallery_Image_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product_EShop" Relationship="Self.FK_Product_Galllery_Product_EShop" FromRole="Product_Galllery" ToRole="Product_EShop" />
+        </EntityType>
+        <EntityType Name="Product_Groups">
+          <Key>
+            <PropertyRef Name="Group_Id" />
+          </Key>
+          <Property Name="Group_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group_Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Parent_Id" Type="Int64" />
+          <NavigationProperty Name="Product_Groups1" Relationship="Self.FK_Product_Groups_Product_Groups" FromRole="Product_Groups" ToRole="Product_Groups1" />
+          <NavigationProperty Name="Product_Groups2" Relationship="Self.FK_Product_Groups_Product_Groups" FromRole="Product_Groups1" ToRole="Product_Groups" />
+          <NavigationProperty Name="Product_Select_Groups" Relationship="Self.FK_Product_Select_Groups_Product_Groups" FromRole="Product_Groups" ToRole="Product_Select_Groups" />
+        </EntityType>
+        <EntityType Name="Product_Select_Groups">
+          <Key>
+            <PropertyRef Name="Pro_Gro_Id" />
+          </Key>
+          <Property Name="Pro_Gro_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Id" Type="Int64" Nullable="false" />
+          <Property Name="Group_Id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Product_EShop" Relationship="Self.FK_Product_Select_Groups_Product_EShop" FromRole="Product_Select_Groups" ToRole="Product_EShop" />
+          <NavigationProperty Name="Product_Groups" Relationship="Self.FK_Product_Select_Groups_Product_Groups" FromRole="Product_Select_Groups" ToRole="Product_Groups" />
+        </EntityType>
+        <EntityType Name="Product_Tags">
+          <Key>
+            <PropertyRef Name="Tag_Id" />
+          </Key>
+          <Property Name="Tag_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Id" Type="Int64" Nullable="false" />
+          <Property Name="Tag" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Product_EShop" Relationship="Self.FK_Product_Tags_Product_EShop" FromRole="Product_Tags" ToRole="Product_EShop" />
+        </EntityType>
+        <Association Name="FK_Product_Galllery_Product_EShop">
+          <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+          <End Role="Product_Galllery" Type="Self.Product_Galllery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_EShop">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="Product_Galllery">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Select_Groups_Product_EShop">
+          <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+          <End Role="Product_Select_Groups" Type="Self.Product_Select_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_EShop">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="Product_Select_Groups">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Tags_Product_EShop">
+          <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+          <End Role="Product_Tags" Type="Self.Product_Tags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_EShop">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="Product_Tags">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Groups_Product_Groups">
+          <End Role="Product_Groups" Type="Self.Product_Groups" Multiplicity="0..1" />
+          <End Role="Product_Groups1" Type="Self.Product_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Groups">
+              <PropertyRef Name="Group_Id" />
+            </Principal>
+            <Dependent Role="Product_Groups1">
+              <PropertyRef Name="Parent_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Select_Groups_Product_Groups">
+          <End Role="Product_Groups" Type="Self.Product_Groups" Multiplicity="1" />
+          <End Role="Product_Select_Groups" Type="Self.Product_Select_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Groups">
+              <PropertyRef Name="Group_Id" />
+            </Principal>
+            <Dependent Role="Product_Select_Groups">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EShopCoffe_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Product_EShop" EntityType="Self.Product_EShop" />
+          <EntitySet Name="Product_Galllery" EntityType="Self.Product_Galllery" />
+          <EntitySet Name="Product_Groups" EntityType="Self.Product_Groups" />
+          <EntitySet Name="Product_Select_Groups" EntityType="Self.Product_Select_Groups" />
+          <EntitySet Name="Product_Tags" EntityType="Self.Product_Tags" />
+          <AssociationSet Name="FK_Product_Galllery_Product_EShop" Association="Self.FK_Product_Galllery_Product_EShop">
+            <End Role="Product_EShop" EntitySet="Product_EShop" />
+            <End Role="Product_Galllery" EntitySet="Product_Galllery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Select_Groups_Product_EShop" Association="Self.FK_Product_Select_Groups_Product_EShop">
+            <End Role="Product_EShop" EntitySet="Product_EShop" />
+            <End Role="Product_Select_Groups" EntitySet="Product_Select_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Tags_Product_EShop" Association="Self.FK_Product_Tags_Product_EShop">
+            <End Role="Product_EShop" EntitySet="Product_EShop" />
+            <End Role="Product_Tags" EntitySet="Product_Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Groups_Product_Groups" Association="Self.FK_Product_Groups_Product_Groups">
+            <End Role="Product_Groups" EntitySet="Product_Groups" />
+            <End Role="Product_Groups1" EntitySet="Product_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Select_Groups_Product_Groups" Association="Self.FK_Product_Select_Groups_Product_Groups">
+            <End Role="Product_Groups" EntitySet="Product_Groups" />
+            <End Role="Product_Select_Groups" EntitySet="Product_Select_Groups" />
+          </AssociationSet>
+          <EntitySet Name="Product_Property" EntityType="EShopCoffe_DBModel.Product_Property" />
+        </EntityContainer>
+        <EntityType Name="Product_Property">
+          <Key>
+            <PropertyRef Name="Property_Id" />
+          </Key>
+          <Property Name="Property_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Property_Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EShopCoffe_DBModelStoreContainer" CdmEntityContainer="EShopCoffe_DBEntities">
+          <EntitySetMapping Name="Product_EShop">
+            <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_EShop">
+              <MappingFragment StoreEntitySet="Product_EShop">
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Proudct_Title" ColumnName="Proudct_Title" />
+                <ScalarProperty Name="Product_Count" ColumnName="Product_Count" />
+                <ScalarProperty Name="Product_IsInStock" ColumnName="Product_IsInStock" />
+                <ScalarProperty Name="Product_Discription" ColumnName="Product_Discription" />
+                <ScalarProperty Name="Product_Price" ColumnName="Product_Price" />
+                <ScalarProperty Name="Product_ImageName" ColumnName="Product_ImageName" />
+                <ScalarProperty Name="Product_CreateDate" ColumnName="Product_CreateDate" />
+                <ScalarProperty Name="Product_Is_Delete" ColumnName="Product_Is_Delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Galllery">
+            <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Galllery">
+              <MappingFragment StoreEntitySet="Product_Galllery">
+                <ScalarProperty Name="Gallery_Id" ColumnName="Gallery_Id" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Gallery_Image_Title" ColumnName="Gallery_Image_Title" />
+                <ScalarProperty Name="Gallery_Image_Name" ColumnName="Gallery_Image_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Groups">
+            <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Groups">
+              <MappingFragment StoreEntitySet="Product_Groups">
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="Group_Title" ColumnName="Group_Title" />
+                <ScalarProperty Name="Parent_Id" ColumnName="Parent_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Select_Groups">
+            <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Select_Groups">
+              <MappingFragment StoreEntitySet="Product_Select_Groups">
+                <ScalarProperty Name="Pro_Gro_Id" ColumnName="Pro_Gro_Id" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Tags">
+            <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Tags">
+              <MappingFragment StoreEntitySet="Product_Tags">
+                <ScalarProperty Name="Tag_Id" ColumnName="Tag_Id" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Property">
+            <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Property">
+              <MappingFragment StoreEntitySet="Product_Property">
+                <ScalarProperty Name="Property_Title" ColumnName="Property_Title" />
+                <ScalarProperty Name="Property_Id" ColumnName="Property_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

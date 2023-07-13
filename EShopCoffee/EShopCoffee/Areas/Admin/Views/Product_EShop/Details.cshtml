@@ -1,0 +1,82 @@
+﻿@model EShopCoffee.Models.DataLayer.Product_EShop
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product_EShop</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Proudct_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Proudct_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_IsInStock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_IsInStock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Discription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Discription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_ImageName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_ImageName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Is_Delete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Is_Delete)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Product_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

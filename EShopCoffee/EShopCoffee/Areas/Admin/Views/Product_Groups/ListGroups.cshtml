@@ -1,0 +1,60 @@
+﻿@model IEnumerable<EShopCoffee.Models.DataLayer.Product_Groups>
+<table class="table table-bordered">
+    <tr>
+        <th class="font-weight-bold Bg-backgrund text-light">
+            @Html.DisplayNameFor(model => model.Group_Title)
+        </th>
+        <th class="font-weight-bold Bg-backgrund text-light">
+            زیر گروه ها
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Where(g => g.Parent_Id == null))
+    {
+        <tr id="Group_@item.Group_Id">
+            <td>
+                <table class="table table-borderless">
+                    <tr class="col-md-12">
+                        <th class="col-8" >
+                            @item.Group_Title
+                        </th>
+                        <td class="col-4">
+                            <a href="@Url.Action("Create", new { id = item.Group_Id })" class="btn btn-sm btn-danger btn-block" title="افزودن گروه">
+                                <i class="fa fa-plus-circle"></i>
+                            </a>
+                            <a href="@Url.Action("Edit", new { id = item.Group_Id })" class="btn btn-sm btn-warning btn-block" title="ویرایش گروه">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+            <td>
+                @if (Model.Any(g => g.Parent_Id == item.Group_Id))
+                {
+                    <ul>
+                        @foreach (var subgroup in Model.Where(g => g.Parent_Id == item.Group_Id))
+                        {
+                            <table class="table table-borderless">
+                                <tr class="col-md-12">
+                                    <th class="col-8" >
+                                        @subgroup.Group_Title
+                                    </th>
+                                    <td class="col-4">
+                                     
+                                        <a href="@Url.Action("Edit", new { id = subgroup.Group_Id })" class="btn btn-sm btn-warning btn-block" title="ویرایش گروه">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        }
+                    </ul>
+                }
+            </td>
+        </tr>
+    }
+
+</table>

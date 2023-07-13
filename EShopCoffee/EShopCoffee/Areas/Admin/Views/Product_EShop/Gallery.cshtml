@@ -1,0 +1,100 @@
+﻿@using EShopCoffee.Models.DataLayer
+@model  EShopCoffee.Models.DataLayer.Product_Galllery
+
+@{
+    ViewBag.Title = "Gallery";
+    List<Product_Galllery> galleriesList = ViewBag.Gallery;
+}
+<h4 class="text-center font-weight-bold mt-4">محصولات</h4>
+<hr />
+@using (Html.BeginForm("Gallery", "Product_EShop", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Product_Id)
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    @Html.LabelFor(model => model.Gallery_Image_Title, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
+                </div>
+                @Html.EditorFor(model => model.Gallery_Image_Title, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+            <p class="text-center">
+                @Html.ValidationMessageFor(model => model.Gallery_Image_Title, "", new { @class = "text-danger" })
+            </p>
+        </div>
+        <div class="form-group">
+            <div class="card text-white  mb-3">
+                <div class="card-header Bg-backgrund">انتخاب تصویر</div>
+                <div class="card-body">
+                    <div style="margin: 10px auto;" class="col-md-12">
+                        <span class="offset-2 col-md-4">
+                            <input type="file" style="margin: 10px;" id="imageProduct" name="imageProduct" />
+                        </span>
+                        <sapn class="col-md-8">
+                            <img id="ImgPreviewProduct" name="ImgPreviewProduct" style="margin: 10px auto; max-width: 300px" class="img-thumbnail" src="~/Images/ProductImages/images.png" />
+                        </sapn>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center">
+                @Html.ValidationMessageFor(model => model.Gallery_Image_Name, "", new { @class = "text-danger" })
+            </p>
+        </div>
+
+       
+        <div class="form-group text-center">
+            <div class="text-center">
+                <button type="submit" title="ذخیره" class="btn bg-success  btn-block">
+                    <i class="fa fa-save fa-2x text-light"></i>
+                </button>
+                <a href="@Url.Action("Index")" class="btn btn-info btn-block" title="بازگشت">
+                    <i class="fa fa-arrow-circle-left fa-2x text-light"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>تصویر</th>
+                <th>عنوان</th>
+                <th></th>
+            </tr>
+            @foreach (var image in galleriesList)
+            {
+                <tr>
+                    <th>
+                        <img class="thumbnail" src="~/Images/ProductImages/Thumbnail/@image.Gallery_Image_Name" />
+                    </th>
+                    <th>@image.Gallery_Image_Title</th>
+                    <th>
+                        <a class="btn btn-danger btn-xs" title="حذف کردن عکس" href="/Admin/Product_EShop/DeleteGallery/@image.Gallery_Id">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                    </th>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
+@section script
+{
+    <script>
+        $('document').ready(function () {
+            $("#imageProduct").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#ImgPreviewProduct').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+    </script>
+}
