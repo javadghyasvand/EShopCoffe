@@ -36,6 +36,15 @@
           <Property Name="Group_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Parent_Id" Type="bigint" />
         </EntityType>
+        <EntityType Name="Product_Proerty_Select">
+          <Key>
+            <PropertyRef Name="Product_Proerty_Id" />
+          </Key>
+          <Property Name="Product_Proerty_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Id" Type="bigint" Nullable="false" />
+          <Property Name="Property_Id" Type="bigint" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
         <EntityType Name="Product_Property">
           <Key>
             <PropertyRef Name="Property_Id" />
@@ -83,6 +92,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_Proerty_Select_Product_EShop">
+          <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+          <End Role="Product_Proerty_Select" Type="Self.Product_Proerty_Select" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_EShop">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="Product_Proerty_Select">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Proerty_Select_Product_Property">
+          <End Role="Product_Property" Type="Self.Product_Property" Multiplicity="1" />
+          <End Role="Product_Proerty_Select" Type="Self.Product_Proerty_Select" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Property">
+              <PropertyRef Name="Property_Id" />
+            </Principal>
+            <Dependent Role="Product_Proerty_Select">
+              <PropertyRef Name="Property_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Select_Groups_Product_EShop">
           <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
           <End Role="Product_Select_Groups" Type="Self.Product_Select_Groups" Multiplicity="*" />
@@ -123,6 +156,7 @@
           <EntitySet Name="Product_EShop" EntityType="Self.Product_EShop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Galllery" EntityType="Self.Product_Galllery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Groups" EntityType="Self.Product_Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Proerty_Select" EntityType="Self.Product_Proerty_Select" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Property" EntityType="Self.Product_Property" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Select_Groups" EntityType="Self.Product_Select_Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Tags" EntityType="Self.Product_Tags" Schema="dbo" store:Type="Tables" />
@@ -133,6 +167,14 @@
           <AssociationSet Name="FK_Product_Groups_Product_Groups" Association="Self.FK_Product_Groups_Product_Groups">
             <End Role="Product_Groups" EntitySet="Product_Groups" />
             <End Role="Product_Groups1" EntitySet="Product_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Proerty_Select_Product_EShop" Association="Self.FK_Product_Proerty_Select_Product_EShop">
+            <End Role="Product_EShop" EntitySet="Product_EShop" />
+            <End Role="Product_Proerty_Select" EntitySet="Product_Proerty_Select" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Proerty_Select_Product_Property" Association="Self.FK_Product_Proerty_Select_Product_Property">
+            <End Role="Product_Property" EntitySet="Product_Property" />
+            <End Role="Product_Proerty_Select" EntitySet="Product_Proerty_Select" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Select_Groups_Product_EShop" Association="Self.FK_Product_Select_Groups_Product_EShop">
             <End Role="Product_EShop" EntitySet="Product_EShop" />
@@ -167,6 +209,7 @@
           <NavigationProperty Name="Product_Galllery" Relationship="Self.FK_Product_Galllery_Product_EShop" FromRole="Product_EShop" ToRole="Product_Galllery" />
           <NavigationProperty Name="Product_Select_Groups" Relationship="Self.FK_Product_Select_Groups_Product_EShop" FromRole="Product_EShop" ToRole="Product_Select_Groups" />
           <NavigationProperty Name="Product_Tags" Relationship="Self.FK_Product_Tags_Product_EShop" FromRole="Product_EShop" ToRole="Product_Tags" />
+          <NavigationProperty Name="Product_Proerty_Select" Relationship="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_EShop" FromRole="Product_EShop" ToRole="Product_Proerty_Select" />
         </EntityType>
         <EntityType Name="Product_Galllery">
           <Key>
@@ -295,15 +338,60 @@
             <End Role="Product_Select_Groups" EntitySet="Product_Select_Groups" />
           </AssociationSet>
           <EntitySet Name="Product_Property" EntityType="EShopCoffe_DBModel.Product_Property" />
-        </EntityContainer>
+          <EntitySet Name="Product_Proerty_Select" EntityType="EShopCoffe_DBModel.Product_Proerty_Select" />
+          <AssociationSet Name="FK_Product_Proerty_Select_Product_Property" Association="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_Property">
+            <End Role="Product_Property" EntitySet="Product_Property" />
+            <End Role="Product_Proerty_Select" EntitySet="Product_Proerty_Select" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Proerty_Select_Product_EShop" Association="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_EShop">
+            <End Role="Product_EShop" EntitySet="Product_EShop" />
+            <End Role="Product_Proerty_Select" EntitySet="Product_Proerty_Select" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Product_Property">
           <Key>
             <PropertyRef Name="Property_Id" />
           </Key>
           <Property Name="Property_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Property_Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product_Proerty_Select" Relationship="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_Property" FromRole="Product_Property" ToRole="Product_Proerty_Select" />
         </EntityType>
-      </Schema>
+        <EntityType Name="Product_Proerty_Select">
+          <Key>
+            <PropertyRef Name="Product_Proerty_Id" />
+          </Key>
+          <Property Name="Product_Proerty_Id" Type="Int64" Nullable="false" />
+          <Property Name="Product_Id" Type="Int64" Nullable="false" />
+          <Property Name="Property_Id" Type="Int64" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product_Property" Relationship="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_Property" FromRole="Product_Proerty_Select" ToRole="Product_Property" />
+          <NavigationProperty Name="Product_EShop" Relationship="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_EShop" FromRole="Product_Proerty_Select" ToRole="Product_EShop" />
+        </EntityType>
+        <Association Name="FK_Product_Proerty_Select_Product_Property">
+          <End Type="EShopCoffe_DBModel.Product_Property" Role="Product_Property" Multiplicity="1" />
+          <End Type="EShopCoffe_DBModel.Product_Proerty_Select" Role="Product_Proerty_Select" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Property">
+              <PropertyRef Name="Property_Id" />
+            </Principal>
+            <Dependent Role="Product_Proerty_Select">
+              <PropertyRef Name="Property_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Proerty_Select_Product_EShop">
+          <End Type="EShopCoffe_DBModel.Product_EShop" Role="Product_EShop" Multiplicity="1" />
+          <End Type="EShopCoffe_DBModel.Product_Proerty_Select" Role="Product_Proerty_Select" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_EShop">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="Product_Proerty_Select">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -366,6 +454,16 @@
               <MappingFragment StoreEntitySet="Product_Property">
                 <ScalarProperty Name="Property_Title" ColumnName="Property_Title" />
                 <ScalarProperty Name="Property_Id" ColumnName="Property_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Proerty_Select">
+            <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Proerty_Select">
+              <MappingFragment StoreEntitySet="Product_Proerty_Select">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Property_Id" ColumnName="Property_Id" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Product_Proerty_Id" ColumnName="Product_Proerty_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

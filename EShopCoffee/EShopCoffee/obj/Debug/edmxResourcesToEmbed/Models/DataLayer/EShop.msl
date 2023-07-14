@@ -61,5 +61,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Product_Proerty_Select">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Proerty_Select">
+        <MappingFragment StoreEntitySet="Product_Proerty_Select">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Property_Id" ColumnName="Property_Id" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="Product_Proerty_Id" ColumnName="Product_Proerty_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

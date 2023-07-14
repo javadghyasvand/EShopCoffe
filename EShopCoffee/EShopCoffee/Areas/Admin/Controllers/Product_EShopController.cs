@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using EShopCoffee.Models;
 using EShopCoffee.Models.DataLayer;
 using InsertShowImage;
 using KooyWebApp_MVC.Classes;
@@ -291,6 +292,36 @@ namespace EShopCoffee.Areas.Admin.Controllers
             _db.Product_Galllery.Remove(gallery);
             _db.SaveChanges();
             return RedirectToAction("Gallery", new { id = gallery.Product_Id });
+        }
+        #endregion
+
+        #region Property
+        public ActionResult ProductProperty(int id)
+        {
+            ViewBag.Property = _db.Product_Proerty_Select.Where(f => f.Product_Id == id);
+            ViewBag.PropertyId = _db.Product_Property.ToList();
+            return View(new Product_Proerty_Select()
+            {
+                Product_Id = id
+            });
+        }
+
+        [HttpPost]
+        public ActionResult ProductProperty(Product_Proerty_Select property)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Product_Proerty_Select.Add(property);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("ProductProperty", new { id = property.Product_Id });
+        }
+        public void DeleteFeature(int id)
+        {
+            var feature = _db.Product_Proerty_Select.Find(id);
+            if (feature != null) _db.Product_Proerty_Select.Remove(feature);
+            _db.SaveChanges();
+
         }
         #endregion
     }

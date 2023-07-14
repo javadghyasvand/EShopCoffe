@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="f4255d279bf74c8a8e3ed3ca7d451cc2" Name="Diagram1">
         <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_EShop" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Galllery" Width="1.5" PointX="4.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Galllery" Width="1.5" PointX="6.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Groups" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Select_Groups" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Tags" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
@@ -15,8 +15,11 @@
         <AssociationConnector Association="EShopCoffe_DBModel.FK_Product_Tags_Product_EShop" ManuallyRouted="false" />
         <AssociationConnector Association="EShopCoffe_DBModel.FK_Product_Groups_Product_Groups" ManuallyRouted="false" />
         <AssociationConnector Association="EShopCoffe_DBModel.FK_Product_Select_Groups_Product_Groups" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Property" Width="1.5" PointX="4.75" PointY="1" />
-      </Diagram>
+        <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Property" Width="1.5" PointX="9" PointY="5.125" />
+        <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Proerty_Select" Width="1.5" PointX="5.75" PointY="5.125" />
+        <AssociationConnector Association="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_Property" />
+        <AssociationConnector Association="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_EShop" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

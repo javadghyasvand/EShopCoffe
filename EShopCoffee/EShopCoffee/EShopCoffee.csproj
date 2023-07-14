@@ -162,6 +162,9 @@
     <Compile Include="Models\DataLayer\Product_Groups.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataLayer\Product_Proerty_Select.cs">
+      <DependentUpon>EShop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataLayer\Product_Property.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
@@ -174,6 +177,7 @@
     <Compile Include="Models\MetaData\Product_EShop_MetaData.cs" />
     <Compile Include="Models\MetaData\Product_Gallery_MetaData.cs" />
     <Compile Include="Models\MetaData\Product_Groups_Metadata.cs" />
+    <Compile Include="Models\MetaData\Product_Property_Select_MetaData.cs" />
     <Compile Include="Models\MetaData\Product_Select_Groups_Metadata.cs" />
     <Compile Include="Models\MetaData\Product_Tags_MetaData.cs" />
     <Compile Include="Models\MetaData\Product_Property_MetaData.cs" />
@@ -874,6 +878,7 @@
       <DependentUpon>EShop.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Product_EShop\ProductProperty.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery.modal.min.js" />

@@ -13,19 +13,15 @@ namespace EShopCoffee.Models.DataLayer
     using System;
     using System.Collections.Generic;
     
-     [MetadataType(typeof(Product_Property_MetaData))]
-    public partial class Product_Property
+     [MetadataType(typeof(Product_Proerty_Select_MetaData))]
+    public partial class Product_Proerty_Select
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product_Property()
-        {
-            this.Product_Proerty_Select = new HashSet<Product_Proerty_Select>();
-        }
-    
+        public long Product_Proerty_Id { get; set; }
+        public long Product_Id { get; set; }
         public long Property_Id { get; set; }
-        public string Property_Title { get; set; }
+        public string Value { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_Proerty_Select> Product_Proerty_Select { get; set; }
+        public virtual Product_Property Product_Property { get; set; }
+        public virtual Product_EShop Product_EShop { get; set; }
     }
 }
