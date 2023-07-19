@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doppio Cofeee Store</title>
+    <link rel="shortcut icon" alt="Doppio Cofeee Store" href="Asset/Images/Logo/Logo.png" type="image/x-icon" />
+    <!-- css -->
+    <link rel="stylesheet" href="Asset/CSS/login.css">
+    <link rel="stylesheet" href="Asset/Fonts/font-awesome-4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="Asset/Bootstrap/css/bootstrapv4.5.3.min.css">
+</head>
+
+<body style="font-family:Vazir!important" dir="rtl">
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+
+                <div class="signup-form">
+                    <h2 class="form-title text-center">
+                        <h3>ثبت نام</h3>
+                        <hr class="hr-temp">
+                        <br>
+                        <p>سلام ! لطفا شماره موبایل یا ایمیل خود را وارد کنید</p>
+                        <br>
+                    </h2>
+                    <br>
+                    <form method="POST" class="register-form" id="register-form">
+                        <div class="form-group">
+                            <label for="name"><i class="fa fa-user-circle fa-2x" aria-hidden="true"></i></label>
+                            <input type="text" name="name" id="name" placeholder="نام و نام خانوادگی" />
+                        </div>
+                        <div class="form-group">
+                            <label for="re-pass"><i class="fa fa-mobile fa-3x" aria-hidden="true"></i></label>
+                            <input type="password" name="re_pass" id="re_pass" placeholder="شماره تلفن " />
+                        </div>
+                        <div class=" form-group form-button  alige_center">
+                            <input type="button" name="Modal-show" data-toggle="modal" data-target="#Number-Modal"
+                                class="form-submit" value="ادامه" />
+                        </div>
+                    </form>
+                </div>
+                <div class="signup-image">
+                    <figure>
+                        <img src="Asset/Images/Logo/Login2.jpg" alt="قهوه دوپیو">
+                    </figure>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="Number-Modal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content m-3">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">عضویت</h5>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+
+                            </div>
+                            <hr class="hr-temp " style="width:80%;">
+                            <div class="modal-body">
+                                <p class="alige_center">کد پیامک شده را وارد نمایید</p>
+                                <br>
+                                <form method="POST" class="register-form" id="register-form">
+                                    <div class="form-group">
+                                        <label for="name"><i class="fa fa-user-circle " aria-hidden="true"></i></label>
+                                        <input type="text" name="name" id="name" placeholder="نام و نام خانوادگی" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="re-pass"><i class="fa fa-mobile fa-2x"
+                                                aria-hidden="true"></i></label>
+                                        <input type="password" name="re_pass" id="re_pass" placeholder="شماره تلفن " />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="re-pass"><i class="fa  fa-key " aria-hidden="true"></i></label>
+                                        <input type="password" name="re_pass" id="re_pass" placeholder="کد تایید" />
+                                    </div>
+                                </form>
+                                <div class="modal-footer alige_center">
+                                    <button id="Submeit-Form" type="submit" class="btn">ثبت کد تایید</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+</body>
+<script src="Asset/Popper/popper.min.js"></script>
+<script src="Asset/Jquery/jquery-2.2.4.min.js"></script>
+<script src="Asset/Jquery/jquery-3.2.1.slim.min.js"></script>
+<script src="Asset/Bootstrap/js/bootstrap4.0.0.min.js"></script>
+
+</html>

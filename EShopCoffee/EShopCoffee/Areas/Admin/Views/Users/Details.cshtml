@@ -1,0 +1,82 @@
+﻿@model EShopCoffee.Models.DataLayer.Users
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Users</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Active_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Active_Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_RegisterDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_RegisterDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Roles.Role_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Roles.Role_Title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.User_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

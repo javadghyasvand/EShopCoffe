@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Doppio Cofeee Store</title>
+    <link rel="shortcut icon" alt="Doppio Cofeee Store" href="Asset/Images/Logo/Logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="Asset/CSS/other.css" />
+    <link rel="stylesheet" href="Asset/Bootstrap/css/bootstrapv4.5.3.min.css">
+    <link rel="stylesheet" href="Asset/Fonts/font-awesome-4.7.0/css/font-awesome.css" />
+
+</head>
+</head>
+
+<body dir="rtl" class="nav_background header-pic " style="font-family:Vazir!important">
+    <!-- div container -->
+    <div class="container container-margin ">
+        <!-- Nav bar -->
+        <nav id="Nav-Bar" class="navbar navbar-expand-lg navbar-light Bg-backgrund">
+            <a class="navbar-brand" href="#">
+                <img src="Asset/Images/Logo/Logo.ico" class="me-2 img-thumbnail" style="border-radius: 50%;" height="30"
+                    alt="Doppio" loading="lazy" />
+                <small>Doppio</small>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class=" navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="center_Nav nav-link" href="#">خانه</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle-split" id="Dropdown_Products" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            محصولات
+                            <span class="f"><i class="fa fa-caret-down li-drop_icon"></i></span>
+                        </a>
+                        <div class="dropdown-menu Bg-backgrund  nav-item" aria-labelledby="Dropdown_Products">
+                            <a class="dropdown-item" href="list_items.html">
+                                <img src="Asset/Images/Logo/Coffe.ico" width="40px" height="40px"
+                                    class="img-thumbnail icon_Categury">
+                                قهوه
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="list_items.html">
+                                <img src="Asset/Images/Logo/Mug.ico" width="40px" height="40px"
+                                    class="img-thumbnail icon_Categury">
+                                ماگ
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="list_items.html">
+                                <img src="Asset/Images/Logo/CoffeMaker.ico" width="40px" height="40px"
+                                    class="img-thumbnail icon_Categury">
+                                قهوه ساز
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="list_items.html">
+                                <img src="Asset/Images/Logo/Equipment.ico" width="40px" height="40px"
+                                    class="img-thumbnail icon_Categury">
+                                تجهیزات
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="list_items.html">
+                                <img src="Asset/Images/Logo/Choclet.ico" width="40px" height="40px"
+                                    class="img-thumbnail icon_Categury">
+                                شکلات
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="Dropdown_Information" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            دانستنی ها
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-custom Bg-backgrund dropdown-menu-left"
+                            aria-labelledby="Dropdown_Information">
+                            <a class="dropdown-item" href="list-information.html">اشنایی با انواع قهوه </a>
+                            <a class="dropdown-item" href="list-information.html"> مقالات </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">درباره ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shopping_Cart.html" tabindex="-1" aria-disabled="true"> <span
+                                class="m-1"></span><i class="fa fa-cart-arrow-down fa-lg"></i> </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Sing_In.html" tabindex="-1" aria-disabled="true"> <span
+                                class="m-1">ورود</span><i class="fa fa-sign-in fa-lg"></i> </a>
+                    </li>
+                </ul>
+                <div class="input-group input-size">
+                    <input type="search " class="form-control rounded-test m-1" placeholder="برای جستجو تایپ کنید"
+                        aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" class="btn btn-Search m-1 "><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+        <div class="countiner">
+            <!-- Sidebar -->
+            <div class="bg-light  mt-3 ml-1 mr-1 row border-rd">
+                <button class="openbtn color_spaml font-weight-bolder btn btn-light" onclick="openNav()">&#9776</button>
+                <div class="clearfix"></div>
+            </div>
+            <div class="row container padding_row">
+                <div id="mySidebar" class="sidebar w-25">
+                    <div>
+                        <a href="javascript:void(0)" class="btn btn-sm text-light btn-danger font-weight-light"
+                            onclick="closeNav()">بستن منو</a>
+                    </div>
+                    <div class=" input-group mt-1">
+                        <div class="input-group d-block">
+                            <span class="input-group-text Sid_Color text-light  d-block" for="Filter-Categury">
+                                انتخاب دسته بندی
+                                <hr class="filter_hr">
+                                <select class="form-control d-block" id="Filter-Categury">
+                                    <option>اسپرسو</option>
+                                    <option>پودر و دان های تازه قهوه</option>
+                                    <option>پودرها و قهوه های فوری</option>
+                                    <option>قهوه ترک</option>
+                                </select>
+
+                            </span>
+                        </div>
+                    </div>
+                    <div class=" input-group mt-1">
+                        <div class="input-group d-block">
+                            <span class="input-group-text Sid_Color text-light  d-block" for="Filter_Sort_By">مرتب
+                                سازی بر
+                                اساس
+                                <hr class="filter_hr">
+                                <select class="form-control d-block" id="Filter_Sort_By">
+                                    <option>محبوبیت</option>
+                                    <option>جدیدترین</option>
+                                    <option>قیمت: کم به زیاد</option>
+                                    <option>قیمت: زیاد به کم</option>
+                                </select>
+
+                            </span>
+                        </div>
+                    </div>
+                    <div class=" input-group mt-1">
+                        <div class="input-group d-block">
+                            <span class="input-group-text Sid_Color text-light  d-block" for="filter_Inventory">وضعیت
+                                موجودی
+                                اساس
+                                <hr class="filter_hr">
+                                <div class="form-check  form-switch text-left mb-2">
+                                    <input class="form-check-input mt-1" type="checkbox" value=""
+                                        id="filter_Inventory-sp">
+                                    <label class="form-check-label" for="filter_Inventory-sp">
+                                        فروش ویژه
+                                    </label>
+                                </div>
+                                <div class="form-check  form-switch text-left">
+                                    <input class="form-check-input mt-1" type="checkbox" value="" id="filter_Inventory">
+                                    <label class="form-check-label" for="filter_Inventory">
+                                        موجود در انبار
+                                    </label>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                    <div class=" input-group mt-1">
+                        <div class="input-group d-block">
+                            <div class="input-group d-block">
+                                <span class="input-group-text Sid_Color text-light  d-block" for="Filter-Categury">
+                                    فیلتر بر اساس قیمت
+                                    <hr class="filter_hr">
+                                    <input class="slider" type="range" name="range" step="50000" min="100000"
+                                        max="1000000" value="" onchange="rangePrimary.value=value"
+                                        class="Range-input mt-2">
+                                    <input class="form-control text-center mt-" type="text" id="rangePrimary" readonly>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="main" class="w-73 ml-3">
+                    <div>
+                        <!-- Card deck -->
+                        <div class="card-deck row mt-2 mb-4">
+
+                            <div class="col-xs-12 col-sm-6 col-md-4 m-0 p-0 mb-2">
+                                <!-- Card -->
+                                <div class="card p-0 m-0">
+                                    <!--Card image-->
+                                    <div class="view overlay">
+                                        <img class="card-img-top"
+                                            src="Asset/Images/Prodect_test/2c43f047b3b1132d37c09d37c0d4a748117de597_1603102365.jpg">
+                                        <a class="buy" type="button"><i
+                                                class="fa fa-plus-square fa-2x text-danger m-2"></i></a>
+                                    </div>
+                                    <!--Card content-->
+                                    <div class="card-body text-center">
+                                        <!--Title-->
+                                        <p class="card-title">تست 1</p>
+                                        <!--Text-->
+                                        <hr>
+                                        <p class="card-text card-price ">
+                                            <span class="card-margin">قیمت:</span>
+                                            <span class="badge badge-danger float-right">15%</span>
+                                            <span>1850000</span>
+                                            <span>تومان</span>
+                                        <p class="line-through">2000000</p>
+                                        </p>
+                                        <hr>
+                                        <a type="button" class="btn btn-block bg_sampl_color text-light"
+                                            href="Prodect_information.html">
+                                            مشاهده
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-4 m-0 p-0 mb-2">
+                                <!-- Card -->
+                                <div class="card p-0 m-0">
+                                    <!--Card image-->
+                                    <div class="view overlay">
+                                        <img class="card-img-top"
+                                            src="Asset/Images/Prodect_test/2fb95ceac9fc89af14dd7d413c7949d71a7f1fa9_1621917476.jpg">
+                                        <a class="buy" type="button"><i
+                                                class="fa fa-plus-square fa-2x text-danger m-2"></i></a>
+                                    </div>
+                                    <!--Card content-->
+                                    <div class="card-body text-center">
+
+                                        <!--Title-->
+                                        <p class="card-title">تست 1</p>
+                                        <!--Text-->
+                                        <hr>
+                                        <p class="card-text card-price ">
+                                            <span class="card-margin">قیمت:</span>
+                                            <span class="badge badge-danger float-right">15%</span>
+                                            <span>1850000</span>
+                                            <span>تومان</span>
+                                        <p class="line-through">2000000</p>
+                                        </p>
+                                        <hr>
+                                        <a type="button" class="btn btn-block bg_sampl_color text-light"
+                                            href="Prodect_information.html">
+                                            مشاهده
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 m-0 p-0 mb-2">
+                                <!-- Card -->
+                                <div class="card p-0 m-0">
+                                    <!--Card image-->
+                                    <div class="view overlay">
+                                        <img class="card-img-top"
+                                            src="Asset/Images/Prodect_test/2fb95ceac9fc89af14dd7d413c7949d71a7f1fa9_1621917476.jpg">
+                                        <a class="buy" type="button"><i
+                                                class="fa fa-plus-square fa-2x text-danger m-2"></i></a>
+                                    </div>
+                                    <!--Card content-->
+                                    <div class="card-body text-center">
+
+                                        <!--Title-->
+                                        <p class="card-title">تست 1</p>
+                                        <!--Text-->
+                                        <hr>
+                                        <p class="card-text card-price ">
+                                            <span class="card-margin">قیمت:</span>
+                                            <span class="badge badge-danger float-right">15%</span>
+                                            <span>1850000</span>
+                                            <span>تومان</span>
+                                        <p class="line-through">2000000</p>
+                                        </p>
+                                        <hr>
+                                        <a type="button" class="btn btn-block bg_sampl_color text-light"
+                                            href="Prodect_information.html">
+                                            مشاهده
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 m-0 p-0 mb-2">
+                                <!-- Card -->
+                                <div class="card p-0 m-0">
+                                    <!--Card image-->
+                                    <div class="view overlay">
+                                        <img class="card-img-top"
+                                            src="Asset/Images/Prodect_test/2fb95ceac9fc89af14dd7d413c7949d71a7f1fa9_1621917476.jpg">
+                                        <a class="buy" type="button"><i
+                                                class="fa fa-plus-square fa-2x text-danger m-2"></i></a>
+                                    </div>
+                                    <!--Card content-->
+                                    <div class="card-body text-center">
+
+                                        <!--Title-->
+                                        <p class="card-title">تست 1</p>
+                                        <!--Text-->
+                                        <hr>
+                                        <p class="card-text card-price ">
+                                            <span class="card-margin">قیمت:</span>
+                                            <span class="badge badge-danger float-right">15%</span>
+                                            <span>1850000</span>
+                                            <span>تومان</span>
+                                        <p class="line-through">2000000</p>
+                                        </p>
+                                        <hr>
+                                        <a type="button" class="btn btn-block bg_sampl_color text-light"
+                                            href="Prodect_information.html">
+                                            مشاهده
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 m-0 p-0 mb-2">
+                                <!-- Card -->
+                                <div class="card p-0 m-0">
+                                    <!--Card image-->
+                                    <div class="view overlay">
+                                        <img class="card-img-top"
+                                            src="Asset/Images/Prodect_test/9b51c6c8f305d850d78d70b7e1035190e5fa3d12_1646723414.jpg">
+                                        <a class="buy" type="button"><i
+                                                class="fa fa-plus-square fa-2x text-danger m-2"></i></a>
+                                    </div>
+                                    <!--Card content-->
+                                    <div class="card-body text-center">
+
+                                        <!--Title-->
+                                        <p class="card-title">تست 1</p>
+                                        <!--Text-->
+                                        <hr>
+                                        <p class="card-text card-price ">
+                                            <span class="card-margin">قیمت:</span>
+                                            <span class="badge badge-danger float-right">15%</span>
+                                            <span>1850000</span>
+                                            <span>تومان</span>
+                                        <p class="line-through">2000000</p>
+                                        </p>
+                                        <hr>
+                                        <a type="button" class="btn btn-block bg_sampl_color text-light"
+                                            href="Prodect_information.html">
+                                            مشاهده
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <!-- Card -->
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 m-0 p-0 mb-2">
+                                <!-- Card -->
+                                <div class="card p-0 m-0">
+                                    <!--Card image-->
+                                    <div class="view overlay">
+                                        <img class="card-img-top"
+                                            src="Asset/Images/Prodect_test/edf2d8741a6c46e860251edef97452937334eef0_1652488151.jpg">
+                                        <a class="buy" type="button"><i
+                                                class="fa fa-plus-square fa-2x text-danger m-2"></i></a>
+                                    </div>
+                                    <!--Card content-->
+                                    <div class="card-body text-center">
+
+                                        <!--Title-->
+                                        <p class="card-title">تست 1</p>
+                                        <!--Text-->
+                                        <hr>
+                                        <p class="card-text card-price ">
+                                            <span class="card-margin">قیمت:</span>
+                                            <span class="badge badge-danger float-right">15%</span>
+                                            <span>1850000</span>
+                                            <span>تومان</span>
+                                        <p class="line-through">2000000</p>
+                                        </p>
+                                        <hr>
+                                        <a type="button" class="btn btn-block bg_sampl_color text-light"
+                                            href="Prodect_information.html">
+                                            مشاهده
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <!-- Card -->
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <nav aria-label="Page navigation example text-light">
+                <ul class="pagination justify-content-center ">
+                    <li class="page-item ">
+                        <a class="page-link color_spaml" href="#" tabindex="-1">قبلی</a>
+                    </li>
+                    <li class="page-item"><a class="page-link color_spaml" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link color_spaml" href="#">2</a></li>
+                    <li class="page-item "><a class="page-link color_spaml" href="#">3</a></li>
+                    <li class="page-item ">
+                        <a class="page-link color_spaml" href="#">بعدی</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- Footer -->
+    <!-- Footer -->
+    <footer class="Bg_Color " dir="rtl">
+        <div class="container py-5">
+            <div class="row py-3">
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <h6 class="text-uppercase font-weight-bold mb-4">تماس با مشتریان</h6>
+                    <hr class="Hr_Footer">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="Abut_Us.html" class="text-color text-decoration-none">درباره ما</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <h6 class="text-uppercase font-weight-bold mb-4">راهنما</h6>
+                    <hr class="Hr_Footer">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="Abut_Us.html" class="text-color text-decoration-none">نحوه پرداخت</a>
+                        </li>
+                        <li class="mb-2"><a href="Abut_Us.html" class="text-color text-decoration-none">بازگشت محصول
+                            </a></li>
+                        <li class="mb-2"><a href="Abut_Us.html" class="text-color text-decoration-none">تاریخچه
+                                سفارشات</a></li>
+                        <li class="mb-2"><a href="Abut_Us.html" class="text-color text-decoration-none">تحویل کالا</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <h6 class="text-uppercase font-weight-bold mb-4">آدرس</h6>
+                    <hr class="Hr_Footer">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <p class="text-color">قزوین خیابان پادگان قبل از گوچه بهمن</p>
+                        </li>
+                        <li class="mb-2">
+                            <p class="text-color"> کد پستی :</p>
+                        </li>
+                        <li class="mb-2">
+                            <p class="text-color">شماره تماس : </p>
+                        </li>
+                        <li class="mb-2">
+                            <p class="text-color">شماره همراه : </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0 ml-5  ">
+                    <img class="img_logo_namead" src="Asset/Images/Logo/head636473112731542337.png"
+                        alt="نماد الکترونیکی">
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="text-center">
+                    <ul class="list-inline mt-4">
+                        <li class="list-inline-item text-color"><a href="#" target="_blank" title="twitter"><i
+                                    class="fa  fa-2x fa-twitter text-color"></i></a></li>
+                        <li class="list-inline-item "><a href="#" target="_blank" title="facebook"><i
+                                    class="fa fa-2x fa-facebook-f text-color"></i></a></li>
+                        <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i
+                                    class="fa fa-2x fa-instagram text-color"></i></a></li>
+                        <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i
+                                    class="fa fa-2x fa-youtube text-color"></i></a></li>
+                        <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i
+                                    class="fa fa-2x fa-google text-color"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="bg-light py-2 text-dark">
+            <div class="container text-center">
+                <p class="text-dark mb-0 py-2">استفاده از مطالب
+                    <a class="d-inline a_color font-weight-bolder" href="Index.html">فروشگاه دوپیو</a>
+                    با ذکر منبع و مقاصد غیر تجاری بلامانع است
+                </p>
+
+            </div>
+        </div>
+
+    </footer>
+</body>
+<script src="Asset/Popper/popper.min.js" type="text/javascript"></script>
+<script src="Asset/Jquery/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="Asset/Jquery/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
+<script src="Asset/Bootstrap/js/bootstrap4.0.0.min.js" type="text/javascript"></script>
+<script src="Asset/JS/CustomJs.js"></script>
+
+</html>

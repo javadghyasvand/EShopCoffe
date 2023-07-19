@@ -19,6 +19,9 @@
         <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Proerty_Select" Width="1.5" PointX="5.75" PointY="5.125" />
         <AssociationConnector Association="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_Property" />
         <AssociationConnector Association="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_EShop" />
+        <EntityTypeShape EntityType="EShopCoffe_DBModel.Roles" Width="1.5" PointX="0.5" PointY="7.75" />
+        <EntityTypeShape EntityType="EShopCoffe_DBModel.Users" Width="1.5" PointX="2.75" PointY="7.75" />
+        <AssociationConnector Association="EShopCoffe_DBModel.FK_Users_Roles" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

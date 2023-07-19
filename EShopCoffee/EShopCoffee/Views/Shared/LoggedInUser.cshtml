@@ -1,0 +1,40 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <li>
+        <a href="#">
+            <i class="fa fa-user"></i> <label>@User.Identity.Name خوش آمدید</label>
+        </a>
+    </li>
+    <li>
+        <a href="/Account/LogOff">
+            <i class="fa fa-sign-out"></i> <label>خروج</label>
+        </a>
+    </li>
+
+}
+else
+{
+    <li>
+        <a href="/Register">
+            <i class="fa fa-user-plus"></i> <label>عضویت</label>
+        </a>
+    </li>
+    <li>
+        <a href="/Login">
+            <i class="fa fa-user"></i> <label>ورود به سایت</label>
+        </a>
+    </li>
+}
+
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="Dropdown_Information" role="button" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        دانستنی ها
+    </a>
+    <div class="dropdown-menu dropdown-menu-custom Bg-backgrund dropdown-menu-left"
+         aria-labelledby="Dropdown_Information">
+        <a class="dropdown-item" href="list_information.html">اشنایی با انواع قهوه </a>
+        <a class="dropdown-item" href="list_information.html"> مقالات </a>
+    </div>
+</li>
