@@ -160,6 +160,11 @@
       <End Role="Roles" EntitySet="Roles" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
+    <EntitySet Name="User_Details" EntityType="EShopCoffe_DBModel.User_Details" />
+    <AssociationSet Name="FK_User_Details_Users" Association="EShopCoffe_DBModel.FK_User_Details_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="User_Details" EntitySet="User_Details" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Product_Property">
     <Key>
@@ -226,6 +231,8 @@
     <Property Name="User_IsActive" Type="Boolean" Nullable="false" />
     <Property Name="User_RegisterDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Roles" Relationship="EShopCoffe_DBModel.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+    <Property Name="User_Image" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User_Details" Relationship="EShopCoffe_DBModel.FK_User_Details_Users" FromRole="Users" ToRole="User_Details" />
   </EntityType>
   <Association Name="FK_Users_Roles">
     <End Type="EShopCoffe_DBModel.Roles" Role="Roles" Multiplicity="1" />
@@ -236,6 +243,30 @@
       </Principal>
       <Dependent Role="Users">
         <PropertyRef Name="User_Role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="User_Details">
+    <Key>
+      <PropertyRef Name="User_Detail_Id" />
+    </Key>
+    <Property Name="User_Detail_Id" Type="Int64" Nullable="false" />
+    <Property Name="User_Id" Type="Int64" Nullable="false" />
+    <Property Name="User_Address" Type="String" Nullable="false" MaxLength="850" FixedLength="false" Unicode="true" />
+    <Property Name="User_State" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="User_City" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="User_Postal_Code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="EShopCoffe_DBModel.FK_User_Details_Users" FromRole="User_Details" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK_User_Details_Users">
+    <End Type="EShopCoffe_DBModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="EShopCoffe_DBModel.User_Details" Role="User_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="User_Details">
+        <PropertyRef Name="User_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

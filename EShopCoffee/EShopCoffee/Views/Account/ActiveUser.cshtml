@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "ActiveUser";
+}
+@Styles.Render("~/Content/Asset/CSS/login.css")
+
+<div class="login_div container bg-white shadow mt-4 mb-4 p-3 border-dark zmdi-border-right text-center">
+    <div>
+        <figure class="mt-4">
+            <img class="mt-4" width="150px" src="/Content/Asset/Images/Logo/Logo.png" alt="قهوه دوپیو">
+        </figure>
+        <hr>
+        <h3 class="text-center"><strong> @ViewBag.UserName </strong>عزیز </h3>
+        <div class="alert alert-success mt-1 mb-1">
+            <p>حساب کاربری شما فعال شد از طریق این <a href="/Login">  لینک </a> می توانید وارد سایت شوید.</p>
+        </div>
+    </div>
+</div>

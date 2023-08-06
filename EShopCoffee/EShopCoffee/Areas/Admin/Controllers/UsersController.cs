@@ -13,14 +13,17 @@ namespace EShopCoffee.Areas.Admin.Controllers
     public class UsersController : Controller
     {
         private EShopCoffe_DBEntities db = new EShopCoffe_DBEntities();
-        [Authorize(Roles = "Maneger")]
+
         // GET: Admin/Users
         public ActionResult Index()
         {
-            var users = db.Users.ToList();
+            var users = db.Users.Include(u => u.Roles);
             return View(users.ToList());
         }
-
+        public ActionResult Navbar()
+        {
+            return PartialView();
+        }
         // GET: Admin/Users/Details/5
         public ActionResult Details(long? id)
         {
@@ -39,7 +42,7 @@ namespace EShopCoffee.Areas.Admin.Controllers
         // GET: Admin/Users/Create
         public ActionResult Create()
         {
-            ViewBag.User_Role_Id = new SelectList(db.Roles, "Role_Id", "Role_Title");
+            ViewBag.Role_Id = new SelectList(db.Roles, "Role_Id", "Role_Title");
             return View();
         }
 
@@ -48,7 +51,7 @@ namespace EShopCoffee.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "User_Id,User_Role_Id,User_Name,User_Email,User_Phone,User_Password,User_Active_Code,User_IsActive,User_RegisterDate")] Users users)
+        public ActionResult Create([Bind(Include = "User_Id,User_Role_Id,User_Name,User_Email,User_Phone,User_Password,User_Active_Code,User_IsActive,User_RegisterDate,User_Image")] Users users)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +65,7 @@ namespace EShopCoffee.Areas.Admin.Controllers
         }
 
         // GET: Admin/Users/Edit/5
-        public ActionResult Edit(long? id)
+        public ActionResult Edit([Bind(Include = "User_Id,User_Role_Id,User_Name,User_Email,User_Phone,User_Password,User_Active_Code,User_IsActive,User_RegisterDate,User_Image")] long? id)
         {
             if (id == null)
             {
@@ -82,7 +85,7 @@ namespace EShopCoffee.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "User_Id,User_Role_Id,User_Name,User_Email,User_Phone,User_Password,User_Active_Code,User_IsActive,User_RegisterDate")] Users users)
+        public ActionResult Edit([Bind(Include = "User_Id,User_Role_Id,User_Name,User_Email,User_Phone,User_Password,User_Active_Code,User_IsActive,User_RegisterDate,User_Image")] Users users)
         {
             if (ModelState.IsValid)
             {

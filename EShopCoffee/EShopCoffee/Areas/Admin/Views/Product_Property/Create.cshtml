@@ -3,11 +3,14 @@
 @{
     ViewBag.Title = "Create";
 }
-
+@section Navbar
+{
+    @Html.Action("Navbar")
+}
 <h4 class="text-center font-weight-bold mt-4">
     افزودن ویژگی
 </h4>
-<hr/>
+<hr />
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()

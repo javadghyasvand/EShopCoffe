@@ -1,0 +1,49 @@
+﻿@using System.Runtime.InteropServices
+@using EShopCoffee.Models.DataLayer
+
+@if (User.Identity.IsAuthenticated)
+{
+    {
+        EShopCoffe_DBEntities db = new EShopCoffe_DBEntities();
+        var user = db.Users.Single(u => u.User_Email == User.Identity.Name);
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="Dropdown_Information" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <img max-width="50px" style=" border-radius: 50%; border:3px solid white" width="30px" src="~/Images/UserImge/@user.User_Image" />
+                <span class="ml-2 mr-2">@user.User_Name</span>
+            </a>
+            @switch (user.User_Role_Id)
+            {
+                case 2:
+                    <div class="dropdown-menu dropdown-menu-custom Bg-backgrund dropdown-menu-left"
+                         aria-labelledby="Dropdown_Information">
+                        <a class="dropdown-item" href="/Admin/AdminHome">پنل ادمین</a>
+                        <a class="dropdown-item" href="/Home/UserProfile/@user.User_Id">مشاهده اطلاعات کاربری </a>
+                        <a class="dropdown-item" href="#"> سفارش های قبلی </a>
+                        <a class="dropdown-item" href="/UserPanel/User/ChangPassword"> تغییر رمز عبور </a>
+                        <a class="dropdown-item btn btn-danger" href="/Account/LogOff">خروج</a>
+                    </div>
+                    break;
+                case 3:
+                    <div class="dropdown-menu dropdown-menu-custom Bg-backgrund dropdown-menu-left"
+                         aria-labelledby="Dropdown_Information">
+                        <a class="dropdown-item" href="/Home/UserProfile/@user.User_Id">مشاهده اطلاعات کاربری </a>
+                        <a class="dropdown-item" href="#"> سفارش های قبلی </a>
+                        <a class="dropdown-item" href="/UserPanel/User/ChangPassword"> تغییر رمز عبور </a>
+                        <a class="dropdown-item btn btn-danger" href="/Account/LogOff">خروج</a>
+                    </div>
+                    break;
+            }
+        </li>
+    }
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link" href="/Login" tabindex="-1" aria-disabled="true">ورود</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/Register" tabindex="-1" aria-disabled="true">ثبت نام</a>
+    </li>
+}

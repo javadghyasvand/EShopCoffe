@@ -32,5 +32,7 @@ namespace EShopCoffee.Models
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public bool User_IsActive { get; set; }
         public System.DateTime User_RegisterDate { get; set; }
+        [Display(Name = "تصویر")]
+        public string User_Image { get; set; }
     }
 }

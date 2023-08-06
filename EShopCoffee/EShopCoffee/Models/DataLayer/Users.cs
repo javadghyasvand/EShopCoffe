@@ -16,6 +16,12 @@ namespace EShopCoffee.Models.DataLayer
      [MetadataType(typeof(Users_MetaData))]
     public partial class Users
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Users()
+        {
+            this.User_Details = new HashSet<User_Details>();
+        }
+    
         public long User_Id { get; set; }
         public long User_Role_Id { get; set; }
         public string User_Name { get; set; }
@@ -25,7 +31,10 @@ namespace EShopCoffee.Models.DataLayer
         public string User_Active_Code { get; set; }
         public bool User_IsActive { get; set; }
         public System.DateTime User_RegisterDate { get; set; }
+        public string User_Image { get; set; }
     
         public virtual Roles Roles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User_Details> User_Details { get; set; }
     }
 }

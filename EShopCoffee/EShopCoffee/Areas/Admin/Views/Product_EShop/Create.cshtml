@@ -4,6 +4,10 @@
 @{
     ViewBag.Title = "Create";
 }
+@section Navbar
+{
+    @Html.Action("Navbar")
+}
 <h4 class="text-center font-weight-bold mt-4">افزودن محصول</h4>
 <hr />
 @using (Html.BeginForm("Create", "Product_EShop", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -26,7 +30,6 @@
                     @Html.LabelFor(model => model.Proudct_Title, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
                 </div>
                 @Html.EditorFor(model => model.Proudct_Title, new { htmlAttributes = new { @class = "form-control" } })
-
             </div>
             <p class="text-center">
                 @Html.ValidationMessageFor(model => model.Proudct_Title, "", new { @class = "text-danger" })
@@ -39,7 +42,6 @@
                     @Html.LabelFor(model => model.Product_Count, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
                 </div>
                 @Html.EditorFor(model => model.Product_Count, new { htmlAttributes = new { @class = "form-control" } })
-
             </div>
             <p class="text-center">
                 @Html.ValidationMessageFor(model => model.Product_Count, "", new { @class = "text-danger" })
@@ -52,7 +54,6 @@
                     @Html.LabelFor(model => model.Product_Price, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
                 </div>
                 @Html.EditorFor(model => model.Product_Price, new { htmlAttributes = new { @class = "form-control" } })
-
             </div>
             <p class="text-center">
                 @Html.ValidationMessageFor(model => model.Product_Price, "", new { @class = "text-danger" })

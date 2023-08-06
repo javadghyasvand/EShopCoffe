@@ -82,6 +82,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="EShopCoffe_DBModel.Users">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="User_Image" ColumnName="User_Image" />
           <ScalarProperty Name="User_RegisterDate" ColumnName="User_RegisterDate" />
           <ScalarProperty Name="User_IsActive" ColumnName="User_IsActive" />
           <ScalarProperty Name="User_Active_Code" ColumnName="User_Active_Code" />
@@ -91,6 +92,18 @@
           <ScalarProperty Name="User_Name" ColumnName="User_Name" />
           <ScalarProperty Name="User_Role_Id" ColumnName="User_Role_Id" />
           <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Details">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.User_Details">
+        <MappingFragment StoreEntitySet="User_Details">
+          <ScalarProperty Name="User_Postal_Code" ColumnName="User_Postal_Code" />
+          <ScalarProperty Name="User_City" ColumnName="User_City" />
+          <ScalarProperty Name="User_State" ColumnName="User_State" />
+          <ScalarProperty Name="User_Address" ColumnName="User_Address" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="User_Detail_Id" ColumnName="User_Detail_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

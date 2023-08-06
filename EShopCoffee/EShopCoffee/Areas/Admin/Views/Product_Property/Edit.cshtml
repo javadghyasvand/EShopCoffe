@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Edit";
 }
-
+@section Navbar
+{
+    @Html.Action("Navbar")
+}
 <h2>Edit</h2>
 
 @using (Html.BeginForm())

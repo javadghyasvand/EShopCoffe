@@ -19,7 +19,10 @@ namespace EShopCoffee.Areas.Admin.Controllers
         {
             return View(_db.Product_Property.ToList());
         }
-
+        public ActionResult Navbar()
+        {
+            return PartialView();
+        }
         // GET: Admin/Product_Property/Details/5
         public ActionResult Details(long? id)
         {

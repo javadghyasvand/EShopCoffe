@@ -34,5 +34,6 @@ namespace EShopCoffee.Models.DataLayer
         public virtual DbSet<Product_Proerty_Select> Product_Proerty_Select { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<User_Details> User_Details { get; set; }
     }
 }

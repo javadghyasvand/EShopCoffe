@@ -2,94 +2,132 @@
 
 @{
     ViewBag.Title = "Edit";
+
 }
 
-<h2>Edit</h2>
-
+<h4 class="text-center font-weight-bold mt-4">ویرایش کابر جدید</h4>
+<hr />
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Users</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.User_Id)
-
         <div class="form-group">
-            @Html.LabelFor(model => model.User_Role_Id, "User_Role_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("User_Role_Id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.User_Role_Id, "", new { @class = "text-danger" })
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    @Html.LabelFor(model => model.User_Role_Id, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
+                </div>
+                @Html.DropDownList("Role_Id", null, htmlAttributes: new { @class = "form-control" })
             </div>
+            <p class="text-center">
+                @Html.ValidationMessageFor(model => model.User_Role_Id, "", new { @class = "text-danger " })
+            </p>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.User_Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    @Html.LabelFor(model => model.User_Name, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
+                </div>
                 @Html.EditorFor(model => model.User_Name, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <p class="text-center">
                 @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
-            </div>
+            </p>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.User_Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    @Html.LabelFor(model => model.User_Email, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
+                </div>
                 @Html.EditorFor(model => model.User_Email, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <p class="text-center">
                 @Html.ValidationMessageFor(model => model.User_Email, "", new { @class = "text-danger" })
-            </div>
+            </p>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.User_Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    @Html.LabelFor(model => model.User_Phone, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
+                </div>
                 @Html.EditorFor(model => model.User_Phone, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <p class="text-center">
                 @Html.ValidationMessageFor(model => model.User_Phone, "", new { @class = "text-danger" })
-            </div>
+            </p>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.User_Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    @Html.LabelFor(model => model.User_Password, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
+                </div>
                 @Html.EditorFor(model => model.User_Password, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <p class="text-center">
                 @Html.ValidationMessageFor(model => model.User_Password, "", new { @class = "text-danger" })
-            </div>
+            </p>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.User_Active_Code, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="input-group mb-3 ">
+                <div class="input-group-prepend ">
+                    @Html.LabelFor(model => model.User_Active_Code, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
+                </div>
                 @Html.EditorFor(model => model.User_Active_Code, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User_Active_Code, "", new { @class = "text-danger" })
             </div>
+            <p class="text-center">
+                @Html.ValidationMessageFor(model => model.User_Active_Code, "", new { @class = "text-danger" })
+            </p>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.User_IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.User_IsActive)
-                    @Html.ValidationMessageFor(model => model.User_IsActive, "", new { @class = "text-danger" })
+            <div class="card text-white  mb-3">
+                <div class="card-header Bg-backgrund">انتخاب تصویر</div>
+                <div class="card-body">
+                    <div style="margin: 10px auto;" class="col-md-12">
+                        <span class="offset-2 col-md-4">
+                            <input type="file" style="margin: 10px;" id="imageProduct" name="imageProduct" />
+                        </span>
+                        <sapn class="col-md-8">
+                            <img id="ImgPreviewProduct" name="ImgPreviewProduct" style="margin: 10px auto; max-width: 300px" class="img-thumbnail" src="~/Images/UserImge/no-photo.jpg" />
+                        </sapn>
+                    </div>
                 </div>
             </div>
+            <p class="text-center">
+                @Html.ValidationMessageFor(model => model.User_Image, "", new { @class = "text-danger" })
+            </p>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User_RegisterDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User_RegisterDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User_RegisterDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <div class="form-group text-center">
+            <div class="text-center">
+                <button type="submit" title="ذخیره" class="btn bg-success  btn-block">
+                    <i class="fa fa-save fa-2x text-light"></i>
+                </button>
+                <a href="@Url.Action("Index")" class="btn btn-info btn-block" title="بازگشت">
+                    <i class="fa fa-arrow-circle-left fa-2x text-light"></i>
+                </a>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@section script
+{
+    <script>
+
+
+        CKEDITOR.replace('Product_Discription');
+
+        $('document').ready(function () {
+            $("#imageProduct").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#ImgPreviewProduct').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+    </script>
+}

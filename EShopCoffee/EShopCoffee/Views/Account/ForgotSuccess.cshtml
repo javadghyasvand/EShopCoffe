@@ -1,0 +1,23 @@
+﻿@model EShopCoffee.Models.DataLayer.Users
+@{
+    ViewBag.Title = "ForgotSuccess";
+}
+@Styles.Render("~/Content/Asset/CSS/login.css")
+
+<div class="login_div container bg-white shadow mb-4 p-3 border-dark zmdi-border-right border text-center" style="margin-top:100px">
+    <div>
+        <div class="m-2">
+            <img class="img-responsive img-log a_color " max-width="150px" src="/Content/Asset/Images/Logo/Logo.png" alt="قهوه دوپیو">
+        </div>
+        <h3 class="text-center m-2"><strong> @Model.User_Name </strong> عزیز ! باتشکر از ثبت نام شما در سایت </h3>
+        <hr>
+        <div class="alert alert-success mt-1 mb-1">
+            <p class="text-center ml-4 mr-4"> ایمیل حاوی لینک بازیابی کلمه عبور به ایمیل <strong> @Model.User_Email </strong> ارسال شد. لطفا وارد ایمیل شوید و روی لینک کلیک کنید. </p>
+        </div>
+        <div class="form-group text-center mb-3">
+            <div class="text-center ">
+                <a class="btn btn-info btn-block mb-5" href="\"> بارگشت به صفحه اصلی</a>
+            </div>
+        </div>
+    </div>
+</div>

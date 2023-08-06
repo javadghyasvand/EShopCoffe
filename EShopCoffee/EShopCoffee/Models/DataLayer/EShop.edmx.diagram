@@ -22,6 +22,8 @@
         <EntityTypeShape EntityType="EShopCoffe_DBModel.Roles" Width="1.5" PointX="0.5" PointY="7.75" />
         <EntityTypeShape EntityType="EShopCoffe_DBModel.Users" Width="1.5" PointX="2.75" PointY="7.75" />
         <AssociationConnector Association="EShopCoffe_DBModel.FK_Users_Roles" />
+        <EntityTypeShape EntityType="EShopCoffe_DBModel.User_Details" Width="1.5" PointX="5" PointY="8.25" />
+        <AssociationConnector Association="EShopCoffe_DBModel.FK_User_Details_Users" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -8,10 +8,20 @@ namespace EShopCoffee.Areas.Admin.Controllers
 {
     public class AdminHomeController : Controller
     {
+      
         // GET: Admin/AdminHome
         public ActionResult Index()
         {
             return View();
         }
+        public ActionResult Navbar()
+        {
+            return PartialView();
+        }
+        public ActionResult HomeLogo()
+        {
+            return PartialView();
+        }
+
     }
 }

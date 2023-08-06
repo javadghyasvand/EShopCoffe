@@ -8,6 +8,6 @@ namespace EShopCoffee.Models.ViewModels
         [Display(Name = "ایمیل")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [EmailAddress(ErrorMessage = "ایمیل وارد شده صحیح نمی باشد")]
-        public string Email { get; set; }
+        public string User_Email { get; set; }
     }
 }

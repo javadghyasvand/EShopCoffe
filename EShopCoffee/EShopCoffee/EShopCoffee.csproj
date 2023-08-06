@@ -135,8 +135,11 @@
     <Compile Include="Areas\Admin\Controllers\Product_GroupsController.cs" />
     <Compile Include="Areas\Admin\Controllers\Product_PropertyController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
-    <Compile Include="Controllers\Account.cs" />
+    <Compile Include="Areas\UserPanel\Controllers\UserController.cs" />
+    <Compile Include="Areas\UserPanel\UserPanelAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManegeEmailsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -182,6 +185,9 @@
     <Compile Include="Models\DataLayer\Users.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataLayer\User_Details.cs">
+      <DependentUpon>EShop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MetaData\Product_EShop_MetaData.cs" />
     <Compile Include="Models\MetaData\Product_Gallery_MetaData.cs" />
     <Compile Include="Models\MetaData\Product_Groups_Metadata.cs" />
@@ -191,11 +197,14 @@
     <Compile Include="Models\MetaData\Product_Property_MetaData.cs" />
     <Compile Include="Models\MetaData\Roles_MetaData.cs" />
     <Compile Include="Models\MetaData\Users_MetaData.cs" />
+    <Compile Include="Models\MetaData\User_Details_MetaData.cs" />
     <Compile Include="Models\ViewModels\ChangPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\ViewModels\LoggedInUserViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\RecoveryPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserProfileViewModel.cs" />
     <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\CheckContentImage.cs" />
@@ -209,6 +218,7 @@
   <ItemGroup>
     <Content Include="Content\Asset\Bootstrap\css\bootstrapv4.5.3.min.css" />
     <Content Include="Content\Asset\Bootstrap\js\bootstrap4.0.0.min.js" />
+    <Content Include="Content\Asset\CSS\Emailstyle.css" />
     <Content Include="Content\Asset\CSS\Index_style.css" />
     <Content Include="Content\Asset\CSS\login.css" />
     <Content Include="Content\Asset\CSS\notfound.css" />
@@ -701,27 +711,14 @@
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\Image\Logo\1.png" />
-    <Content Include="Content\Image\Logo\Category-Maker.jpg" />
-    <Content Include="Content\Image\Logo\Category_Chocklet.jpg" />
-    <Content Include="Content\Image\Logo\Category_Coffee.jpg" />
-    <Content Include="Content\Image\Logo\Category_Equipment.jpg" />
-    <Content Include="Content\Image\Logo\Category_Mug.jpg" />
-    <Content Include="Content\Image\Logo\Choclet.ico" />
-    <Content Include="Content\Image\Logo\Coffe.ico" />
-    <Content Include="Content\Image\Logo\coffee5.jpg" />
-    <Content Include="Content\Image\Logo\coffeemobile.jpg" />
-    <Content Include="Content\Image\Logo\CoffeMaker.ico" />
-    <Content Include="Content\Image\Logo\Equipment.ico" />
-    <Content Include="Content\Image\Logo\head636473112731542337.png" />
-    <Content Include="Content\Image\Logo\Login1.png" />
-    <Content Include="Content\Image\Logo\Login2.jpg" />
+    <Content Include="Content\Image\Email\cappuccino_coffee_cream_212547_3840x2160.jpg" />
+    <Content Include="Content\Image\Email\coffee_machine_cup_coffee_212558_3840x2160.jpg" />
+    <Content Include="Content\Image\Email\cup_coffee_book_157739_3840x2160.jpg" />
+    <Content Include="Content\Image\Login\Login1.png" />
+    <Content Include="Content\Image\Login\Login2.jpg" />
     <Content Include="Content\Image\Logo\Logo.ico" />
     <Content Include="Content\Image\Logo\Logo.png" />
-    <Content Include="Content\Image\Logo\Mug.ico" />
-    <Content Include="Content\Image\Logo\NotFound.jpg" />
-    <Content Include="Content\Image\Logo\sidewbar.png" />
-    <Content Include="Content\Image\Logo\Untitled-1.png" />
+    <Content Include="Content\Image\Logo\Logo1.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -760,6 +757,7 @@
     <Content Include="Images\ProductImages\Thumbnail\images.png" />
     <Content Include="Images\Slider\659f1cb1-669e-40be-9ad5-ba2b6fe15138.jpg" />
     <Content Include="Images\Slider\b6eb2fe3-be25-4c25-a0ac-76d3aecd9a46.jpg" />
+    <Content Include="Images\UserImge\no-photo.jpg" />
     <Content Include="Models\DataLayer\EShop.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EShop.edmx</DependentUpon>
@@ -818,9 +816,6 @@
     <Content Include="Content\Asset\Fonts\vazir\timesbd.ttf" />
     <Content Include="Content\Asset\Fonts\vazir\timesbi.ttf" />
     <Content Include="Content\Asset\Fonts\vazir\timesi.ttf" />
-    <Content Include="Content\Asset\Fonts\vazir\Vazir.eot" />
-    <Content Include="Content\Asset\Fonts\vazir\Vazir.ttf" />
-    <Content Include="Content\Asset\Fonts\vazir\Vazir.woff" />
     <Content Include="Content\font-awesome\css\font-awesome.css.map" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.ttf" />
@@ -894,11 +889,21 @@
     </Content>
     <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product_EShop\ProductProperty.cshtml" />
+    <Content Include="Areas\UserPanel\Views\web.config" />
+    <Content Include="Areas\UserPanel\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\UserPanel\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\UserPanel\Views\User\ChangPassword.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\Navbar.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\HomeLogo.cshtml" />
+    <Content Include="Areas\Admin\Views\Product_EShop\Navbar.cshtml" />
+    <Content Include="Areas\Admin\Views\Product_Groups\Navbar.cshtml" />
+    <Content Include="Areas\Admin\Views\Product_Property\Navbar.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Navbar.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery.modal.min.js" />
@@ -927,18 +932,28 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\Create.cshtml" />
-    <Content Include="Views\Account\Delete.cshtml" />
-    <Content Include="Views\Account\Details.cshtml" />
-    <Content Include="Views\Account\Edit.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Shared\_DefultLayout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Shared\LoggedInUser.cshtml" />
+    <Content Include="Views\Home\LoggedInUser.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\RegisterSuccess.cshtml" />
+    <Content Include="Views\Home\Welcome.cshtml" />
+    <Content Include="Views\ManegeEmails\ActiveEmail.cshtml" />
+    <Content Include="Views\ManegeEmails\RecoveryPassword.cshtml" />
+    <Content Include="Views\Account\ActiveUser.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotSuccess.cshtml" />
+    <Content Include="Views\Account\RecoveryPassword.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Home\Navbar.cshtml" />
+    <Content Include="Views\Home\Footer.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\UserPanel\Data\" />
+    <Folder Include="Images\UserImge\Thumbnail\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

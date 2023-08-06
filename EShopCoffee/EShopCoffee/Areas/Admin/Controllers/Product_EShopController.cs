@@ -24,7 +24,10 @@ namespace EShopCoffee.Areas.Admin.Controllers
         {
             return View(_db.Product_EShop.Where(p => p.Product_Is_Delete == false).ToList());
         }
-
+        public ActionResult Navbar()
+        {
+            return PartialView();
+        }
         // GET: Admin/Product_EShop/Details/5
         public ActionResult Details(long? id)
         {

@@ -136,17 +136,17 @@ function closeNav() {
 
 }
 
-$('#multi22').mdbRange({
-    single: {
-        active: true,
-        multi: {
-            active: true,
-            rangeLength: 2,
-            counting: true,
-            countingTarget: ['#ex3', '#ex4']
-        }
-    }
-});
+//$('#multi22').mdbRange({
+//    single: {
+//        active: true,
+//        multi: {
+//            active: true,
+//            rangeLength: 2,
+//            counting: true,
+//            countingTarget: ['#ex3', '#ex4']
+//        }
+//    }
+//});
 function formatSliderValues(value) {
     if (value == null) return 'Any';
     /* This code formats a number in a human value, by adding separators (forces 2 decimal). 
@@ -157,45 +157,46 @@ function formatSliderValues(value) {
 
 var values = [0, 100, 200, 500, 1000, 1500, null];
 
-$("#slider-range").slider({
-    range: true,
-    max: values.length - 1,
-    values: [values[0], values.length - 1],
-    slide: function (event, ui) {
-        var min = values[ui.values[0]];
-        var max = values[ui.values[1]];
-        $("[name=min]").val(min);
-        $("[name=max]").val(max);
-        $("#min").text(formatSliderValues(min));
-        $("#max").text(formatSliderValues(max));
-    }
-});
+//$("#slider-range").slider({
+//    range: true,
+//    max: values.length - 1,
+//    values: [values[0], values.length - 1],
+//    slide: function (event, ui) {
+//        var min = values[ui.values[0]];
+//        var max = values[ui.values[1]];
+//        $("[name=min]").val(min);
+//        $("[name=max]").val(max);
+//        $("#min").text(formatSliderValues(min));
+//        $("#max").text(formatSliderValues(max));
+//    }
+//});
 
 /* show initial values */
-var min = values[$("#slider-range").slider("values", 0)];
-var max = values[$("#slider-range").slider("values", 1)];
-$("[name=min]").val(min);
-$("[name=max]").val(max);
-$("#min").text(formatSliderValues(min));
-$("#max").text(formatSliderValues(max));
-const setLabel = (lbl, val) => {
-    const label = $(`#slider-${lbl}-label`);
-    label.text(val);
-    const slider = $(`#slider-div .${lbl}-slider-handle`);
-    const rect = slider[0].getBoundingClientRect();
-    label.offset({
-        top: rect.top - 30,
-        left: rect.left
-    });
-}
 
-const setLabels = (values) => {
-    setLabel("min", values[0]);
-    setLabel("max", values[1]);
-}
+//var min = values[$("#slider-range").slider("values", 0)];
+//var max = values[$("#slider-range").slider("values", 1)];
+//$("[name=min]").val(min);
+//$("[name=max]").val(max);
+//$("#min").text(formatSliderValues(min));
+//$("#max").text(formatSliderValues(max));
+//const setLabel = (lbl, val) => {
+//    const label = $(`#slider-${lbl}-label`);
+//    label.text(val);
+//    const slider = $(`#slider-div .${lbl}-slider-handle`);
+//    const rect = slider[0].getBoundingClientRect();
+//    label.offset({
+//        top: rect.top - 30,
+//        left: rect.left
+//    });
+//}
+
+//const setLabels = (values) => {
+//    setLabel("min", values[0]);
+//    setLabel("max", values[1]);
+//}
 
 
-$('#ex2').slider().on('slide', function (ev) {
-    setLabels(ev.value);
-});
-setLabels($('#ex2').attr("data-value").split(","));
+//$('#ex2').slider().on('slide', function (ev) {
+//    setLabels(ev.value);
+//});
+//setLabels($('#ex2').attr("data-value").split(","));

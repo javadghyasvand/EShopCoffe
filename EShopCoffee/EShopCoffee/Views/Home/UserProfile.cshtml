@@ -1,0 +1,83 @@
+﻿@model EShopCoffee.Models.ViewModels.UserProfileViewModel
+
+@section Navbar
+{
+    @Html.Action("Navbar")
+}
+
+<div class="container">
+@Html.HiddenFor(model => model.User_Id)
+@Html.HiddenFor(model => model.User_Detail_Id)
+<div class="card text-white  mb-5">
+    <div class="card-header Bg-backgrund">اطلاعات کاربری</div>
+    <div class="card-body">
+        <div>
+            <div class="text-center">
+                <span>
+                    <img id="ImgPreviewProduct" name="ImgPreviewProduct" style="margin: 1px auto; max-width: 50px" class="img-thumbnail" src="~/Images/UserImge/@Model.User_Image"/>
+                </span>
+                <br/>
+                <span class="text-dark font-weight-bolder">@Model.User_Name</span>
+
+            </div>
+           
+            <hr/>
+            <div class="col-md-12 row m-3">
+                <div class="text-dark col-md-6">
+                    <label>ایمیل:</label>
+                    @Html.DisplayFor(model => model.User_Email, null, new { @class = "text-dark" })
+                </div>
+                <div class="text-dark col-md-6">
+                    <label>شماره تماس:</label>
+                    @Html.DisplayFor(model => model.User_Phone, null, new { @class = "text-dark" })
+                </div>
+            </div>
+            <div class="col-md-12 row m-3">
+                <div class="text-dark col-md-6">
+                    <label>استان:</label>
+                    @Html.DisplayFor(model => model.User_State, null, new { @class = "text-dark" })
+                </div>
+                <div class="text-dark col-md-6">
+                    <label>شهر:</label>
+                    @Html.DisplayFor(model => model.User_City, null, new { @class = "text-dark" })
+                </div>
+            </div>
+            <div class="col-md-12 row m-3">
+                <div class="text-dark col-md-6">
+                    <label>کد پستی:</label>
+                    @Html.DisplayFor(model => model.User_Postal_Code, null, new { @class = "text-dark" })
+                </div>
+                <div class="text-dark col-md-6">
+                 
+                </div>
+            </div>
+            <div  class="col-md-12 row m-3">
+                <div class="text-dark ml-3">
+                    <label>آدرس:</label>
+                    @Html.DisplayFor(model => model.User_Address, null, new { @class = "text-dark" })
+                </div>
+            </div>
+           
+        </div>
+        <hr/>
+        <div class="text-center">
+            <a class="btn btn-warning" href="" ><i class="fa fa-edit"></i></a>
+        </div>
+        
+    </div>
+</div>
+
+@section Footer
+{
+    @Html.Action("Footer")
+}
+
+<style>
+    .img-thumbnail {
+        padding: 0.15rem !important;
+        border: 1px solid #dee2e6;
+        border-radius: 50% !important;
+        max-width: 100%;
+        height: auto;
+    }
+</style>

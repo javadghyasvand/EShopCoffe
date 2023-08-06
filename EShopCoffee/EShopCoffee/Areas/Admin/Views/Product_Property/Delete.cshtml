@@ -3,10 +3,13 @@
 @{
     ViewBag.Title = "Delete";
 }
-
+@section Navbar
+{
+    @Html.Action("Navbar")
+}
 <h5 class="alert alert-danger m-4">آیا از حذف مطمن هستید ؟</h5>
 <div>
-    <hr/>
+    <hr />
     <table class="table">
         <tr>
             <th class="font-weight-bold Bg-backgrund text-light">

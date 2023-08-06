@@ -18,7 +18,7 @@ namespace MyShop
 
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-            mail.From = new MailAddress("javadghyasvand68@gmail.com", "فروشگاه");
+            mail.From = new MailAddress("doppioshopsender@gmail.com", "فروشگاه دوپیو");
             mail.To.Add(To);
             mail.Subject = Subject;
             mail.Body = Body;
@@ -29,7 +29,7 @@ namespace MyShop
             // mail.Attachments.Add(attachment);
             
             SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("javadghyasvand68@gmail.com", "esvukurwnwfpbojo");
+            SmtpServer.Credentials = new System.Net.NetworkCredential("doppioshopsender@gmail.com", "aesaocrstorjiczu");
             SmtpServer.EnableSsl = true;
             
             SmtpServer.Send(mail);

@@ -1,0 +1,52 @@
+﻿@font-face {
+    font-family: Vazir;
+    src: url(http://79.127.52.162/Downloads/Instructions/3DModelHtml/Assets/Image/Image/CSS/vazir/Vazir.eot), 
+         url(http://79.127.52.162/Downloads/Instructions/3DModelHtml/Assets/Image/Image/CSS/vazir/Vazir.ttf), 
+         url( http://79.127.52.162/Downloads/Instructions/3DModelHtml/Assets/Image/Image/CSS/vazir/Vazir.woff);
+}
+
+a:hover,
+a:visited {
+    /* This is the link colour */
+    text-decoration: dashed;
+    color: #0282fa;
+}
+
+a {
+    color: #2cf3a0;
+    font-weight: 900;
+    text-decoration: none;
+}
+
+
+p,
+p:visited {
+    /* Fallback paragraph style */
+    font-size: 15px;
+    line-height: 24px;
+    font-family: 'Vazir', Arial, sans-serif;
+    font-weight: 300;
+    text-decoration: none;
+    color: #000000;
+}
+
+h1 {
+    /* Fallback heading style */
+    font-size: 22px;
+    line-height: 24px;
+    font-family: 'Vazir', Arial, sans-serif;
+    font-weight: normal;
+    text-decoration: none;
+    color: #000000;
+}
+
+.ExternalClass p,
+.ExternalClass span,
+.ExternalClass font,
+.ExternalClass td {
+    line-height: 100%;
+}
+
+.ExternalClass {
+    width: 100%;
+}

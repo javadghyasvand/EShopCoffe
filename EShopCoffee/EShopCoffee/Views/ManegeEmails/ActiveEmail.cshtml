@@ -1,0 +1,121 @@
+﻿@using System.Configuration
+@model EShopCoffee.Models.DataLayer.Users
+
+
+<div style="text-align: center; margin: 0; padding-top: 10px; padding-bottom: 10px; padding-left: 0; padding-right: 0; -webkit-text-size-adjust: 100%;background-color: #f2f4f6; color: #000000"
+     align="center">
+
+    <!-- Fallback force center content -->
+    <div style="text-align: center; font-family: Vazir">
+        <!-- Start container for logo -->
+        <table align="center"
+               style="text-align: center; vertical-align: top; width: 600px; max-width: 600px; background-color: #000000;"
+               width="600">
+            <tbody>
+                <tr>
+                    <td style="width: 596px; vertical-align: top; padding-left: 0; padding-right: 0; padding-top: 15px; padding-bottom: 15px;"
+                        width="596">
+
+                        <!-- Your logo is here -->
+                        <img style="width: 540px; max-width: 200px; height: 200px; max-height: 255px; text-align: center; color: #ffffff;"
+                             alt="Logo" src="http://79.127.52.162/Downloads/Instructions/3DModelHtml/Assets/Image/Image/Logo/Logo.png"
+                             align="center" width="180" height="85">
+                        <h2 style="font-size: 20px; line-height: 24px; font-weight: 600; text-decoration: none; color: #ffffff;">
+                            فروشگاه دوپیو
+                        </h2>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- End container for logo -->
+        <!-- Hero image -->
+        <img style="width: 600px; max-width: 600px; height: 497px; max-height: 497px; text-align: center; border:  6px #007042 solid; border-radius: 5px;"
+             alt="Hero image"
+             src="http://79.127.52.162/Downloads/Instructions/3DModelHtml/Assets/Image/Image/Email/coffee_machine_cup_coffee_212558_3840x2160.jpg" align="center" width="600" height="350">
+        <!-- Hero image -->
+        <!-- Start single column section -->
+        <table align="center"
+               style="text-align: center; vertical-align: top; width: 600px; max-width: 600px; background-color: #000000;"
+               width="600">
+
+            <tbody>
+                <tr>
+                    <td style="width: 596px; vertical-align: top; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 40px;"
+                        width="596">
+
+                        <h1 style="font-size: 20px; line-height: 24px;  font-weight: 600; text-decoration: none; color: #efb329;">
+                            @Model.User_Name !عزیز
+                        </h1>
+
+                        <p style="font-size: 15px; line-height: 24px;  font-weight: 400; text-decoration: none; color: #ffffff;">
+                          با نشکر از ثبت نام شما در سایت ما،جهت فعال سازی حساب کار بری خود روی لینک زیر کلیک کنید.
+                        </p>
+
+
+                        <p style="font-size: 15px; line-height: 24px;  font-weight: 400; text-decoration: none;margin-top: 30px ">
+                            <a style="background-color: #0B996E; border: 1px solid #ffffff; border-radius: 10px; height: 100px; padding: 15px; width: 150px;color: #ffffff !important; font-weight: 900 !important; text-decoration: none !important; "
+                               href="@ConfigurationManager.AppSettings["MyDomain"]/Account/ActiveUser/@Model.User_Active_Code">لینک فعال سازی</a>
+                        </p>
+
+
+
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+        <img style="width:800px; max-width: 600px; height: 200px; max-height: 200px; text-align: center; border:  6px #007042 solid; border-radius: 5px;"
+             alt="Hero image"
+             src="http://79.127.52.162/Downloads/Instructions/3DModelHtml/Assets/Image/Image/Email/cappuccino_coffee_cream_212547_3840x2160.jpg" align="center" width="600" height="350">
+
+        <!-- Start footer -->
+        <table align="center"
+               style="text-align: center; vertical-align: top; width: 600px; max-width: 600px; background-color: #000000;"
+               width="600">
+            <tbody>
+                <tr>
+                    <td style="width: 596px; vertical-align: top; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 40px;"
+                        width="596">
+
+                        <!-- Your inverted logo is here -->
+                        <img style="width: 85px; max-width: 180px; height: 85px; max-height: 85px; text-align: center; color: #ffffff;"
+                             alt="Logo" src="http://79.127.52.162/Downloads/Instructions/3DModelHtml/Assets/Image/Image/Logo/Logo.png"
+                             align="center" width="180" height="85">
+                        <h5 style="line-height: 24px;  font-weight: 600; text-decoration: none; color: #efb329;">
+                            : تلفن
+                        </h5>
+                        <p style="font-size: 13px; line-height: 24px;  font-weight: 400; text-decoration: none; color: #ffffff;">
+                            09111111111
+                            <br />
+                        </p>
+
+                        <h5 style="line-height: 24px;  font-weight: 600; text-decoration: none; color: #efb329;">
+                            : آدرس
+                        </h5>
+                        <p style="font-size: 13px; line-height: 24px;  font-weight: 400; text-decoration: none; color: #ffffff;">
+                            پونک خ نخبگان
+                            <br />
+                        </p>
+
+                        <p style="margin-bottom: 0; font-size: 13px; line-height: 24px;  font-weight: 400; text-decoration: none; color: #ffffff;">
+                            <a target="_blank" style="text-decoration: underline; color: #efb329;" href="">
+                                doppio.ir
+                            </a>
+                        </p>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- End footer -->
+
+
+
+    </div>
+
+</div>
+
+
