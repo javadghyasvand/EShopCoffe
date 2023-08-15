@@ -2,29 +2,33 @@
 
 @{
     ViewBag.Title = "Edit";
-
+    var rolesId = ViewBag.User_Role_Id;
 }
 
 <h4 class="text-center font-weight-bold mt-4">ویرایش کابر جدید</h4>
 <hr />
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-
+   
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model=>model.User_Id)
+        @Html.HiddenFor(model=>model.User_Password)
+        @Html.HiddenFor(model=>model.User_Active_Code)
+        @Html.HiddenFor(model=>model.User_RegisterDate)
+        @Html.HiddenFor(model=>model.User_Image)
         <div class="form-group">
             <div class="input-group mb-3 ">
                 <div class="input-group-prepend ">
                     @Html.LabelFor(model => model.User_Role_Id, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
                 </div>
-                @Html.DropDownList("Role_Id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("User_Role_Id", null, htmlAttributes: new { @class = "form-control" })
             </div>
             <p class="text-center">
                 @Html.ValidationMessageFor(model => model.User_Role_Id, "", new { @class = "text-danger " })
             </p>
         </div>
-
         <div class="form-group">
             <div class="input-group mb-3 ">
                 <div class="input-group-prepend ">
@@ -59,26 +63,23 @@
             </p>
         </div>
         <div class="form-group">
-            <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                    @Html.LabelFor(model => model.User_Password, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
+            <div class="input-group mb-3 col-md-12  ">
+                <div class="col-md-6">
+                    <label class="input-group-text Bg-backgrund text-light label">
+                        <div class="form-group form-check text-center mt-2">
+                            @Html.EditorFor(model => model.User_IsActive, new { @class = "checkbox" })
+                            @Html.LabelFor(model => model.User_IsActive, new { @class = "form-check-label" })
+                        </div>
+                    </label>
+                    <p class="text-center">
+                        @Html.ValidationMessageFor(model => model.User_IsActive, "", new { @class = "text-danger" })
+                    </p>
                 </div>
-                @Html.EditorFor(model => model.User_Password, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.User_Password, "", new { @class = "text-danger" })
-            </p>
-        </div>
-        <div class="form-group">
-            <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                    @Html.LabelFor(model => model.User_Active_Code, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
+                <div class="col-md-6">
+                  
                 </div>
-                @Html.EditorFor(model => model.User_Active_Code, new { htmlAttributes = new { @class = "form-control" } })
+
             </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.User_Active_Code, "", new { @class = "text-danger" })
-            </p>
         </div>
         <div class="form-group">
             <div class="card text-white  mb-3">
@@ -89,7 +90,7 @@
                             <input type="file" style="margin: 10px;" id="imageProduct" name="imageProduct" />
                         </span>
                         <sapn class="col-md-8">
-                            <img id="ImgPreviewProduct" name="ImgPreviewProduct" style="margin: 10px auto; max-width: 300px" class="img-thumbnail" src="~/Images/UserImge/no-photo.jpg" />
+                            <img id="ImgPreviewProduct" name="ImgPreviewProduct" style="margin: 10px auto; max-width: 300px" class="img-thumbnail" src="~/Images/UserImge/@Model.User_Image" />
                         </sapn>
                     </div>
                 </div>

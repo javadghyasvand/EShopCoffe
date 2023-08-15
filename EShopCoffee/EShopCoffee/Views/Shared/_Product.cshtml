@@ -1,0 +1,46 @@
+﻿@model EShopCoffee.Models.DataLayer.Product_EShop
+
+<div class="owl-item active" style="width:350px;">
+    <div class="item">
+        <div class="product">
+            <div class="flip-container">
+                <div class="flipper">
+                    <div class="front">
+                        <a  href="/ShowProduct/@Model.Product_Id" >
+                            <img src="~/Images/ProductImages/@Model.Product_ImageName" alt="@Model.Proudct_Title" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="back">
+                        <a  href="/ShowProduct/@Model.Product_Id">
+                            <img src="~/Images/ProductImages/@Model.Product_ImageName" alt="@Model.Proudct_Title" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <a  href="/ShowProduct/@Model.Product_Id" class="invisible">
+                <img src="~/Images/ProductImages/@Model.Product_ImageName" alt="@Model.Proudct_Title" class="img-fluid">
+            </a>
+            
+            <div class="text mt-3">
+                <h3>
+                    <a href="/ShowProduct/@Model.Product_Id">@Model.Proudct_Title</a>
+                </h3>
+                <hr />
+                @if (@Model.Product_Count > 0)
+                {
+                    <p class="price">
+                        <del></del><label>@Model.Product_Price.ToString("#,0")  تومان</label>
+                    </p>
+                }
+                else
+                {
+                    <p class="price">
+                        <del></del><label class="text-danger">ناموجود</label>
+                    </p>
+                }
+
+            </div>
+
+        </div>
+    </div>
+</div>

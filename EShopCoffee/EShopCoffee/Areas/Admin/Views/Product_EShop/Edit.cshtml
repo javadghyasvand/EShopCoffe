@@ -6,212 +6,185 @@
     List<Product_Select_Groups> selectedGroupsList = ViewBag.SelectedGroups;
     List<Product_Groups> groups = ViewBag.Groups;
 
-}
-@section Navbar
-{
-    @Html.Action("Navbar")
-}
-<h4 class="text-center font-weight-bold mt-4">ویرایش محصول</h4>
-<hr />
 
-@using (Html.BeginForm("Edit", "Product_EShop", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+}
+<div class="container">
+    @using (Html.BeginForm("Create", "Product_EShop", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.Product_Id)
         @Html.HiddenFor(model => model.Product_CreateDate)
         @Html.HiddenFor(model => model.Product_ImageName)
-        @if (ViewBag.ErorrSelectedGroups == true)
-        {
-            <div class="alert alert-danger">لطفا گروه محصول را انتخاب کنید </div>
-        }
-        @if (ViewBag.ErorrIsImage == true)
-        {
-            <div class="alert alert-danger">لطفا فایل عکس اپلود کنید </div>
-        }
-        <div class="form-group">
-            <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                    @Html.LabelFor(model => model.Proudct_Title, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
-                </div>
-                @Html.EditorFor(model => model.Proudct_Title, new { htmlAttributes = new { @class = "form-control" } })
-
-            </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.Proudct_Title, "", new { @class = "text-danger" })
-            </p>
-        </div>
-
-        <div class="form-group">
-            <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                    @Html.LabelFor(model => model.Product_Count, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
-                </div>
-                @Html.EditorFor(model => model.Product_Count, new { htmlAttributes = new { @class = "form-control" } })
-
-            </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.Product_Count, "", new { @class = "text-danger" })
-            </p>
-        </div>
-
-        <div class="form-group">
-            <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                    @Html.LabelFor(model => model.Product_Price, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
-                </div>
-                @Html.EditorFor(model => model.Product_Price, new { htmlAttributes = new { @class = "form-control" } })
-
-            </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.Product_Price, "", new { @class = "text-danger" })
-            </p>
-        </div>
-
-        <div class="form-group">
-            <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                    <label class="input-group-text Bg-backgrund text-light label">کلمات کلیدی با # جداکنید</label>
-                </div>
-                <input class=" form-control" type="text" name="tags" value="@ViewBag.Tags" placeholder="کلمات کلیدی را با # جدا کنید" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="input-group mb-3 col-md-12  ">
-                <div class="col-md-6">
-                    <label class="input-group-text Bg-backgrund text-light label">
-                        <div class="form-group form-check text-center mt-2">
-                            @Html.EditorFor(model => model.Product_IsInStock, new { @class = "checkbox" })
-                            @Html.LabelFor(model => model.Product_IsInStock, new { @class = "form-check-label" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row" style="text-align: right;">
+            <div class="col-lg-12">
+                <div class="box">
+                    <h3 class="text-center color_defult">افزودن محصول</h3>
+                    <hr/>
+                    @if (ViewBag.ErorrSelectedGroups == true)
+                    {
+                        <div class="alert alert-danger">لطفا گروه محصول را انتخاب کنید </div>
+                    }
+                    @if (ViewBag.ErorrIsImage == true)
+                    {
+                        <div class="alert alert-danger">لطفا فایل عکس اپلود کنید </div>
+                    }
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.Product_Count, htmlAttributes: new { @class = "text-dark label" })
+                            @Html.EditorFor(model => model.Product_Count, new { htmlAttributes = new { @class = "form-control" } })
+                            <p>
+                                @Html.ValidationMessageFor(model => model.Product_Count, "", new { @class = "text-danger" })
+                            </p>
                         </div>
-                    </label>
-                    <p class="text-center">
-                        @Html.ValidationMessageFor(model => model.Product_IsInStock, "", new { @class = "text-danger" })
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <label class="input-group-text Bg-backgrund text-light label">
-                        <div class="form-group form-check text-center mt-2">
-                            @Html.EditorFor(model => model.Product_Is_Delete, new { @class = "checkbox" })
-                            @Html.LabelFor(model => model.Product_Is_Delete, new { @class = "form-check-label" })
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.Proudct_Title, htmlAttributes: new { @class = "text-dark label" })
+                            @Html.EditorFor(model => model.Proudct_Title, new { htmlAttributes = new { @class = "form-control" } })
+                            <p>
+                                @Html.ValidationMessageFor(model => model.Proudct_Title, "", new { @class = "text-danger" })
+                            </p>
                         </div>
-                    </label>
-                    <p class="text-center">
-                        @Html.ValidationMessageFor(model => model.Product_Is_Delete, "", new { @class = "text-danger" })
-                    </p>
-                </div>
 
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="card text-white  mb-3">
-                <div class="card-header Bg-backgrund">انتخاب تصویر</div>
-                <div class="card-body">
-                    <div style="margin: 10px auto;" class="col-md-12">
-                        <span class="offset-2 col-md-4">
-                            <input type="file" style="margin: 10px;" id="imageProduct" name="imageProduct" />
-                        </span>
-                        <sapn class="col-md-8">
-                            <img id="ImgPreviewProduct" name="ImgPreviewProduct" style="margin: 10px auto; max-width: 300px" class="img-thumbnail" src="~/Images/ProductImages/@Model.Product_ImageName" />
-                        </sapn>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <div class="row text-center">
+                                <div class="col-lg-6 mt-2">
+                                    @Html.EditorFor(model => model.Product_IsInStock, new { @class = "checkbox" })
+                                    @Html.LabelFor(model => model.Product_IsInStock, new { @class = "form-check-label" })
+                                    <p>
+                                        @Html.ValidationMessageFor(model => model.Product_IsInStock, "", new { @class = "text-danger" })
+                                    </p>
+                                </div>
+                                <div class="col-lg-6 mt-2">
+                                    @Html.EditorFor(model => model.Product_Is_Delete, new { @class = "checkbox" })
+                                    @Html.LabelFor(model => model.Product_Is_Delete, new { @class = "form-check-label" })
+                                    <p>
+                                        @Html.ValidationMessageFor(model => model.Product_Is_Delete, "", new { @class = "text-danger" })
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.Product_Price, htmlAttributes: new { @class = "text-dark label" })
+                            @Html.EditorFor(model => model.Product_Price, new { htmlAttributes = new { @class = "form-control" } })
+                            <p>
+                                @Html.ValidationMessageFor(model => model.Product_Price, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-dark label">کلمات کلیدی </label>
+                        <input class=" form-control" type="text" name="tags" value="@ViewBag.Tags" placeholder="کلمات کلیدی را با # جدا کنید"/>
+                    </div>
+                    <div id="accordion" class="mt-4">
+                        <div class="card border-primary mb-3">
+                            <div id="heading" class="card-header p-0 border-0">
+                                <h4 class="mb-0">
+                                    <a href="#" data-toggle="collapse" data-target="#collapse" aria-expanded="true" aria-controls="collapseOne" class="textalign btn btn-primary d-block text-left rounded-0">توضیحات</a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" aria-labelledby="heading" data-parent="#accordion" class="collapse show">
+                                <div class="card-body">
+                                    @Html.EditorFor(model => model.Product_Discription, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            @Html.ValidationMessageFor(model => model.Product_Discription, "", new { @class = "text-danger" })
+                        </p>
+                    </div>
+                    <div id="accordionOne" class="mt-4">
+                        <div class="card border-primary mb-3">
+                            <div id="headingOne" class="card-header p-0 border-0">
+                                <h4 class="mb-0">
+                                    <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="textalign btn btn-primary d-block text-left rounded-0">انتخاب تصویر</a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionOne" class="collapse show">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <span class="col-lg-4 mt-5">
+                                            <input type="file" style="margin: 10px;" id="imageProduct" name="imageProduct"/>
+                                        </span>
+                                        <sapn class="col-lg-5">
+                                            <img id="ImgPreviewProduct" name="ImgPreviewProduct" style="margin: 10px auto; width: 150px" class="img-thumbnail" src="~/Images/ProductImages/@Model.Product_ImageName"/>
+                                        </sapn>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="accordionTwo">
+                        <div class="card border-primary mb-3">
+                            <div id="headingTwo" class="card-header p-0 border-0">
+                                <h4 class="mb-0">
+                                    <a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="textalign btn btn-primary d-block text-left rounded-0">دسته بندی</a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionTwo" class="collapse show">
+                                <div class="card-body">
+                                    <div class="row">
+                                        @foreach (var headGroups in groups.Where(g => g.Parent_Id == null))
+                                        {
+                                            <div class="mt-1 col-lg-4">
+                                                <div class="card border-primary mb-3">
+                                                    <div class="card-header p-0 border-0">
+                                                        <h4 class="mb-0">
+                                                            <span class="textalign btn btn-primary d-block text-left rounded-0">
+                                                                @headGroups.Group_Title
+                                                            </span>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="collapse show">
+                                                        <div class="card-body p-2 mr-2">
+                                                            <div class="form-group form-check textalign">
+                                                                <input type="checkbox" class="form-check-input" name="selectedGroup" id="check-box+@headGroups.Group_Id" @((selectedGroupsList.Any(g => g.Group_Id == headGroups.Group_Id)) ? "checked" : "") value="@headGroups.Group_Id">
+                                                                <label class="form-check-label w-75" for="check-box+@headGroups.Group_Id">@headGroups.Group_Title</label>
+                                                            </div>
+                                                            <hr/>
+                                                            @if (groups.Any(g => g.Parent_Id == headGroups.Group_Id))
+                                                            {
+                                                                foreach (var subgroups in groups.Where(g => g.Parent_Id == headGroups.Group_Id))
+                                                                {
+                                                                    <div class="form-group form-check textalign">
+                                                                        <input type="checkbox" class="form-check-input " name="selectedGroup" id="check-box+@subgroups.Group_Id" @((selectedGroupsList.Any(g => g.Group_Id == subgroups.Group_Id)) ? "checked" : "") value="@subgroups.Group_Id">
+                                                                        <label class="form-check-label w-75" for="check-box+@subgroups.Group_Id">@subgroups.Group_Title</label>
+                                                                    </div>
+                                                                }
+                                                            }
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="text-center col-lg-12 mt-3 mb-3">
+                                <a href="@Url.Action("Index")" class="btn btn-danger w-25">
+                                    <i class="fa fa-arrow-left"> </i>بازگشت
+                                </a>
+                                <button type="submit" class="btn btn-primary w-25"><i class="fa fa-sign-in"></i>ثبت</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.Product_ImageName, "", new { @class = "text-danger" })
-            </p>
+
         </div>
+    }
+</div>
 
-        <div class="form-group">
-            <div class="card text-white  mb-3">
-                <div class="card-header Bg-backgrund">توضیحات</div>
-                <div class="card-body">
-                    @Html.EditorFor(model => model.Product_Discription, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-            </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.Product_Discription, "", new { @class = "text-danger" })
-            </p>
-        </div>
-        <div class="form-group">
-            <div class="card text-white  mb-3">
-                <div class="card-header Bg-backgrund">انتخاب گروه</div>
-
-                <div class="card-body text-dark">
-
-                    <table class="table table-bordered">
-                        <tr>
-                            <th class="font-weight-bold Bg-backgrund text-light">
-                                گروه ها
-                            </th>
-                            <th class="font-weight-bold Bg-backgrund text-light">
-                                زیر گروه ها
-                            </th>
-                        </tr>
-
-                        @foreach (var headGroups in groups.Where(g => g.Parent_Id == null))
-                        {
-                            <tr>
-                                <td>
-                                    <table class="table table-borderless">
-                                        <tr class="col-md-12">
-                                            <th class="col-5">
-                                                <div class="form-group form-check">
-                                                    <input type="checkbox" class="form-check-input" id="check-box+@headGroups.Group_Id" name="selectedGroup" @((selectedGroupsList.Any(g => g.Group_Id == headGroups.Group_Id)) ? "checked" : "") value="@headGroups.Group_Id">
-                                                    <label class="form-check-label" for="check-box+@headGroups.Group_Id">@headGroups.Group_Title</label>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td>
-                                    @if (groups.Any(g => g.Parent_Id == headGroups.Group_Id))
-                                    {
-                                        <ul>
-                                            @foreach (var subgroups in groups.Where(g => g.Parent_Id == headGroups.Group_Id))
-                                            {
-                                                <table class="table table-borderless">
-                                                    <tr class="col-md-7">
-                                                        <th class="col-8">
-                                                            <div class="form-group form-check">
-                                                                <input type="checkbox" class="form-check-input" @((selectedGroupsList.Any(g => g.Group_Id == subgroups.Group_Id)) ? "checked" : "") name="selectedGroup" id="check-box+@subgroups.Group_Id" value="@subgroups.Group_Id">
-                                                                <label class="form-check-label" for="check-box+@subgroups.Group_Id">@subgroups.Group_Title</label>
-                                                            </div>
-                                                        </th>
-                                                    </tr>
-                                                </table>
-                                            }
-                                        </ul>
-                                    }
-                                </td>
-                            </tr>
-                        }
-
-                    </table>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="form-group text-center">
-            <div class="text-center">
-                <button type="submit" title="ذخیره" class="btn bg-success  btn-block">
-                    <i class="fa fa-save fa-2x text-light"></i>
-                </button>
-                <a href="@Url.Action("Index")" class="btn btn-info btn-block" title="بازگشت">
-                    <i class="fa fa-arrow-circle-left fa-2x text-light"></i>
-                </a>
-            </div>
-        </div>
-
-    </div>
-}
-
-@section script
+@section scripts
 {
     <script>
-
         CKEDITOR.replace('Product_Discription');
 
         $('document').ready(function () {
@@ -226,20 +199,21 @@
             });
         });
     </script>
+
 }
 
 <style>
     input[type="file"]::file-selector-button {
-        border: 2px solid #28A745;
+        border: 2px solid #4FBFA8;
         padding: 0.2em 0.4em;
         border-radius: 0.2em;
-        background-color: #28A745;
+        background-color: #4FBFA8;
         transition: 1s;
         color: #ffff
     }
 
         input[type="file"]::file-selector-button:hover {
-            background-color: #288745;
-            border: 2px solid #288745;
+            background-color: #3EAA94;
+            border: 2px solid #3EAA94;
         }
 </style>

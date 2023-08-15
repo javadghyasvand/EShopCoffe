@@ -1,86 +1,53 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initie=1">
+    <meta name="description" content="">
     <title>Doppio Cofeee Store</title>
-    <link rel="shortcut icon" alt="Doppio Cofeee Store" href="~/Content/Asset/Images/Logo/Logo.png" type="image/x-icon" />
-    <link rel="stylesheet" href="~/Content/Asset/CSS/other.css" />
-    <link rel="stylesheet" href="~/Content/Asset/Bootstrap/css/bootstrapv4.5.3.min.css">
-    <link rel="stylesheet" href="~/Content/Asset/Fonts/font-awesome-4.7.0/css/font-awesome.css" />
+    <!--Icon-->
+    <link rel="shortcut icon" alt="Doppio Cofeee Store" href="~/Content/SiteFile/img/LogoEN.png" type="image/x-icon" />
+    <!-- Bootstrap CSS-->
+    @Styles.Render("~/Content/SiteFile/vendor/bootstrap/css/bootstrap.min.css")
+    <!-- Font Awesome CSS-->
+    @Styles.Render("~/Content/SiteFile/vendor/font-awesome/css/font-awesome.min.css")
+    <!-- Google fonts - Roboto -->
+    <!-- owl carousel-->
+    @Styles.Render("~/Content/SiteFile/vendor/owl.carousel/assets/owl.carousel.css")
+    @Styles.Render("~/Content/SiteFile/vendor/owl.carousel/assets/owl.theme.default.css")
+    @Styles.Render("~/Content/SiteFile/css/style.default.css")
+    <!-- Custom stylesheet - for your changes-->
+    @Styles.Render("~/Content/SiteFile/css/custom.css")
+
 </head>
+<body>
+    <!-- navbar-->
+    @Html.Partial("Navbar")
+    <div id="all">
 
-<body dir="rtl" style="font-family: Vazir !important">
-    <!-- div container -->
-  
-        <!-- Nav bar -->
-
-    @RenderSection("Navbar",false)
-   
-
-<div class="container">
-    @RenderSection("HomeLogo",false)
-    @RenderBody()
-</div>
-
-
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
-
-
-    <script src="~/Content/Asset/Bootstrap/js/bootstrap4.0.0.min.js"></script>
-
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-
-
-    <script src="~/Content/Asset/Popper/popper.min.js"></script>
-    <script src="~/Content/ckeditor/ckeditor.js"></script>
-    @RenderSection("script", false)
-
-</body>
-
-</html>
-<!-- <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle-split" id="Dropdown_Products" role="button"
-       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        محصولات
-        <span class="f">
-            <i class="fa fa-caret-down li-drop_icon"></i>
-        </span>
-    </a>
-    <div class="dropdown-menu Bg-backgrund  nav-item" aria-labelledby="Dropdown_Products">
-        <a class="dropdown-item" href="list_items.html">
-            <img src="~/Content/Asset/Images/Logo/Coffe.ico" width="40px" height="40px"
-                 class="img-thumbnail icon_Categury">
-            قهوه
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="list_items.html">
-            <img src="~/Content/Asset/Images/Logo/Mug.ico" width="40px" height="40px"
-                 class="img-thumbnail icon_Categury">
-            ماگ
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="list_items.html">
-            <img src="~/Content/Asset/Images/Logo/CoffeMaker.ico" width="40px" height="40px"
-                 class="img-thumbnail icon_Categury">
-            قهوه ساز
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="list_items.html">
-            <img src="~/Content/Asset/Images/Logo/Equipment.ico" width="40px" height="40px"
-                 class="img-thumbnail icon_Categury">
-            تجهیزات
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="list_items.html">
-            <img src="~/Content/Asset/Images/Logo/Choclet.ico" width="40px" height="40px"
-                 class="img-thumbnail icon_Categury">
-            شکلات
-        </a>
+        <div id="content">
+            @RenderBody()
+        </div>
     </div>
-</li>-->
+</body>
+</html>
+<!-- JavaScript files-->
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/Content/SiteFile/vendor/jquery/jquery.min.js")
+@Scripts.Render("~/Content/SiteFile/vendor/bootstrap/js/bootstrap.bundle.min.js")
+@Scripts.Render("~/Content/SiteFile/vendor/jquery.cookie/jquery.cookie.js")
+@Scripts.Render("~/Content/SiteFile/vendor/owl.carousel/owl.carousel.min.js")
+@Scripts.Render("~/Content/SiteFile/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js")
+@Scripts.Render("~/Content/SiteFile/js/front.js")
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+@RenderSection("scripts", required: false)
+
+

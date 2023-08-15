@@ -35,5 +35,6 @@ namespace EShopCoffee.Models.DataLayer
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<User_Details> User_Details { get; set; }
+        public virtual DbSet<Product_Comments> Product_Comments { get; set; }
     }
 }

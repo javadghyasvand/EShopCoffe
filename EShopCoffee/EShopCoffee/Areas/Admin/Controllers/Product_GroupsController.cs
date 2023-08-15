@@ -20,10 +20,6 @@ namespace EShopCoffee.Areas.Admin.Controllers
             var productGroups = _db.Product_Groups.Include(p => p.Product_Groups2);
             return View(productGroups.ToList());
         }
-        public ActionResult Navbar()
-        {
-            return PartialView();
-        }
         // GET: Admin/Product_Groups/Details/5
         public ActionResult Details(long? id)
         {

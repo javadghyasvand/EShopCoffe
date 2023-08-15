@@ -1,0 +1,67 @@
+﻿
+<header class="header mb-5" dir="rtl">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a href="/" class="navbar-brand">
+                <img style="width: 100px;" src="~/Content/SiteFile/img/logo.png" alt="Doppio logo" class="d-none d-md-inline-block">
+                <img style="width: 100px;" src="~/Content/SiteFile/img/logo.png" alt="Doppio logo" class="d-inline-block d-md-none">
+                <span class="sr-only">Doppio - go to homepage</span>
+            </a>
+            <div class="navbar-buttons">
+                <button type="button" data-toggle="collapse" data-target="#navigation" class="btn btn-outline-secondary navbar-toggler">
+                    <span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i>
+                </button>
+                <button type="button" data-toggle="collapse" data-target="#search" class="btn btn-outline-secondary navbar-toggler">
+                    <span class="sr-only">Toggle search</span><i class="fa fa-search"></i>
+                </button>
+                <a href="basket.html"
+                   class="btn btn-outline-secondary navbar-toggler">
+                    <i class="fa fa-shopping-cart"></i>
+                </a>
+            </div>
+            <div id="navigation" class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/Admin/AdminHome" class="nav-link menu active">صفحه اصلی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/Product_EShop" class="nav-link menu">محصولات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/Product_Groups" class="nav-link menu">دسته بندی </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/Product_Property" class="nav-link menu">ویژگی ها</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/Admin/Users" class="nav-link">کاربران</a>
+                    </li>
+                </ul>
+                <div class="navbar-buttons d-flex justify-content-between">
+                    <!-- /.nav-collapse-->
+                    <div id="search-not-mobile" class="navbar-collapse collapse"></div>
+                    <a data-toggle="collapse" href="#search"
+                       class="btn navbar-btn btn-primary d-none d-lg-inline-block">
+                        <span class="sr-only">Toggle search</span><i class="fa fa-search"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="search" class="collapse">
+        <div class="container">
+            <form role="search" class="ml-auto">
+                <div class="input-group">
+                    <input type="text" placeholder="جستجو" class="form-control">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</header>
+

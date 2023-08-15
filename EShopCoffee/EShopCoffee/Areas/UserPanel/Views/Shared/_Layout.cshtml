@@ -1,29 +1,53 @@
 ﻿<html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initie=1">
+    <meta name="description" content="">
     <title>Doppio Cofeee Store</title>
-    <link rel="shortcut icon" alt="Doppio Cofeee Store" href="~/Content/Asset/Images/Logo/Logo.png" type="image/x-icon" />
-
-    @Styles.Render("~/Content/Asset/CSS/Index_style.css")
-    @Styles.Render("~/Content/Asset/Bootstrap/css/bootstrapv4.5.3.min.css")
-    @Styles.Render("~/Content/Asset/Fonts/font-awesome-4.7.0/css/font-awesome.css")
- 
+    <!--Icon-->
+    <link rel="shortcut icon" alt="Doppio Cofeee Store" href="~/Content/SiteFile/img/LogoEN.png" type="image/x-icon" />
+    <!-- Bootstrap CSS-->
+    @Styles.Render("~/Content/SiteFile/vendor/bootstrap/css/bootstrap.min.css")
+    <!-- Font Awesome CSS-->
+    @Styles.Render("~/Content/SiteFile/vendor/font-awesome/css/font-awesome.min.css")
+    <!-- Google fonts - Roboto -->
+    <!-- owl carousel-->
+    @Styles.Render("~/Content/SiteFile/vendor/owl.carousel/assets/owl.carousel.css")
+    @Styles.Render("~/Content/SiteFile/vendor/owl.carousel/assets/owl.theme.default.css")
+    @Styles.Render("~/Content/SiteFile/css/style.default.css")
+    <!-- Custom stylesheet - for your changes-->
+    @Styles.Render("~/Content/SiteFile/css/custom.css")
 
 </head>
+<body>
+    <!-- navbar-->
+    @Html.Partial("Navbar")
+    <div id="all">
 
-<body dir="rtl" style="font-family: Vazir !important">
-@RenderBody()
+        <div id="content"> 
+            @RenderBody()
+            @Html.Partial("Footer")
+        </div>
+    </div>
 </body>
 </html>
+<!-- JavaScript files-->
+
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
-@Scripts.Render("~/Content/Asset/Popper/popper.min.js")
-@Scripts.Render("~/Content/Asset/Jquery/jquery-2.2.4.min.js")
-@Scripts.Render("~/Content/Asset/Jquery/jquery-3.2.1.slim.min.js")
-@Scripts.Render("~/Content/Asset/Bootstrap/js/bootstrap4.0.0.min.js")
-@Scripts.Render("~/Content/Asset/JS/CustomJs.js")
+@Scripts.Render("~/Content/SiteFile/vendor/jquery/jquery.min.js")
+@Scripts.Render("~/Content/SiteFile/vendor/bootstrap/js/bootstrap.bundle.min.js")
+@Scripts.Render("~/Content/SiteFile/vendor/jquery.cookie/jquery.cookie.js")
+@Scripts.Render("~/Content/SiteFile/vendor/owl.carousel/owl.carousel.min.js")
+@Scripts.Render("~/Content/SiteFile/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js")
+@Scripts.Render("~/Content/SiteFile/js/front.js")
+
 @RenderSection("scripts", required: false)
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>

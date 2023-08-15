@@ -11,19 +11,11 @@ namespace EShopCoffee.Controllers
     public class HomeController : Controller
     {
         EShopCoffe_DBEntities _db = new EShopCoffe_DBEntities();
-        public ActionResult Welcome()
+        public ActionResult Slider()
         {
             return PartialView();
         }
-        public ActionResult LoggedInUser()
-        {
-        
-            return PartialView();
-        }
-        public ActionResult Navbar()
-        {
-            return PartialView();
-        }
+
         public ActionResult Footer()
         {
             return PartialView();
@@ -40,7 +32,7 @@ namespace EShopCoffee.Controllers
 
             return View();
         }
-
+      
         public ActionResult UserProfile(long id)
         {
             var user = _db.Users.Find(id);
@@ -63,7 +55,7 @@ namespace EShopCoffee.Controllers
             }
             else
             {
-                profileViewModel.User_Id = user.User_Id;
+                    profileViewModel.User_Id = user.User_Id;
                     profileViewModel.User_Email = user.User_Email;
                     profileViewModel.User_Name = user.User_Name;
                     profileViewModel.User_Phone = user.User_Phone;

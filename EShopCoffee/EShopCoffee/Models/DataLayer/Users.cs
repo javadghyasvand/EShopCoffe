@@ -20,6 +20,7 @@ namespace EShopCoffee.Models.DataLayer
         public Users()
         {
             this.User_Details = new HashSet<User_Details>();
+            this.Product_Comments = new HashSet<Product_Comments>();
         }
     
         public long User_Id { get; set; }
@@ -36,5 +37,7 @@ namespace EShopCoffee.Models.DataLayer
         public virtual Roles Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User_Details> User_Details { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product_Comments> Product_Comments { get; set; }
     }
 }

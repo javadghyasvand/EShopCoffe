@@ -1,16 +1,12 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-@section Navbar
+
+
+@section  Slider
 {
-    @Html.Action("Navbar")
+    @Html.Action("Slider")
 }
-@section Welcome
-{
-    @Html.Action("Welcome")
-}
-@section Footer
-{
-    @Html.Action("Footer")
-}
+
+@Html.Action("LastProduct", "Product")
 

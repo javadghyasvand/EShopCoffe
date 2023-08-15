@@ -1,0 +1,42 @@
+﻿@model  EShopCoffee.Models.DataLayer.Product_Comments
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        @using (Ajax.BeginForm("CreateComment", "Product", FormMethod.Post, new AjaxOptions()
+        {
+            OnSuccess = "SuccessComment",
+            UpdateTargetId = "ListComment"
+        }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Product_Id)
+            @Html.HiddenFor(model => model.Parent_Id)
+            <div id="comment-form">
+                <h4 class="mt-3 text-center">ثبت نظر</h4>
+                <hr/>
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Comment)
+                                @Html.TextAreaFor(model => model.Comment, new { styles = "height: 300px !important;", @class = "form-control"})
+                                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="" class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-comment-o"></i>ثبت نظر</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-danger mt-3">
+        برای ثبت نظر وارد حساب کاربری شوید.
+    </div>
+}

@@ -5,11 +5,8 @@
     ViewBag.Title = "Index";
 }
 
-@section Navbar
-{
-    @Html.Action("Navbar")
-}
-<h4 class="text-center font-weight-bold mt-4">محصولات</h4>
+
+<h4 class="text-center font-weight-bold mt-4">کاربران</h4>
 <hr />
 <table class="table">
     <tr>
@@ -58,15 +55,11 @@
                 @Html.DisplayFor(modelItem => item.Roles.Role_Title)
             </td>
             <td>
-                
                 <a class="btn btn-sm btn-warning btn-block" title="ویرایش" href="@Url.Action("Edit", new { id = item.User_Id })">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </a>
                 <a class="btn btn-sm btn-info btn-block" title="جزئیات" href="@Url.Action("Details", new { id = item.User_Id })">
                     <i class="fa fa-info-circle" aria-hidden="true"></i>
-                </a>
-                <a class="btn btn-sm btn-danger btn-block" title="حذف" href="@Url.Action("Delete", new { id = item.User_Id })">
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
                 </a>
             </td>
         </tr>

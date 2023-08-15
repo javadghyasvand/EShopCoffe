@@ -4,84 +4,91 @@
 @{
     ViewBag.Title = "Index";
 }
-@section Navbar
-{
-    @Html.Action("Navbar")
-}
-<h4 class="text-center font-weight-bold mt-4">محصولات</h4>
-<hr />
-<p>
-    <a href="@Url.Action("Create")" title="افزودن سرگروه جدید" class="btn font-weight-bold btn-success text-light w-25">
-        <i class="fa fa-plus-circle fa-2x"></i>
-    </a>
-    <a href="@Url.Action("RemoveProductsList")" title="محصولات حذف شده" class="btn font-weight-bold btn-danger text-light w-25">
-        <i class="fa fa-trash fa-2x"></i>
-    </a>
-    <a href="@Url.Action("Index")" title="بازگشت به صفحه اصلی" class="btn font-weight-bold btn-info text-light w-25">
-        <i class="fa fa-product-hunt fa-2x"></i>
-    </a>
-</p>
-<table class="table">
-    <tr>
-        <th class="font-weight-bold Bg-backgrund text-light">
-            @Html.DisplayNameFor(model => model.Proudct_Title)
-        </th>
-        <th class="font-weight-bold Bg-backgrund text-light">
-            @Html.DisplayNameFor(model => model.Product_Count)
-        </th>
-        <th class="font-weight-bold Bg-backgrund text-light">
-            @Html.DisplayNameFor(model => model.Product_IsInStock)
-        </th>
-        <th class="font-weight-bold Bg-backgrund text-light">
-            @Html.DisplayNameFor(model => model.Product_Price)
-        </th>
-        <th class="font-weight-bold Bg-backgrund text-light">
-            @Html.DisplayNameFor(model => model.Product_ImageName)
-        </th>
-        <th class="font-weight-bold Bg-backgrund text-light">
-            @Html.DisplayNameFor(model => model.Product_CreateDate)
-        </th>
-        <th class="font-weight-bold Bg-backgrund text-light">
-            @Html.DisplayNameFor(model => model.Product_Is_Delete)
-        </th>
-        <th class="font-weight-bold Bg-backgrund text-light"></th>
-    </tr>
+<div id="customer-orders" class="container">
+    <div class="box">
+        <h1 class="text-center">محصولات</h1>
+        <hr />
+        <div class="text-center mb-3">
+            <a href="@Url.Action("Index")" class="btn btn-danger">
+                محصولات 
+                <i class="fa fa-product-hunt"></i>
+            </a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_Is_Delete)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_IsInStock)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_ImageName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_CreateDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_Price)
+                        </th>
+                        <th>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Proudct_Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product_Count)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product_IsInStock)
-            </td>
-            <td>
-                @item.Product_Price.ToString("##,###")
-            </td>
-            <td>
-                <img style="width: 200px" class="img-thumbnail" src="~/Images/ProductImages/Thumbnail/@item.Product_ImageName" />
-            <td>
-                @item.Product_CreateDate.ToShamsi()
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product_Is_Delete)
-            </td>
-            <td>
-                <a href="@Url.Action("Edit", new { id = item.Product_Id })" class="btn btn-sm btn-warning btn-block" title="ویرایش محصول">
-                    <i class="fa fa-edit"></i>
-                </a>
-                <a href="@Url.Action("Gallery",new{id=item.Product_Id})" class="btn btn-sm btn-info btn-block" title="گالری محصول">
-                    <i class="fa fa-photo"></i>
-                </a>
-                <a href="@Url.Action("ProductProperty",new{id=item.Product_Id})" class="btn btn-sm btn-dark btn-block" title="ویژگی های محصول">
-                    <i class="fa fa-info-circle"></i>
-                </a>
-            </td>
-        </tr>
-    }
+                            @Html.DisplayNameFor(model => model.Product_Count)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Proudct_Title)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("Edit", new { id = item.Product_Id })" title="ویرایش محصول" class="btn btn-block btn-sm btn-warning btn-sm">
 
-</table>
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="@Url.Action("Gallery", new { id = item.Product_Id })" title="گالری محصول" class="btn btn-block btn-sm btn-info btn-sm">
+
+                                    <i class="fa fa-photo"></i>
+                                </a>
+                                <a href="@Url.Action("ProductProperty", new { id = item.Product_Id })" title="ویژگی های محصول" class="btn btn-block btn-sm btn-primary btn-sm">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product_Is_Delete)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product_IsInStock)
+                            </td>
+                            <td>
+                                <img style="width: 100px" class="img-thumbnail" src="~/Images/ProductImages/Thumbnail/@item.Product_ImageName" />
+                            </td>
+                            <td>
+                                @item.Product_CreateDate.ToShamsi()
+                            </td>
+                            <td>
+                                @item.Product_Price.ToString("##,###")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product_Count)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Proudct_Title)
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

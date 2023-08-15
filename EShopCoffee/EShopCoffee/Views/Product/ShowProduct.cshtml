@@ -1,0 +1,183 @@
+﻿@using EShopCoffee.Models.ViewModels
+@model EShopCoffee.Models.DataLayer.Product_EShop
+@{
+    ViewBag.Title = Model.Proudct_Title;
+
+}
+<div id="all">
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                </div>
+                <div class="col-lg-12 order-1 order-lg-2">
+                    <div id="productMain" class="row">
+                        <div class="col-md-6">
+                            @if (Model.Product_Galllery.Any())
+                            {
+                                <div data-slider-id="1" class="owl-carousel shop-detail-carousel">
+                                    @foreach (var item in Model.Product_Galllery)
+                                    {
+                                        <div class="item">
+                                            <img src="~/Images/ProductImages/@item.Gallery_Image_Name" alt="@item.Gallery_Image_Title" class="img-fluid">
+                                        </div>
+                                    }
+                                </div>
+                            }
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="box">
+                                <h1 class="text-center">@Model.Proudct_Title</h1>
+                                <p class="goToDescription">
+                                    <a href="#details" class="scroll-to">برو به مشخصات محصول</a>
+                                </p>
+                                <p class="price"> قیمت : @Model.Product_Price.ToString("#,0") تومان</p>
+                                <p class="text-center buttons">
+                                    <a onclick="AddToCart(@Model.Product_Id)" class="btn btn-primary">
+                                        <i class="fa fa-shopping-cart"></i>افزودن به سبد خرید
+                                    </a>
+                                </p>
+                            </div>
+                            @if (Model.Product_Galllery.Any())
+                            {
+                                <div data-slider-id="1" class="owl-thumbs">
+
+                                    @foreach (var item in Model.Product_Galllery)
+                                    {
+                                        <button class="owl-thumb-item">
+                                            <img src="~/Images/ProductImages/Thumbnail/@item.Gallery_Image_Name" alt="@item.Gallery_Image_Title" class="img-fluid">
+                                        </button>
+                                    }
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div id="details" class="box" dir="rtl">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details_product" role="tab"
+                                   aria-controls="details_product" aria-selected="true">
+                                    توضیحات
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="prop-tab" data-toggle="tab" href="#prop-product" role="tab"
+                                   aria-controls="prop-product" aria-selected="false">
+                                    ویژگی ها
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Comments-tab" data-toggle="tab" href="#Comments_Product" role="tab"
+                                   aria-controls="Comments_Product" aria-selected="false">
+                                    نظرات
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent" style="text-align: start;">
+                            <div class="tab-pane fade show active" id="details_product" role="tabpanel" aria-labelledby="home-tab">
+                                <div>
+                                    <p></p>
+                                    <h4 class="text-center">نام محصول :@Model.Proudct_Title</h4>
+                                    <hr>
+
+                                    <blockquote style="height: fit-content;">
+                                        <p>توضیحات</p>
+                                        <p>
+                                            <em>
+                                                @Html.Raw(@Model.Product_Discription)
+                                            </em>
+                                        </p>
+                                    </blockquote>
+                                </div>
+
+
+                            </div>
+                            <div class="tab-pane fade" id="prop-product" role="tabpanel" aria-labelledby="profile-tab">
+                                <p></p>
+                                <h4 class="text-center">نام محصول :@Model.Proudct_Title</h4>
+                                <hr>
+                                @if (ViewBag.ProductFeatuer != null)
+                                {
+                                    List<ShowProductPropViewModel> list = ViewBag.ProductFeatuer;
+                                    foreach (var item in list)
+                                    {
+                                        <ul>
+                                            <li>
+                                                <span>@item.TitleProp:@string.Join(",", item.Value)</span>
+                                            </li>
+                                        </ul>
+                                    }
+                                }
+
+                            </div>
+                            <div class="tab-pane fade" id="Comments_Product" role="tabpanel" aria-labelledby="profile-tab">
+                                <div>
+                                    @Html.Action("CreateComment")
+                                    <div id="ListComment">
+                                        @Html.Action("ShowComments")
+                                    </div>
+                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        function SuccessComment() {
+            $("#Comment").val("");
+            $("#Parent_Id").val("");
+        }
+        function ReplayComment(id) {
+            $("#Parent_Id").val(id);
+            $("html, body").delay(600).animate({ scrollTop: $('#Comments_Product').offset().top-100 },600);
+        }
+      
+    </script>
+}
+
+<!--<div class="row same-height-row">
+<div class="col-md-3 col-sm-6">
+    <div class="box same-height">
+        <h3>محصولات مشابه</h3>
+    </div>
+</div>
+<div class="col-md-3 col-sm-6">
+<div class="product same-height">
+    <div class="flip-container">
+        <div class="flipper">
+            <div class="front">
+                <a href="detail.html">
+                    <img src="img/product2.jpg" alt="" class="img-fluid">
+                </a>
+            </div>
+            <div class="back">
+                <a href="detail.html">
+                    <img src="img/product2_2.jpg" alt=""
+                         class="img-fluid">
+                </a>
+            </div>
+        </div>
+    </div>
+    <a href="detail.html" class="invisible">
+        <img src="img/product2.jpg" alt=""
+             class="img-fluid">
+    </a>
+    <div class="text">
+        <h3>Fur coat</h3>
+        <p class="price">$143</p>
+    </div>
+</div>-->
+<!-- /.product-->
+<!--</div>
+</div>-->

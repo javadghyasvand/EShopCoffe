@@ -48,9 +48,6 @@ body {
     margin-left: 5px !important;
 }
 
-nav * {
-    color: white !important;
-}
 
 .drop_list:hover {
     display: block;

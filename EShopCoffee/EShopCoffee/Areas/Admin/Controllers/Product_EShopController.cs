@@ -22,11 +22,8 @@ namespace EShopCoffee.Areas.Admin.Controllers
         // GET: Admin/Product_EShop
         public ActionResult Index()
         {
-            return View(_db.Product_EShop.Where(p => p.Product_Is_Delete == false).ToList());
-        }
-        public ActionResult Navbar()
-        {
-            return PartialView();
+            var productList=_db.Product_EShop.OrderByDescending(p => p.Product_CreateDate);
+            return View(productList.Where(p => p.Product_Is_Delete == false).ToList());
         }
         // GET: Admin/Product_EShop/Details/5
         public ActionResult Details(long? id)
@@ -134,6 +131,7 @@ namespace EShopCoffee.Areas.Admin.Controllers
             }
 
             ViewBag.SelectedGroups = products.Product_Select_Groups.ToList();
+           
             ViewBag.Groups = _db.Product_Groups.ToList();
             ViewBag.Tags = string.Join("#", products.Product_Tags.Select(t => t.Tag).ToList());
 

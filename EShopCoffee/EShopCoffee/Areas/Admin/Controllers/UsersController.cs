@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EShopCoffee.Models.DataLayer;
+using EShopCoffee.Models.ViewModels;
+using InsertShowImage;
+using KooyWebApp_MVC.Classes;
 
 namespace EShopCoffee.Areas.Admin.Controllers
 {
@@ -20,23 +24,51 @@ namespace EShopCoffee.Areas.Admin.Controllers
             var users = db.Users.Include(u => u.Roles);
             return View(users.ToList());
         }
-        public ActionResult Navbar()
-        {
-            return PartialView();
-        }
         // GET: Admin/Users/Details/5
-        public ActionResult Details(long? id)
-        {
+        public ActionResult Details(long? id){
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Users users = db.Users.Find(id);
+            var users = db.Users.Find(id);
+
             if (users == null)
             {
                 return HttpNotFound();
             }
-            return View(users);
+            UserProfileAdminViewModel profileViewModel = new UserProfileAdminViewModel();
+            if (db.User_Details.Any(d => d.User_Id == id))
+            {
+                var user_detailes = db.User_Details.Single(d => d.User_Id == id);
+                profileViewModel.User_Id = users.User_Id;
+                profileViewModel.User_Email = users.User_Email;
+                profileViewModel.User_Name = users.User_Name;
+                profileViewModel.User_Phone = users.User_Phone;
+                profileViewModel.User_Image = users.User_Image;
+                profileViewModel.User_Role = users.Roles.Role_Title;
+                profileViewModel.User_IsActive = users.User_IsActive;
+                profileViewModel.User_Phone = user_detailes.User_Address;
+                profileViewModel.User_Detail_Id = user_detailes.User_Detail_Id;
+                profileViewModel.User_City = user_detailes.User_City;
+                profileViewModel.User_Postal_Code = user_detailes.User_Postal_Code;
+                profileViewModel.User_State = user_detailes.User_State;
+
+
+            }
+            else
+            {
+                profileViewModel.User_Id = users.User_Id;
+                profileViewModel.User_Email = users.User_Email;
+                profileViewModel.User_Name = users.User_Name;
+                profileViewModel.User_Phone = users.User_Phone;
+                profileViewModel.User_Image = users.User_Image;
+                profileViewModel.User_Role = users.Roles.Role_Title;
+                profileViewModel.User_IsActive = users.User_IsActive;
+                profileViewModel.User_Address = "ثبت نشد";
+                profileViewModel.User_City = "ثبت نشد";
+                profileViewModel.User_Postal_Code = "ثبت نشد";
+                profileViewModel.User_State = "ثبت نشد";
+            } return View(profileViewModel);
         }
 
         // GET: Admin/Users/Create
@@ -65,7 +97,7 @@ namespace EShopCoffee.Areas.Admin.Controllers
         }
 
         // GET: Admin/Users/Edit/5
-        public ActionResult Edit([Bind(Include = "User_Id,User_Role_Id,User_Name,User_Email,User_Phone,User_Password,User_Active_Code,User_IsActive,User_RegisterDate,User_Image")] long? id)
+        public ActionResult Edit(long? id)
         {
             if (id == null)
             {
@@ -76,6 +108,7 @@ namespace EShopCoffee.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            // var roles = db.Roles.ToList();
             ViewBag.User_Role_Id = new SelectList(db.Roles, "Role_Id", "Role_Title", users.User_Role_Id);
             return View(users);
         }
@@ -85,10 +118,29 @@ namespace EShopCoffee.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "User_Id,User_Role_Id,User_Name,User_Email,User_Phone,User_Password,User_Active_Code,User_IsActive,User_RegisterDate,User_Image")] Users users)
+        public ActionResult Edit([Bind(Include = "User_Id,User_Role_Id,User_Name,User_Email,User_Phone,User_Password,User_Active_Code,User_IsActive,User_RegisterDate,User_Image")] Users users,HttpPostedFileBase imageProduct)
         {
             if (ModelState.IsValid)
             {
+                if (imageProduct != null && imageProduct.IsImage())
+                {
+                    if (imageProduct.FileName == "no-photo.jpg")
+                    {
+                    }
+                    else
+                    {
+                        System.IO.File.Delete(Server.MapPath("/Images/UserImge/" +
+                                                             users.User_Image));
+                        System.IO.File.Delete(Server.MapPath("/Images/UserImge/Thumbnail/" +
+                                                             users.User_Image));
+                        users.User_Image =
+                            Guid.NewGuid().ToString() + Path.GetExtension(imageProduct.FileName);
+                        imageProduct.SaveAs(Server.MapPath("/Images/UserImge/" + users.User_Image));
+                        ImageResizer imageResizer = new ImageResizer();
+                        imageResizer.Resize(Server.MapPath("/Images/UserImge/" + users.User_Image),
+                            Server.MapPath("/Images/UserImge/Thumbnail/" + users.User_Image));
+                    }
+                }
                 db.Entry(users).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

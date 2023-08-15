@@ -1,0 +1,75 @@
+﻿@using System.Runtime.InteropServices
+@using EShopCoffee.Models.DataLayer
+
+@if (User.Identity.IsAuthenticated)
+{
+    {
+        EShopCoffe_DBEntities db = new EShopCoffe_DBEntities();
+        var user = db.Users.Single(u => u.User_Email == User.Identity.Name);
+        <li class="nav-item dropdown menu-large">
+            <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">
+                <img style="width: 20px" src="~/Images/UserImge/@user.User_Image"/>
+                <span class="mr-2"> @user.User_Name</span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu megamenu  text-center">
+                <li>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <h5>اطلاعات کاربری</h5>
+                            <ul class="list-unstyled mb-3">
+                                <li class="nav-item">
+                                    <p class="nav-link">
+                                        <img class="img-thumbnail rounded-circle" style="width: 150px" src="~/Images/UserImge/@user.User_Image"/>
+                                    </p>
+
+                                </li>
+                                <li class="nav-item">
+                                    <p class="nav-link">
+                                        <span>نام کاربری:</span> @user.User_Name
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 col-lg-6">
+
+
+                            <ul class="list-unstyled mb-3 mr-1">
+
+                                @if (user.User_Role_Id == 2)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Admin/AdminHome">پنل ادمین</a>
+                                    </li>
+                                }
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Home/UserProfile/@user.User_Id">مشاهده اطلاعات کاربری </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"> سفارش های قبلی </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/UserPanel/User/ChangPassword"> تغییر رمز عبور </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-danger text-light" href="/Account/LogOff"><i class="fa fa-sign-out"></i> خروج</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    }
+}
+else
+{
+    <li class="nav-item">
+        <a href="/Login" class="nav-link ">ورود</a>
+    </li>
+    <li class="nav-item">
+        <a href="/Register" class="nav-link ">ثبت نام</a>
+    </li>
+}

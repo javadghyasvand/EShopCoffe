@@ -14,10 +14,6 @@ namespace EShopCoffee.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult Navbar()
-        {
-            return PartialView();
-        }
         public ActionResult HomeLogo()
         {
             return PartialView();

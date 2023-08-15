@@ -25,7 +25,7 @@ namespace EShopCoffee.Areas.UserPanel.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _db.Users.Single(u => u.User_Name == User.Identity.Name);
+                var user = _db.Users.Single(u => u.User_Email == User.Identity.Name);
                 string oldpassword =
                     FormsAuthentication.HashPasswordForStoringInConfigFile(changPassword.OldPassword, "MD5");
                 if (user.User_Password == oldpassword)

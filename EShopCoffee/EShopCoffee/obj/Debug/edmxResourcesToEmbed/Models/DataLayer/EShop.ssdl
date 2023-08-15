@@ -1,5 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="EShopCoffe_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Product_Comments">
+    <Key>
+      <PropertyRef Name="Comment_Id" />
+    </Key>
+    <Property Name="Comment_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_Id" Type="bigint" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="Parent_Id" Type="bigint" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="850" Nullable="false" />
+    <Property Name="CommentDate" Type="datetime" Nullable="false" />
+    <Property Name="UserImage" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
   <EntityType Name="Product_EShop">
     <Key>
       <PropertyRef Name="Product_Id" />
@@ -76,7 +90,7 @@
     </Key>
     <Property Name="User_Detail_Id" Type="bigint" Nullable="false" />
     <Property Name="User_Id" Type="bigint" Nullable="false" />
-    <Property Name="User_Address" Type="nvarchar" MaxLength="850" Nullable="false" />
+    <Property Name="User_Address" Type="nvarchar(max)" Nullable="false" />
     <Property Name="User_State" Type="nvarchar" MaxLength="350" Nullable="false" />
     <Property Name="User_City" Type="nvarchar" MaxLength="350" Nullable="false" />
     <Property Name="User_Postal_Code" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -96,6 +110,42 @@
     <Property Name="User_RegisterDate" Type="datetime" Nullable="false" />
     <Property Name="User_Image" Type="nvarchar" MaxLength="150" />
   </EntityType>
+  <Association Name="FK_Product_Comments_Product_Comments">
+    <End Role="Product_Comments" Type="Self.Product_Comments" Multiplicity="0..1" />
+    <End Role="Product_Comments1" Type="Self.Product_Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Comments">
+        <PropertyRef Name="Comment_Id" />
+      </Principal>
+      <Dependent Role="Product_Comments1">
+        <PropertyRef Name="Parent_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Comments_Product_EShop">
+    <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+    <End Role="Product_Comments" Type="Self.Product_Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_EShop">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Product_Comments">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Comments_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Product_Comments" Type="Self.Product_Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="Product_Comments">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Product_Galllery_Product_EShop">
     <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
     <End Role="Product_Galllery" Type="Self.Product_Galllery" Multiplicity="*" />
@@ -205,6 +255,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="EShopCoffe_DBModelStoreContainer">
+    <EntitySet Name="Product_Comments" EntityType="Self.Product_Comments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product_EShop" EntityType="Self.Product_EShop" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product_Galllery" EntityType="Self.Product_Galllery" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product_Groups" EntityType="Self.Product_Groups" Schema="dbo" store:Type="Tables" />
@@ -215,6 +266,18 @@
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User_Details" EntityType="Self.User_Details" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Product_Comments_Product_Comments" Association="Self.FK_Product_Comments_Product_Comments">
+      <End Role="Product_Comments" EntitySet="Product_Comments" />
+      <End Role="Product_Comments1" EntitySet="Product_Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Comments_Product_EShop" Association="Self.FK_Product_Comments_Product_EShop">
+      <End Role="Product_EShop" EntitySet="Product_EShop" />
+      <End Role="Product_Comments" EntitySet="Product_Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Comments_Users" Association="Self.FK_Product_Comments_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Product_Comments" EntitySet="Product_Comments" />
+    </AssociationSet>
     <AssociationSet Name="FK_Product_Galllery_Product_EShop" Association="Self.FK_Product_Galllery_Product_EShop">
       <End Role="Product_EShop" EntitySet="Product_EShop" />
       <End Role="Product_Galllery" EntitySet="Product_Galllery" />

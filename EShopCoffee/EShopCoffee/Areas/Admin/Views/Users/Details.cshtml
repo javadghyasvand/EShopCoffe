@@ -1,90 +1,93 @@
-﻿@model EShopCoffee.Models.DataLayer.Users
+﻿@model EShopCoffee.Models.ViewModels.UserProfileAdminViewModel
+<div class="container">
+    @Html.HiddenFor(model => model.User_Id)
+    @Html.HiddenFor(model => model.User_Detail_Id)
+    <div class="card text-white  mb-5">
+        <div class="card-header Bg-backgrund">اطلاعات کاربری</div>
+        <div class="card-body">
+            <div>
+                <div class="text-center">
+                    <span>
+                        <img id="ImgPreviewProduct" name="ImgPreviewProduct" style="margin: 1px auto; max-width: 50px" class="img-thumbnail" src="~/Images/UserImge/@Model.User_Image" />
+                    </span>
+                    <br />
+                    <span class="text-dark font-weight-bolder">@Model.User_Name</span>
 
-@{
-    ViewBag.Title = "Details";
-}
+                </div>
 
-<h2>Details</h2>
+                <hr />
+                <div class="col-md-12 row m-3">
+                    <div class="text-dark col-md-6">
+                        <label>ایمیل:</label>
+                        @Html.DisplayFor(model => model.User_Email, null, new { @class = "text-dark" })
+                    </div>
+                    <div class="text-dark col-md-6">
+                        <label>شماره تماس:</label>
+                        @Html.DisplayFor(model => model.User_Phone, null, new { @class = "text-dark" })
+                    </div>
+                </div>
+                <div class="col-md-12 row m-3">
+                    <div class="text-dark col-md-6">
+                        <label>وضعیت:</label>
+                        @Html.DisplayFor(model => model.User_IsActive, null, new { @class = "text-dark" })
+                    </div>
+                    <div class="text-dark col-md-6">
+                        <label> نقش:</label>
+                        @Html.DisplayFor(model => model.User_Role, null, new { @class = "text-dark" })
+                    </div>
+                </div>
+                <div class="col-md-12 row m-3">
+                    <div class="text-dark col-md-6">
+                        <label>استان:</label>
+                        @Html.DisplayFor(model => model.User_State, null, new { @class = "text-dark" })
+                    </div>
+                    <div class="text-dark col-md-6">
+                        <label>شهر:</label>
+                        @Html.DisplayFor(model => model.User_City, null, new { @class = "text-dark" })
+                    </div>
+                </div>
+                <div class="col-md-12 row m-3">
+                    <div class="text-dark col-md-6">
+                        <label>کد پستی:</label>
+                        @Html.DisplayFor(model => model.User_Postal_Code, null, new { @class = "text-dark" })
+                    </div>
+                    <div class="text-dark col-md-6">
 
-<div>
-    <h4>Users</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.User_Name)
-        </dt>
+                    </div>
+                </div>
+                <div class="col-md-12 row m-3">
+                    <div class="text-dark ml-3">
+                        <label>آدرس:</label>
+                        @Html.DisplayFor(model => model.User_Address, null, new { @class = "text-dark" })
+                    </div>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.User_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User_Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User_Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User_Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User_Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User_Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User_Password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User_Active_Code)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User_Active_Code)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User_IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User_IsActive)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User_RegisterDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User_RegisterDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User_Image)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User_Image)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Roles.Role_Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Roles.Role_Title)
-        </dd>
-
-    </dl>
+            </div>
+            <hr />
+            <div class="form-group text-center">
+                <div class="text-center">
+                    <a class="btn btn-warning text-light  btn-block" href=@Url.Action("Edit", "Users", new { id = Model.User_Id }) title="ویرایش">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="@Url.Action("Index")" class="btn text-light btn-info btn-block" title="بازگشت">
+                        <i class="fa fa-arrow-circle-left"></i>
+                    </a>
+                    <a href="@Url.Action("Index","AdminHome")" class="btn text-light btn-primary btn-block" title="صفحه اصلی">
+                        <i class="fa fa-home"></i>                 
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.User_Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+<style>
+    .img-thumbnail {
+        padding: 0.15rem !important;
+        border: 1px solid #dee2e6;
+        border-radius: 50% !important;
+        max-width: 100%;
+        height: auto;
+     }
+</style>

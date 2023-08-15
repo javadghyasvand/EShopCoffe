@@ -1,10 +1,4 @@
 ﻿@model EShopCoffee.Models.ViewModels.UserProfileViewModel
-
-@section Navbar
-{
-    @Html.Action("Navbar")
-}
-
 <div class="container">
 @Html.HiddenFor(model => model.User_Id)
 @Html.HiddenFor(model => model.User_Detail_Id)
@@ -66,12 +60,6 @@
         
     </div>
 </div>
-
-@section Footer
-{
-    @Html.Action("Footer")
-}
-
 <style>
     .img-thumbnail {
         padding: 0.15rem !important;
