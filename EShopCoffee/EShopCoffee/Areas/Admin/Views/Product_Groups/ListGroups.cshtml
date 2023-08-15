@@ -20,21 +20,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach (var headGroups in Model.Where(g => g.Parent_Id == null))
-                    {
-                            <tr>
-                                <td>
-                                    <a href="/Admin/Product_EShop/DeleteGallery/@image.Gallery_Id" title="ویرایش محصول" class="btn btn-block btn-sm btn-danger btn-sm">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <img style="width: 100px" class="img-thumbnail" src="~/Images/ProductImages/Thumbnail/@image.Gallery_Image_Name" />
-                                </td>
-
-                                <th>@headGroups.Group_Title</th>
-                            </tr>
-                        }
+                    @* @foreach (var headGroups in Model.Where(g => g.Parent_Id == null)) *@
+                    @* { *@
+                    @*         <tr> *@
+                    @*             <td> *@
+                    @*                 <a href="/Admin/Product_EShop/DeleteGallery/  @headGroups.Group_Title" title="ویرایش محصول" class="btn btn-block btn-sm btn-danger btn-sm"> *@
+                    @*                     <i class="fa fa-trash"></i> *@
+                    @*                 </a> *@
+                    @*             </td> *@
+                    @*             <td> *@
+                    @*                 <img style="width: 100px" class="img-thumbnail" src="~/Images/ProductImages/Thumbnail/@image.Gallery_Image_Name" /> *@
+                    @*             </td> *@
+                    @* *@
+                    @*             <th>@headGroups.Group_Title</th> *@
+                    @*         </tr> *@
+                    @*     } *@
 
                     </tbody>
                 </table>
