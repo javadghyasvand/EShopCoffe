@@ -25,16 +25,17 @@ namespace EShopCoffee.Models.DataLayer
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Product_Comments> Product_Comments { get; set; }
         public virtual DbSet<Product_EShop> Product_EShop { get; set; }
         public virtual DbSet<Product_Galllery> Product_Galllery { get; set; }
         public virtual DbSet<Product_Groups> Product_Groups { get; set; }
+        public virtual DbSet<Product_Proerty_Select> Product_Proerty_Select { get; set; }
+        public virtual DbSet<Product_Property> Product_Property { get; set; }
         public virtual DbSet<Product_Select_Groups> Product_Select_Groups { get; set; }
         public virtual DbSet<Product_Tags> Product_Tags { get; set; }
-        public virtual DbSet<Product_Property> Product_Property { get; set; }
-        public virtual DbSet<Product_Proerty_Select> Product_Proerty_Select { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<tblOstan> tblOstan { get; set; }
+        public virtual DbSet<tblShahrestan> tblShahrestan { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<User_Details> User_Details { get; set; }
-        public virtual DbSet<Product_Comments> Product_Comments { get; set; }
     }
 }

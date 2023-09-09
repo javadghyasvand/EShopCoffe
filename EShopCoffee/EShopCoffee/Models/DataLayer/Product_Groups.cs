@@ -26,6 +26,7 @@ namespace EShopCoffee.Models.DataLayer
         public long Group_Id { get; set; }
         public string Group_Title { get; set; }
         public Nullable<long> Parent_Id { get; set; }
+        public string Group_Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_Groups> Product_Groups1 { get; set; }

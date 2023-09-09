@@ -1,123 +1,155 @@
-﻿@model EShopCoffee.Models.DataLayer.Users
+﻿@using EShopCoffee.Models.DataLayer
+@model EShopCoffee.Models.DataLayer.Users
 
 @{
+    EShopCoffe_DBEntities coffeDbEntities = new EShopCoffe_DBEntities();
     ViewBag.Title = "Edit";
     var rolesId = ViewBag.User_Role_Id;
+    var stateList = coffeDbEntities.tblOstan.ToList();
+    var cityList = coffeDbEntities.tblShahrestan.ToList();
+
+
 }
-
-<h4 class="text-center font-weight-bold mt-4">ویرایش کابر جدید</h4>
-<hr />
-@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-   
-    <div class="form-horizontal">
+<div class="container">
+    @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model=>model.User_Id)
-        @Html.HiddenFor(model=>model.User_Password)
-        @Html.HiddenFor(model=>model.User_Active_Code)
-        @Html.HiddenFor(model=>model.User_RegisterDate)
-        @Html.HiddenFor(model=>model.User_Image)
-        <div class="form-group">
-            <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                    @Html.LabelFor(model => model.User_Role_Id, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
-                </div>
-                @Html.DropDownList("User_Role_Id", null, htmlAttributes: new { @class = "form-control" })
-            </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.User_Role_Id, "", new { @class = "text-danger " })
-            </p>
-        </div>
-        <div class="form-group">
-            <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                    @Html.LabelFor(model => model.User_Name, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
-                </div>
-                @Html.EditorFor(model => model.User_Name, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
-            </p>
-        </div>
-        <div class="form-group">
-            <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                    @Html.LabelFor(model => model.User_Email, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
-                </div>
-                @Html.EditorFor(model => model.User_Email, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.User_Email, "", new { @class = "text-danger" })
-            </p>
-        </div>
-        <div class="form-group">
-            <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                    @Html.LabelFor(model => model.User_Phone, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
-                </div>
-                @Html.EditorFor(model => model.User_Phone, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.User_Phone, "", new { @class = "text-danger" })
-            </p>
-        </div>
-        <div class="form-group">
-            <div class="input-group mb-3 col-md-12  ">
-                <div class="col-md-6">
-                    <label class="input-group-text Bg-backgrund text-light label">
-                        <div class="form-group form-check text-center mt-2">
-                            @Html.EditorFor(model => model.User_IsActive, new { @class = "checkbox" })
-                            @Html.LabelFor(model => model.User_IsActive, new { @class = "form-check-label" })
+        @Html.HiddenFor(model => model.User_Id)
+        @Html.HiddenFor(model => model.User_Password)
+        @Html.HiddenFor(model => model.User_Active_Code)
+        @Html.HiddenFor(model => model.User_RegisterDate)
+        @Html.HiddenFor(model => model.User_Image)
+        <div class="row textalign">
+            <div class="col-lg-12">
+                <div class="box">
+                    <h3 class="text-center color_defult">افزودن محصول</h3>
+                    <hr />
+                    <div id="accordionOne" class="mt-4">
+                        <div class="card border-primary mb-3">
+                            <div id="headingOne" class="card-header p-0 border-0">
+                                <h4 class="mb-0">
+                                    <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="textalign btn btn-primary d-block text-left rounded-0">انتخاب تصویر</a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionOne" class="collapse show">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <span class="col-lg-4 mt-5">
+                                            <input type="file" style="margin: 10px;" id="imageProduct" name="imageProduct" />
+                                        </span>
+                                        <sapn class="col-lg-5">
+                                            <img id="ImgPreviewProduct" name="ImgPreviewProduct" style="margin: 10px auto; max-width: 200px" class="img-thumbnail" src="~/Images/UserImge/@Model.User_Image" />
+                                        </sapn>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </label>
-                    <p class="text-center">
-                        @Html.ValidationMessageFor(model => model.User_IsActive, "", new { @class = "text-danger" })
-                    </p>
-                </div>
-                <div class="col-md-6">
-                  
-                </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.User_Email, htmlAttributes: new { @class = "text-dark label" })
+                            @Html.EditorFor(model => model.User_Email, new { htmlAttributes = new { @class = "form-control" } })
+                            <p>
+                                @Html.ValidationMessageFor(model => model.User_Email, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.User_Name, htmlAttributes: new { @class = "text-dark label" })
+                            @Html.EditorFor(model => model.User_Name, new { htmlAttributes = new { @class = "form-control" } })
+                            <p>
+                                @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <br />
+                            <br />
+                            @Html.LabelFor(model => model.User_IsActive, htmlAttributes: new { @class = "text-dark label" })
+                            @Html.EditorFor(model => model.User_IsActive, new { @class = "checkbox ml-4" })
+                            <p>
+                                @Html.ValidationMessageFor(model => model.User_IsActive, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.User_Phone, new { @class = "text-dark label" })
+                            @Html.EditorFor(model => model.User_Phone, new { htmlAttributes = new { @class = "form-control" } })
+                            <p>
+                                @Html.ValidationMessageFor(model => model.User_Phone, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
 
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="card text-white  mb-3">
-                <div class="card-header Bg-backgrund">انتخاب تصویر</div>
-                <div class="card-body">
-                    <div style="margin: 10px auto;" class="col-md-12">
-                        <span class="offset-2 col-md-4">
-                            <input type="file" style="margin: 10px;" id="imageProduct" name="imageProduct" />
-                        </span>
-                        <sapn class="col-md-8">
-                            <img id="ImgPreviewProduct" name="ImgPreviewProduct" style="margin: 10px auto; max-width: 300px" class="img-thumbnail" src="~/Images/UserImge/@Model.User_Image" />
-                        </sapn>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label> :دسترسی کاربر</label>
+                            @Html.DropDownList("User_Role_Id", null, htmlAttributes: new { @class = "form-control" })
+                            <p class="text-center">
+                                @Html.ValidationMessageFor(model => model.User_Role_Id, "", new { @class = "text-danger " })
+                            </p>
+                        </div>
+                    </div>
+                    <hr />
+                    <h5 class="text-center color_defult">آدرس</h5>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label class="text-dark label">شهر</label>
+                            <select name="User_City_ID" id="city" class="form-control">
+                                @foreach (var city in cityList)
+                                {
+                                    <option></option>
+                                    <option parent="@city.OstanID" @((city.OstanID == Model.User_State_ID) ? "select" : "") value="@city.id">@city.Shahrestan</option>
+                                }
+                            </select>
+
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label class="text-dark label">استان</label>
+                            <select name="User_State_ID" id="state" class="form-control">
+                                @foreach (var state in stateList)
+                                {
+                                    <option @((state.id == Model.User_State_ID) ? "selected" : "") value="@state.id">@state.Ostan</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.User_Address, htmlAttributes: new { @class = "text-dark label" })
+                            @Html.TextAreaFor(model => model.User_Address, htmlAttributes: new { @class = "form-control" })
+                            <p>
+                                @Html.ValidationMessageFor(model => model.User_Address, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.User_Postal_Code, htmlAttributes: new { @class = "text-dark label" })
+
+                            @Html.EditorFor(model => model.User_Postal_Code, new { htmlAttributes = new { @class = "form-control" } })
+                            <p>
+                                @Html.ValidationMessageFor(model => model.User_Postal_Code, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="text-center col-lg-12 mt-3 mb-3">
+                            <a href="@Url.Action("Index")" class="btn btn-danger w-25">
+                                <i class="fa fa-arrow-left"> </i>بازگشت
+                            </a>
+                            <button type="submit" class="btn btn-primary w-25"><i class="fa fa-sign-in"></i>ثبت</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.User_Image, "", new { @class = "text-danger" })
-            </p>
         </div>
-        <div class="form-group text-center">
-            <div class="text-center">
-                <button type="submit" title="ذخیره" class="btn bg-success  btn-block">
-                    <i class="fa fa-save fa-2x text-light"></i>
-                </button>
-                <a href="@Url.Action("Index")" class="btn btn-info btn-block" title="بازگشت">
-                    <i class="fa fa-arrow-circle-left fa-2x text-light"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-}
+    }
+</div>
 
-@section script
+@section scripts
 {
     <script>
-
-
-        CKEDITOR.replace('Product_Discription');
 
         $('document').ready(function () {
             $("#imageProduct").change(function () {
@@ -130,5 +162,28 @@
                 }
             });
         });
+        $(document).ready(function () {
+            var stateId = $("#state").val();
+            $("#city option").each(function () {
+                if ($(this).attr("parent") == stateId) {
+                    $(this).css("display", "block");
+                } else {
+                    $(this).css("display","none");
+                }
+                
+            });
+        });
+        $('#state').on('change', function () {
+            var stateId = $("#state").val();
+            $("#city option").each(function () {
+                if ($(this).attr("parent") == stateId) {
+                    $(this).css("display", "block");
+                } else {
+                    $(this).css("display", "none");
+                }
+
+            });
+        });
     </script>
+
 }

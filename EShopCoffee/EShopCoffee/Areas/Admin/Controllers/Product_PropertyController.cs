@@ -35,9 +35,9 @@ namespace EShopCoffee.Areas.Admin.Controllers
         }
 
         // GET: Admin/Product_Property/Create
-        public ActionResult Create()
+        public ActionResult Create( )
         {
-            return View();
+            return PartialView();
         }
 
         // POST: Admin/Product_Property/Create
@@ -51,10 +51,11 @@ namespace EShopCoffee.Areas.Admin.Controllers
             {
                 _db.Product_Property.Add(productProperty);
                 _db.SaveChanges();
-                return RedirectToAction("Index");
+                return PartialView("ListProperty", _db.Product_Property.ToList());
             }
 
             return View(productProperty);
+
         }
 
         // GET: Admin/Product_Property/Edit/5
@@ -69,7 +70,7 @@ namespace EShopCoffee.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(productProperty);
+            return PartialView(productProperty);
         }
 
         // POST: Admin/Product_Property/Edit/5
@@ -83,24 +84,18 @@ namespace EShopCoffee.Areas.Admin.Controllers
             {
                 _db.Entry(productProperty).State = EntityState.Modified;
                 _db.SaveChanges();
-                return RedirectToAction("Index");
+                return PartialView("ListProperty", _db.Product_Property.ToList());
             }
             return View(productProperty);
         }
 
         // GET: Admin/Product_Property/Delete/5
-        public ActionResult Delete(long? id)
+        public void Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product_Property productProperty = _db.Product_Property.Find(id);
-            if (productProperty == null)
-            {
-                return HttpNotFound();
-            }
-            return View(productProperty);
+            var group = _db.Product_Property.Find(id);
+            _db.Product_Property.Remove(group);
+            _db.SaveChanges();
+
         }
 
         // POST: Admin/Product_Property/Delete/5
@@ -112,6 +107,10 @@ namespace EShopCoffee.Areas.Admin.Controllers
             _db.Product_Property.Remove(productProperty);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public ActionResult ListProperty()
+        {
+            return PartialView(_db.Product_Property.ToList());
         }
 
         protected override void Dispose(bool disposing)

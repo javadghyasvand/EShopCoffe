@@ -1,17 +1,35 @@
 ﻿@{
     ViewBag.Title = "ActiveUser";
 }
-@Styles.Render("~/Content/Asset/CSS/login.css")
-
-<div class="login_div container bg-white shadow mt-4 mb-4 p-3 border-dark zmdi-border-right text-center">
-    <div>
-        <figure class="mt-4">
-            <img class="mt-4" width="150px" src="/Content/Asset/Images/Logo/Logo.png" alt="قهوه دوپیو">
-        </figure>
-        <hr>
-        <h3 class="text-center"><strong> @ViewBag.UserName </strong>عزیز </h3>
-        <div class="alert alert-success mt-1 mb-1">
-            <p>حساب کاربری شما فعال شد از طریق این <a href="/Login">  لینک </a> می توانید وارد سایت شوید.</p>
+<div class="container">
+    <div class="row" style="text-align: right;">
+        <div class="col-lg-12">
+            <div class="box">
+                <h3 class="text-center color_defult"></h3>
+                <hr />
+                <div class="col-lg-12 text-center">
+                    <div dir="rtl">
+                        <img class="img-thumbnail rounded-circle bg-light" width="150px" max-width="150px" src="~/Content/SiteFile/img/LogoEN.png" alt="قهوه دوپیو">
+                        <h4 class="text-center mt-3 mb-3"> با فروشگاه اینترنتی<a class="font-weight-bolder" href="/"> دپیو </a> قهوه را تازه و آنلاین بخر</h4>
+                        <h3 class="text-center"><strong> @ViewBag.UserName </strong>عزیز </h3>
+                        <div class="alert alert-success mt-1 mb-1">
+                            <p>حساب کاربری شما فعال شد از طریق این <a href="/Login">  لینک </a> می توانید وارد سایت شوید.</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <hr />
+                    <div class="text-center ">
+                        <a class="btn btn-primary mb-5" href="\">
+                            <i class="fa fa-arrow-circle-left fa-2x"></i>
+                            بارگشت به صفحه اصلی
+                        </a>
+                        <a class="btn btn-primary mb-5" href="\Login">
+                            <i class="fa fa-sign-in fa-2x"></i>
+                            ورود به حساب کاربری
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

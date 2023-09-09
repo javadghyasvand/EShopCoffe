@@ -1,0 +1,151 @@
+﻿@using EShopCoffee.Models.DataLayer
+@model EShopCoffee.Models.ViewModels.UserProfileViewModel
+@{
+    EShopCoffe_DBEntities coffeDbEntities = new EShopCoffe_DBEntities();
+    ViewBag.Title = "Edit";
+    var rolesId = ViewBag.User_Role_Id;
+    var stateList = coffeDbEntities.tblOstan.ToList();
+    var cityList = coffeDbEntities.tblShahrestan.ToList();
+
+
+}
+<div class="container">
+    @using (Html.BeginForm("EditProfile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.User_Id)
+        @Html.HiddenFor(model => model.User_Image) 
+        @Html.HiddenFor(model => model.User_Email)
+        <input type="hidden" name="" />
+        <div class="textalign">
+            <div class="box">
+                <h3 class="text-center color_defult">ویرایش پروفایل</h3>
+                <hr />
+                <div class="profile-pic mb-5 mt-5">
+                    <label class="-label" for="file">
+                        <span class="glyphicon glyphicon-camera"></span>
+                        <span>Change Image</span>
+                    </label>
+                    <input id="file" type="file" name="imageProduct" onchange="loadFile(event)" />
+                    <img id="ImgPreviewProduct" src="~/Images/UserImge/@Model.User_Image" width="200" />
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-lg-6">
+                        @Html.LabelFor(model => model.User_Phone, new { @class = "text-dark label" })
+                        @Html.EditorFor(model => model.User_Phone, new { htmlAttributes = new { @class = "form-control" } })
+                        <p>
+                            @Html.ValidationMessageFor(model => model.User_Phone, "", new { @class = "text-danger" })
+                        </p>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        @Html.LabelFor(model => model.User_Name, htmlAttributes: new { @class = "text-dark label" })
+                        @Html.EditorFor(model => model.User_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        <p>
+                            @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
+                        </p>
+                    </div>
+                </div>
+                <hr />
+                <h5 class="text-center color_defult">آدرس</h5>
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label class="text-dark label">شهر</label>
+                        <select name="User_City_ID" id="city" class="form-control">
+                            @foreach (var city in cityList)
+                            {
+                                <option parent="@city.OstanID" @((city.id == Model.User_City_ID) ? "selected" : "") value="@city.id">@city.Shahrestan</option>
+                            }
+                        </select>
+                        <p>
+                            @Html.ValidationMessageFor(model => model.User_City_ID, "", new { @class = "text-danger" })
+                        </p>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label class="text-dark label">استان</label>
+                        <select name="User_State_ID" id="state" class="form-control">
+                            @foreach (var state in stateList)
+                            {
+                                <option @((state.id == Model.User_State_ID) ? "selected" : "") value="@state.id">@state.Ostan</option>
+                            }
+                        </select>
+                        <p>
+                            @Html.ValidationMessageFor(model => model.User_State_ID, "", new { @class = "text-danger" })
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        @Html.LabelFor(model => model.User_Address, htmlAttributes: new { @class = "text-dark label" })
+                        @Html.TextAreaFor(model => model.User_Address, htmlAttributes: new { @class = "form-control" })
+                        <p>
+                            @Html.ValidationMessageFor(model => model.User_Address, "", new { @class = "text-danger" })
+                        </p>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        @Html.LabelFor(model => model.User_Postal_Code, htmlAttributes: new { @class = "text-dark label" })
+
+                        @Html.EditorFor(model => model.User_Postal_Code, new { htmlAttributes = new { @class = "form-control" } })
+                        <p>
+                            @Html.ValidationMessageFor(model => model.User_Postal_Code, "", new { @class = "text-danger" })
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="text-center col-lg-12 mt-3 mb-3">
+                        <a href="@Url.Action("Index")" class="btn btn-danger w-25">
+                            <i class="fa fa-arrow-left"> </i>بازگشت
+                        </a>
+                        <button type="submit" class="btn btn-primary w-25"><i class="fa fa-sign-in"></i>ثبت</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section scripts
+{
+    <script>
+
+        $('document').ready(function () {
+            $("#imageProduct").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#ImgPreviewProduct').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+        $(document).ready(function () {
+            var stateId = $("#state").val();
+            $("#city option").each(function () {
+                if ($(this).attr("parent") == stateId) {
+                    $(this).css("display", "block");
+                } else {
+                    $(this).css("display","none");
+                }
+
+            });
+        });
+        $('#state').on('change', function () {
+            var stateId = $("#state").val();
+            $("#city option").attr("Selected", "");
+            $("#city").val("");
+            $("#city option").each(function () {
+                if ($(this).attr("parent") == stateId) {
+                    $(this).css("display", "block");
+                } else {
+                    $(this).css("display", "none");
+                }
+
+            });
+        });
+        var loadFile = function (event) {
+            var image = document.getElementById("ImgPreviewProduct");
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+
+}

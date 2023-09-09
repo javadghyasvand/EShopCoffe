@@ -1,45 +1,89 @@
 ﻿@model EShopCoffee.Models.DataLayer.Product_Groups
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "GroupEdit";
 }
-
-<h4 class="text-center font-weight-bold mt-4">
-    ویرایش گروه
-</h4>
-<hr />
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        @Html.HiddenFor(model => model.Group_Id)
-        @Html.HiddenFor(model => model.Parent_Id)
-        <div class="form-group">
-            <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                    @Html.LabelFor(model => model.Group_Title, htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
+<div class="container">
+    <div class="box">
+        <div class="text-center mb-3">
+            <h3 class="text-center color_defult">ویرایش گروه</h3>
+            @using (Html.BeginForm("Edit", "Product_Groups", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Group_Id)
+                @Html.HiddenFor(model => model.Group_Image)
+                @Html.HiddenFor(model => model.Parent_Id)
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div>
+                    <div class="form-group">
+                        <label>عنوان گروه</label>
+                        @Html.EditorFor(model => model.Group_Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Group_Title, "", new { @class = "text-danger" })
+                    </div>
+                    <div id="accordionOne" class="mt-4">
+                        <div class="card border-primary mb-3">
+                            <div id="headingOne" class="card-header p-0 border-0">
+                                <h4 class="mb-0">
+                                    <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="textalign btn btn-primary d-block text-left rounded-0">انتخاب تصویر</a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionOne" class="collapse show">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <span class="col-lg-4 mt-5">
+                                            <input type="file" style="margin: 10px;" id="imageProduct" name="imageProduct"/>
+                                        </span>
+                                        <sapn class="col-lg-5">
+                                            <img id="ImgPreviewProduct" name="ImgPreviewProduct" style="margin: 10px auto; width: 150px" class="img-thumbnail" src="~/Images/ProductGroups/Thumbnail/@Model.Group_Image"/>
+                                        </sapn>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="text-center col-lg-12 mt-3 mb-3">
+                                <button type="submit" class="btn btn-primary w-25"><i class="fa fa-save"></i>ویرایش</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                @Html.EditorFor(model => model.Group_Title, new { htmlAttributes = new { @class = "form-control" } })
-
-            </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.Group_Title, "", new { @class = "text-danger" })
-            </p>
-
-        </div>
-
-
-        <div class="form-group text-center">
-            <div class="text-center">
-                <button type="submit" title="ذخیره" class="btn btn-success btn-block">
-                    <i class="fa fa-save fa-2x"></i>
-                </button>
-                <a href="@Url.Action("Index")" class="btn btn-info btn-block" title="بازگشت">
-                    <i class="fa fa-arrow-circle-left fa-2x"></i>
-                </a>
-            </div>
+            }
         </div>
     </div>
+</div>
+
+@section scripts
+{
+    <script>
+    
+        $('document').ready(function () {
+            $("#imageProduct").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#ImgPreviewProduct').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+
+    </script>
+
 }
+
+<style>
+    input[type="file"]::file-selector-button {
+        border: 2px solid #4FBFA8;
+        padding: 0.2em 0.4em;
+        border-radius: 0.2em;
+        background-color: #4FBFA8;
+        transition: 1s;
+        color: #ffff
+    }
+
+    input[type="file"]::file-selector-button:hover {
+        background-color: #3EAA94;
+        border: 2px solid #3EAA94;
+    }
+</style>

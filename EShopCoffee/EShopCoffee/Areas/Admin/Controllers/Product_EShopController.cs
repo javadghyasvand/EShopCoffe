@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using EShopCoffee.Models;
 using EShopCoffee.Models.DataLayer;
 using InsertShowImage;
 using KooyWebApp_MVC.Classes;
@@ -84,7 +83,6 @@ namespace EShopCoffee.Areas.Admin.Controllers
                     ViewBag.Groups = _db.Product_Groups.ToList();
                     return View(productEShop);
                 }
-
                 productEShop.Product_CreateDate = DateTime.Now;
                 _db.Product_EShop.Add(productEShop);
                 foreach (int group in selectedGroup)

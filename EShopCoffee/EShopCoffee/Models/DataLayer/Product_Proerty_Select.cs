@@ -21,7 +21,7 @@ namespace EShopCoffee.Models.DataLayer
         public long Property_Id { get; set; }
         public string Value { get; set; }
     
-        public virtual Product_Property Product_Property { get; set; }
         public virtual Product_EShop Product_EShop { get; set; }
+        public virtual Product_Property Product_Property { get; set; }
     }
 }

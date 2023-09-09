@@ -44,6 +44,7 @@
     <Property Name="Group_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Group_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="Parent_Id" Type="bigint" />
+    <Property Name="Group_Image" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="Product_Proerty_Select">
     <Key>
@@ -84,16 +85,20 @@
     <Property Name="Role_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Role_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
   </EntityType>
-  <EntityType Name="User_Details">
+  <EntityType Name="tblOstan">
     <Key>
-      <PropertyRef Name="User_Detail_Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="User_Detail_Id" Type="bigint" Nullable="false" />
-    <Property Name="User_Id" Type="bigint" Nullable="false" />
-    <Property Name="User_Address" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="User_State" Type="nvarchar" MaxLength="350" Nullable="false" />
-    <Property Name="User_City" Type="nvarchar" MaxLength="350" Nullable="false" />
-    <Property Name="User_Postal_Code" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ostan" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblShahrestan">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="OstanID" Type="int" Nullable="false" />
+    <Property Name="Shahrestan" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -108,7 +113,13 @@
     <Property Name="User_Active_Code" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="User_IsActive" Type="bit" Nullable="false" />
     <Property Name="User_RegisterDate" Type="datetime" Nullable="false" />
-    <Property Name="User_Image" Type="nvarchar" MaxLength="150" />
+    <Property Name="User_Image" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="User_Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="User_Postal_Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="User_State_Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="User_City_Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="User_State_ID" Type="int" />
+    <Property Name="User_City_ID" Type="int" />
   </EntityType>
   <Association Name="FK_Product_Comments_Product_Comments">
     <End Role="Product_Comments" Type="Self.Product_Comments" Multiplicity="0..1" />
@@ -230,15 +241,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_User_Details_Users">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="User_Details" Type="Self.User_Details" Multiplicity="*" />
+  <Association Name="FK_tblShahrestan_tblOstan">
+    <End Role="tblOstan" Type="Self.tblOstan" Multiplicity="1" />
+    <End Role="tblShahrestan" Type="Self.tblShahrestan" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="User_Id" />
+      <Principal Role="tblOstan">
+        <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="User_Details">
-        <PropertyRef Name="User_Id" />
+      <Dependent Role="tblShahrestan">
+        <PropertyRef Name="OstanID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -254,6 +265,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Users_tblOstan">
+    <End Role="tblOstan" Type="Self.tblOstan" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOstan">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="User_State_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_tblShahrestan">
+    <End Role="tblShahrestan" Type="Self.tblShahrestan" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblShahrestan">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="User_City_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="EShopCoffe_DBModelStoreContainer">
     <EntitySet Name="Product_Comments" EntityType="Self.Product_Comments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product_EShop" EntityType="Self.Product_EShop" Schema="dbo" store:Type="Tables" />
@@ -264,7 +299,8 @@
     <EntitySet Name="Product_Select_Groups" EntityType="Self.Product_Select_Groups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product_Tags" EntityType="Self.Product_Tags" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="User_Details" EntityType="Self.User_Details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblOstan" EntityType="Self.tblOstan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblShahrestan" EntityType="Self.tblShahrestan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Product_Comments_Product_Comments" Association="Self.FK_Product_Comments_Product_Comments">
       <End Role="Product_Comments" EntitySet="Product_Comments" />
@@ -306,12 +342,20 @@
       <End Role="Product_EShop" EntitySet="Product_EShop" />
       <End Role="Product_Tags" EntitySet="Product_Tags" />
     </AssociationSet>
-    <AssociationSet Name="FK_User_Details_Users" Association="Self.FK_User_Details_Users">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="User_Details" EntitySet="User_Details" />
+    <AssociationSet Name="FK_tblShahrestan_tblOstan" Association="Self.FK_tblShahrestan_tblOstan">
+      <End Role="tblOstan" EntitySet="tblOstan" />
+      <End Role="tblShahrestan" EntitySet="tblShahrestan" />
     </AssociationSet>
     <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
       <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_tblOstan" Association="Self.FK_Users_tblOstan">
+      <End Role="tblOstan" EntitySet="tblOstan" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_tblShahrestan" Association="Self.FK_Users_tblShahrestan">
+      <End Role="tblShahrestan" EntitySet="tblShahrestan" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
   </EntityContainer>

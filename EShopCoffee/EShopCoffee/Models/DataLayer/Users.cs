@@ -19,7 +19,6 @@ namespace EShopCoffee.Models.DataLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Users()
         {
-            this.User_Details = new HashSet<User_Details>();
             this.Product_Comments = new HashSet<Product_Comments>();
         }
     
@@ -33,11 +32,17 @@ namespace EShopCoffee.Models.DataLayer
         public bool User_IsActive { get; set; }
         public System.DateTime User_RegisterDate { get; set; }
         public string User_Image { get; set; }
+        public string User_Address { get; set; }
+        public string User_Postal_Code { get; set; }
+        public string User_State_Name { get; set; }
+        public string User_City_Name { get; set; }
+        public Nullable<int> User_State_ID { get; set; }
+        public Nullable<int> User_City_ID { get; set; }
     
-        public virtual Roles Roles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User_Details> User_Details { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_Comments> Product_Comments { get; set; }
+        public virtual Roles Roles { get; set; }
+        public virtual tblOstan tblOstan { get; set; }
+        public virtual tblShahrestan tblShahrestan { get; set; }
     }
 }

@@ -41,7 +41,7 @@ h1 {
 }
 
 .btn + .btn {
-  margin-left: 5px;
+  margin-left: 0px !important;
 }
 
 .disabled {

@@ -1,63 +1,97 @@
-﻿@model EShopCoffee.Models.ViewModels.UserProfileViewModel
-<div class="container">
-@Html.HiddenFor(model => model.User_Id)
-@Html.HiddenFor(model => model.User_Detail_Id)
-<div class="card text-white  mb-5">
-    <div class="card-header Bg-backgrund">اطلاعات کاربری</div>
-    <div class="card-body">
-        <div>
-            <div class="text-center">
-                <span>
-                    <img id="ImgPreviewProduct" name="ImgPreviewProduct" style="margin: 1px auto; max-width: 50px" class="img-thumbnail" src="~/Images/UserImge/@Model.User_Image"/>
-                </span>
-                <br/>
-                <span class="text-dark font-weight-bolder">@Model.User_Name</span>
+﻿@using MyShop.Utilities
+@model  EShopCoffee.Models.DataLayer.Users
 
-            </div>
-           
-            <hr/>
-            <div class="col-md-12 row m-3">
-                <div class="text-dark col-md-6">
-                    <label>ایمیل:</label>
-                    @Html.DisplayFor(model => model.User_Email, null, new { @class = "text-dark" })
-                </div>
-                <div class="text-dark col-md-6">
-                    <label>شماره تماس:</label>
-                    @Html.DisplayFor(model => model.User_Phone, null, new { @class = "text-dark" })
-                </div>
-            </div>
-            <div class="col-md-12 row m-3">
-                <div class="text-dark col-md-6">
-                    <label>استان:</label>
-                    @Html.DisplayFor(model => model.User_State, null, new { @class = "text-dark" })
-                </div>
-                <div class="text-dark col-md-6">
-                    <label>شهر:</label>
-                    @Html.DisplayFor(model => model.User_City, null, new { @class = "text-dark" })
-                </div>
-            </div>
-            <div class="col-md-12 row m-3">
-                <div class="text-dark col-md-6">
-                    <label>کد پستی:</label>
-                    @Html.DisplayFor(model => model.User_Postal_Code, null, new { @class = "text-dark" })
-                </div>
-                <div class="text-dark col-md-6">
-                 
-                </div>
-            </div>
-            <div  class="col-md-12 row m-3">
-                <div class="text-dark ml-3">
-                    <label>آدرس:</label>
-                    @Html.DisplayFor(model => model.User_Address, null, new { @class = "text-dark" })
-                </div>
-            </div>
-           
-        </div>
+<div id="customer-orders" class="container">
+    <div class="box">
+        <h3 class="color_defult">اطلاعات کاربری</h3>
         <hr/>
         <div class="text-center">
-            <a class="btn btn-warning" href="" ><i class="fa fa-edit"></i></a>
+            <span class="mt-4">
+                <img style="margin: 1px auto; max-width: 150px" class="img-thumbnail" src="~/Images/UserImge/@Model.User_Image"/>
+            </span>
+          
         </div>
-        
+        <hr/>
+        <div class="textalign">
+            <div class="row mt-4 mb-4">
+                <div class="text-dark col-lg-5 ">
+                    @Html.DisplayFor(model => model.User_Email, null, new { @class = "text-dark" })
+                    <label> : ایمیل </label>
+                </div>
+                <div class="text-dark col-lg-5">
+                    @Html.DisplayFor(model => model.User_Name, null, new { @class = "text-dark" })
+                    <label> :  نام کاربری </label>
+                </div>
+            </div>
+            <div class="row  mt-4 mb-4">
+                <div class="text-dark col-lg-5 ">
+                    <span>
+                        @Model.User_RegisterDate.ToShamsi()
+                    </span>
+                    <label> : تاریخ ثبت نام </label>
+                </div>
+                <div class="text-dark col-lg-5">
+                    @Html.DisplayFor(model => model.User_Phone, null, new { @class = "text-dark" })
+                    <label> : شماره تماس </label>
+                </div>
+            </div>
+            <hr/>
+            @if (Model.User_State_ID != null && Model.User_City_ID != null)
+            {
+                <h5 class="text-center color_defult mb-4">آدرس</h5>
+                <div class="row  mt-4 mb-4">
+                    <div class="text-dark col-lg-5">
+                        @Html.DisplayFor(model => model.User_City_Name, null, new { @class = "text-dark" })
+                        <label> : شهر </label>
+                    </div>
+                    <div class="text-dark col-lg-5">
+                        @Html.DisplayFor(model => model.User_State_Name, null, new { @class = "text-dark" })
+                        <label> : استان </label>
+                    </div>
+                </div>
+                <div class="row mt-4 mb-4">
+                    <div class="text-dark col-lg-5 ">
+
+                        @Html.DisplayFor(model => model.User_Address, null, new { @class = "text-dark" })
+                        <label> : آدرس </label>
+                    </div>
+                    <div class="text-dark col-lg-5">
+                        @Html.DisplayFor(model => model.User_Postal_Code, null, new { @class = "text-dark" })
+                        <label> : کد پستی </label>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row mt-4">
+                    <div class="text-dark text-center col-lg-12">
+                        <a class="btn btn-primary" href="/">
+                            صفحه اصلی
+                            <i class="fa fa-home"></i>
+                        </a>
+                        <a class="btn btn-warning" href="/Home/EditProfile/@Model.User_Id">
+                            ویرایش
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger text-center">
+                    <p>کاربر گرامی !برای تکلمیل اطلاعات خود روی لینک زیر کلیک فرمایید</p>
+                    <div class="text-dark text-center col-lg-12">
+                        <a class="btn btn-primary" href="/">
+                            صفحه اصلی
+                            <i class="fa fa-home"></i>
+                        </a>
+                        <a class="btn btn-warning" href="">
+                            ویرایش
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+
+        </div>
     </div>
 </div>
 <style>

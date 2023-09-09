@@ -8,8 +8,6 @@
     <div id="content">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                </div>
                 <div class="col-lg-12 order-1 order-lg-2">
                     <div id="productMain" class="row">
                         <div class="col-md-6">
@@ -83,12 +81,11 @@
                                     <hr>
 
                                     <blockquote style="height: fit-content;">
-                                        <p>توضیحات</p>
-                                        <p>
-                                            <em>
-                                                @Html.Raw(@Model.Product_Discription)
-                                            </em>
-                                        </p>
+                                        <div class="discript">
+                                            <p>توضیحات</p>
+                                            <input type="checkbox" id="expanded">
+                                            <p>@Html.Raw(@Model.Product_Discription)</p>
+                                        </div>
                                     </blockquote>
                                 </div>
 
@@ -110,7 +107,6 @@
                                         </ul>
                                     }
                                 }
-
                             </div>
                             <div class="tab-pane fade" id="Comments_Product" role="tabpanel" aria-labelledby="profile-tab">
                                 <div>
@@ -118,8 +114,16 @@
                                     <div id="ListComment">
                                         @Html.Action("ShowComments")
                                     </div>
-                                 
                                 </div>
+                            </div>
+                        </div>
+                        <div class="p-1 m-4 tags" style="background-color: #f0f0f0; border-radius: 15px">
+                            <div class="text-center">
+                                @foreach (var tag in Model.Product_Tags)
+                                {
+                                    <a class="badge badge-primary text-light m-1 p-2" style="border-radius:10px" href="/Search/@tag.Tag"># @tag.Tag</a>
+
+                                }
                             </div>
                         </div>
                     </div>

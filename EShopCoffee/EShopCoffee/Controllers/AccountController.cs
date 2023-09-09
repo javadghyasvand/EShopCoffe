@@ -14,9 +14,6 @@ namespace EShopCoffee.Controllers
     {
         private readonly EShopCoffe_DBEntities _db = new EShopCoffe_DBEntities();
 
-       
-
-
         [Route("Login")]
         public ActionResult Login()
         {
@@ -31,7 +28,7 @@ namespace EShopCoffee.Controllers
             {
                 var HashPassword =
                     FormsAuthentication.HashPasswordForStoringInConfigFile(loginViewModel.User_Password, "MD5");
-                var user =  _db.Users.SingleOrDefault(u =>
+                var user = _db.Users.SingleOrDefault(u =>
                     u.User_Email == loginViewModel.User_Email && u.User_Password == HashPassword);
                 if (user != null)
                 {
@@ -71,11 +68,11 @@ namespace EShopCoffee.Controllers
             {
                 if (!_db.Users.Any(u => u.User_Email == register.User_Email.Trim().ToLower()))
                 {
-
                     Users user = new Users()
                     {
                         User_Email = register.User_Email.Trim().ToLower(),
-                        User_Password = FormsAuthentication.HashPasswordForStoringInConfigFile(register.User_Password, "MD5"),
+                        User_Password =
+                            FormsAuthentication.HashPasswordForStoringInConfigFile(register.User_Password, "MD5"),
                         User_Active_Code = Guid.NewGuid().ToString(),
                         User_RegisterDate = DateTime.Now,
                         User_IsActive = false,
@@ -83,7 +80,12 @@ namespace EShopCoffee.Controllers
                         User_Name = register.User_Name,
                         User_Phone = register.User_Phone,
                         User_Image = "no-photo.jpg",
-                        
+                        User_State_Name = "",
+                        User_City_Name = "",
+                        User_Address = "",
+                        User_Postal_Code = "",
+                        User_State_ID = null,
+                        User_City_ID = null,
                     };
                     _db.Users.Add(user);
                     _db.SaveChanges();
@@ -116,6 +118,7 @@ namespace EShopCoffee.Controllers
             _db.SaveChanges();
             return View();
         }
+
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
@@ -127,6 +130,7 @@ namespace EShopCoffee.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [Route("ForgotPassword")]
         public ActionResult ForgotPassword(ForgotPasswordViewModel forgotViewModel)
@@ -156,10 +160,12 @@ namespace EShopCoffee.Controllers
 
             return View();
         }
+
         public ActionResult RecoveryPassword(string id)
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult RecoveryPassword(string id, RecoveryPasswordViewModel recoveryPassWordViewModel)
         {
@@ -177,9 +183,10 @@ namespace EShopCoffee.Controllers
                 _db.SaveChanges();
                 return Redirect("/Login?recovery=true");
             }
+
             return View();
         }
-       
+
 
         protected override void Dispose(bool disposing)
         {
@@ -187,9 +194,8 @@ namespace EShopCoffee.Controllers
             {
                 _db.Dispose();
             }
+
             base.Dispose(disposing);
         }
-
-
     }
 }

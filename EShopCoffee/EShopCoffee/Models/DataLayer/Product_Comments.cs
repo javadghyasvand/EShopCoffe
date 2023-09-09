@@ -24,11 +24,11 @@ namespace EShopCoffee.Models.DataLayer
     
         public long Comment_Id { get; set; }
         public long Product_Id { get; set; }
+        public long UserId { get; set; }
         public Nullable<long> Parent_Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Comment { get; set; }
-        public long UserId { get; set; }
         public System.DateTime CommentDate { get; set; }
         public string UserImage { get; set; }
     

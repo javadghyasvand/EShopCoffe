@@ -9,7 +9,7 @@
 
 }
 <div class="container">
-    @using (Html.BeginForm("Create", "Product_EShop", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Edit", "Product_EShop", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.Product_Id)
@@ -123,7 +123,7 @@
                                     <a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="textalign btn btn-primary d-block text-left rounded-0">دسته بندی</a>
                                 </h4>
                             </div>
-                            <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionTwo" class="collapse show">
+                            <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionTwo" class="collapse show" dir="rtl">
                                 <div class="card-body">
                                     <div class="row">
                                         @foreach (var headGroups in groups.Where(g => g.Parent_Id == null))
@@ -139,7 +139,7 @@
                                                     </div>
                                                     <div class="collapse show">
                                                         <div class="card-body p-2 mr-2">
-                                                            <div class="form-group form-check textalign">
+                                                            <div class="form-group form-check textalign" dir="ltr">
                                                                 <input type="checkbox" class="form-check-input" name="selectedGroup" id="check-box+@headGroups.Group_Id" @((selectedGroupsList.Any(g => g.Group_Id == headGroups.Group_Id)) ? "checked" : "") value="@headGroups.Group_Id">
                                                                 <label class="form-check-label w-75" for="check-box+@headGroups.Group_Id">@headGroups.Group_Title</label>
                                                             </div>
@@ -148,7 +148,7 @@
                                                             {
                                                                 foreach (var subgroups in groups.Where(g => g.Parent_Id == headGroups.Group_Id))
                                                                 {
-                                                                    <div class="form-group form-check textalign">
+                                                                    <div class="form-group form-check textalign" dir="ltr">
                                                                         <input type="checkbox" class="form-check-input " name="selectedGroup" id="check-box+@subgroups.Group_Id" @((selectedGroupsList.Any(g => g.Group_Id == subgroups.Group_Id)) ? "checked" : "") value="@subgroups.Group_Id">
                                                                         <label class="form-check-label w-75" for="check-box+@subgroups.Group_Id">@subgroups.Group_Title</label>
                                                                     </div>

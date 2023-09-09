@@ -1,97 +1,103 @@
 ﻿@model IEnumerable<EShopCoffee.Models.DataLayer.Product_Groups>
-<div class="row" style="text-align: right;">
-    <div class="col-lg-12">
-        <div class="box">
+<div class="box">
+    <div class="row" style="text-align: right;">
+        <div class="col-lg-12">
             <h3 class="text-center color_defult">دسته بندی محصولات</h3>
-            <hr />
+            <hr/>
             <div class="text-center mb-3">
                 <a href="@Url.Action("Create")" class="btn  btn-primary">
                     افزودن سرگروه جدید
                     <i class="fa fa-plus-circle"></i>
                 </a>
             </div>
-            <div class="table-responsive">
-                <table class="table table-hover text-center">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>تصویر</th>
-                            <th>عنوان</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @* @foreach (var headGroups in Model.Where(g => g.Parent_Id == null)) *@
-                    @* { *@
-                    @*         <tr> *@
-                    @*             <td> *@
-                    @*                 <a href="/Admin/Product_EShop/DeleteGallery/  @headGroups.Group_Title" title="ویرایش محصول" class="btn btn-block btn-sm btn-danger btn-sm"> *@
-                    @*                     <i class="fa fa-trash"></i> *@
-                    @*                 </a> *@
-                    @*             </td> *@
-                    @*             <td> *@
-                    @*                 <img style="width: 100px" class="img-thumbnail" src="~/Images/ProductImages/Thumbnail/@image.Gallery_Image_Name" /> *@
-                    @*             </td> *@
-                    @* *@
-                    @*             <th>@headGroups.Group_Title</th> *@
-                    @*         </tr> *@
-                    @*     } *@
-
-                    </tbody>
-                </table>
-            </div>
             <div id="accordionTwo">
                 <div class="card border-primary mb-3">
                     <div id="headingTwo" class="card-header p-0 border-0">
                         <h4 class="mb-0">
-                            <a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="textalign btn btn-primary d-block text-left rounded-0">دسته بندی</a>
+                            <a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="textalign btn btn-primary d-block  text-center rounded-0">دسته بندی</a>
                         </h4>
                     </div>
-                    <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionTwo" class="collapse show">
+                    <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionTwo" class="collapse show" dir="rtl">
                         <div class="card-body">
                             <div class="row">
                                 @foreach (var headGroups in Model.Where(g => g.Parent_Id == null))
                                 {
                                     <div class="mt-1 col-lg-4">
-                                        <div class="card border-primary mb-3">
-                                            <div class="card-header p-0 border-0">
-                                                <h4 class="mb-0">
-                                                    <span class="textalign btn btn-primary d-block text-left rounded-0">
-                                                        @headGroups.Group_Title
+                                        <div class="table-responsive">
+                                            <table class="table table-hover text-center">
+                                                <tr id="Group_@headGroups.Group_Id">
+                                                    <span class="textalign btn btn-primary d-block text-center rounded-0">
+                                                        @Html.DisplayFor(modelItem => headGroups.Group_Title)
                                                     </span>
-                                                </h4>
-                                            </div>
-                                            <div class="collapse show">
-                                                <div class="card-body p-1 m-0">
-                                                    <div class="form-group form-check  text-center mt-1 ">
-                                                        <input type="checkbox" class="form-check-input" name="selectedGroup" id="check-box+@headGroups.Group_Id" value="@headGroups.Group_Id">
-                                                        <label class="form-check-label" for="check-box+@headGroups.Group_Id">@headGroups.Group_Title</label>
-                                                        <hr />
-                                                        @if (Model.Any(g => g.Parent_Id == headGroups.Group_Id))
-                                                        {
-                                                            foreach (var subgroups in Model.Where(g => g.Parent_Id == headGroups.Group_Id))
-                                                            {
-                                                                <div class="form-group form-check textalign p-2">
-                                                                    <input type="checkbox" class="form-check-input " name="selectedGroup" id="check-box+@subgroups.Group_Id" value="@subgroups.Group_Id">
-                                                                    <label class="form-check-label w-75" for="check-box+@subgroups.Group_Id">@subgroups.Group_Title</label>
-                                                                </div>
-                                                            }
-                                                        }
-                                                    </div>
+                                                    <th class="w-25">
+                                                        <img class="img-thumbnail" width="60px" src="~/Images/ProductGroups/Thumbnail/@headGroups.Group_Image" alt="@headGroups.Group_Title"/>
+                                                    </th>
+                                                    <th>
+                                                        @headGroups.Group_Title
+                                                    </th>
+                                                    <td class="w-25">
+                                                        <a href="@Url.Action("Create",new { id = headGroups.Group_Id })" class="btn btn-block btn-sm btn-primary btn-sm">
+                                                            <i class="fa fa-plus-circle"></i>
+                                                        </a>
+                                                        <a href="@Url.Action("Edit", new { id = headGroups.Group_Id })" class="btn btn-block btn-sm btn-warning btn-sm mr-0">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
 
+                                                @if (Model.Any(g => g.Parent_Id == headGroups.Group_Id))
+                                                {
+                                                    foreach (var subgroups in Model.Where(g => g.Parent_Id == headGroups.Group_Id))
+                                                    {
+                                                        <tr id="Group_@subgroups.Group_Id">
+                                                            <th class="w-25">
+                                                                <img class="img-thumbnail" width="60px" src="~/Images/ProductGroups/Thumbnail/@subgroups.Group_Image" alt="@subgroups.Group_Title"/>
+                                                            </th>
+                                                            <th>
+                                                                @subgroups.Group_Title
+                                                            </th>
+                                                            <td>
+                                                                <a  href="@Url.Action("Edit", new { id = subgroups.Group_Id })" class="btn btn-block btn-sm btn-warning btn-sm">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </a>
 
-                                                </div>
-                                            </div>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </table>
                                         </div>
                                     </div>
                                 }
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
 </div>
+
+@section scripts
+{
+    <script>
+        $('document').ready(function () {
+            $("#imageProduct").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#ImgPreviewProduct').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+        function DeleteGroups(id) {
+            if (confirm("آیا از حذف مطمئن هستید؟")) {
+                $.get("/Admin/s/DeleteGroups/" + id, function (result) {
+                    $("#Group_"+ id).hide("slow");
+                });
+            }
+        }
+    </script>
+}

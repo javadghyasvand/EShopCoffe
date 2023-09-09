@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EShopCoffe_DBModelStoreContainer" CdmEntityContainer="EShopCoffe_DBEntities">
+    <EntitySetMapping Name="Product_EShop">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_EShop">
+        <MappingFragment StoreEntitySet="Product_EShop">
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="Proudct_Title" ColumnName="Proudct_Title" />
+          <ScalarProperty Name="Product_Count" ColumnName="Product_Count" />
+          <ScalarProperty Name="Product_IsInStock" ColumnName="Product_IsInStock" />
+          <ScalarProperty Name="Product_Discription" ColumnName="Product_Discription" />
+          <ScalarProperty Name="Product_Price" ColumnName="Product_Price" />
+          <ScalarProperty Name="Product_ImageName" ColumnName="Product_ImageName" />
+          <ScalarProperty Name="Product_CreateDate" ColumnName="Product_CreateDate" />
+          <ScalarProperty Name="Product_Is_Delete" ColumnName="Product_Is_Delete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_Galllery">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Galllery">
+        <MappingFragment StoreEntitySet="Product_Galllery">
+          <ScalarProperty Name="Gallery_Id" ColumnName="Gallery_Id" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="Gallery_Image_Title" ColumnName="Gallery_Image_Title" />
+          <ScalarProperty Name="Gallery_Image_Name" ColumnName="Gallery_Image_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_Groups">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Groups">
+        <MappingFragment StoreEntitySet="Product_Groups">
+          <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+          <ScalarProperty Name="Group_Title" ColumnName="Group_Title" />
+          <ScalarProperty Name="Parent_Id" ColumnName="Parent_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_Select_Groups">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Select_Groups">
+        <MappingFragment StoreEntitySet="Product_Select_Groups">
+          <ScalarProperty Name="Pro_Gro_Id" ColumnName="Pro_Gro_Id" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_Tags">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Tags">
+        <MappingFragment StoreEntitySet="Product_Tags">
+          <ScalarProperty Name="Tag_Id" ColumnName="Tag_Id" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="Tag" ColumnName="Tag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_Property">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Property">
+        <MappingFragment StoreEntitySet="Product_Property">
+          <ScalarProperty Name="Property_Title" ColumnName="Property_Title" />
+          <ScalarProperty Name="Property_Id" ColumnName="Property_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_Proerty_Select">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Proerty_Select">
+        <MappingFragment StoreEntitySet="Product_Proerty_Select">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Property_Id" ColumnName="Property_Id" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="Product_Proerty_Id" ColumnName="Product_Proerty_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Role_Title" ColumnName="Role_Title" />
+          <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="User_Image" ColumnName="User_Image" />
+          <ScalarProperty Name="User_RegisterDate" ColumnName="User_RegisterDate" />
+          <ScalarProperty Name="User_IsActive" ColumnName="User_IsActive" />
+          <ScalarProperty Name="User_Active_Code" ColumnName="User_Active_Code" />
+          <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+          <ScalarProperty Name="User_Phone" ColumnName="User_Phone" />
+          <ScalarProperty Name="User_Email" ColumnName="User_Email" />
+          <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+          <ScalarProperty Name="User_Role_Id" ColumnName="User_Role_Id" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Details">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.User_Details">
+        <MappingFragment StoreEntitySet="User_Details">
+          <ScalarProperty Name="User_Postal_Code" ColumnName="User_Postal_Code" />
+          <ScalarProperty Name="User_City" ColumnName="User_City" />
+          <ScalarProperty Name="User_State" ColumnName="User_State" />
+          <ScalarProperty Name="User_Address" ColumnName="User_Address" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="User_Detail_Id" ColumnName="User_Detail_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_Comments">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.Product_Comments">
+        <MappingFragment StoreEntitySet="Product_Comments">
+          <ScalarProperty Name="UserImage" ColumnName="UserImage" />
+          <ScalarProperty Name="CommentDate" ColumnName="CommentDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Parent_Id" ColumnName="Parent_Id" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="Comment_Id" ColumnName="Comment_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

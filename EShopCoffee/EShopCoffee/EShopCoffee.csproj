@@ -186,10 +186,13 @@
     <Compile Include="Models\DataLayer\Roles.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataLayer\Users.cs">
+    <Compile Include="Models\DataLayer\tblOstan.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataLayer\User_Details.cs">
+    <Compile Include="Models\DataLayer\tblShahrestan.cs">
+      <DependentUpon>EShop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataLayer\Users.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MetaData\Product_Comments_MetaData.cs" />
@@ -201,8 +204,9 @@
     <Compile Include="Models\MetaData\Product_Tags_MetaData.cs" />
     <Compile Include="Models\MetaData\Product_Property_MetaData.cs" />
     <Compile Include="Models\MetaData\Roles_MetaData.cs" />
+    <Compile Include="Models\MetaData\tblOstan_MetaData.cs" />
+    <Compile Include="Models\MetaData\tblShahrestan_MetaData.cs" />
     <Compile Include="Models\MetaData\Users_MetaData.cs" />
-    <Compile Include="Models\MetaData\User_Details_MetaData.cs" />
     <Compile Include="Models\ViewModels\ChangPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\LoggedInUserViewModel.cs" />
@@ -843,6 +847,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\ProductGroups\LogoEN.png" />
+    <Content Include="Images\ProductGroups\Thumbnail\LogoEN.png" />
     <Content Include="Images\ProductImages\07cfc0c0-55eb-4104-a01c-8ae3455332ff.jpg" />
     <Content Include="Images\ProductImages\0a459299-140a-43f8-9b50-d55ffd14f719.jpg" />
     <Content Include="Images\ProductImages\0a54f0c8-6e66-45e7-89a1-ba1c599bc5f2.jpg" />
@@ -878,6 +884,7 @@
     <Content Include="Images\Slider\659f1cb1-669e-40be-9ad5-ba2b6fe15138.jpg" />
     <Content Include="Images\Slider\b6eb2fe3-be25-4c25-a0ac-76d3aecd9a46.jpg" />
     <Content Include="Images\UserImge\no-photo.jpg" />
+    <Content Include="Images\UserImge\Thumbnail\no-photo.jpg" />
     <Content Include="Models\DataLayer\EShop.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EShop.edmx</DependentUpon>
@@ -1000,13 +1007,6 @@
     <Content Include="Areas\Admin\Views\Product_Property\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Product_Property\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Product_Property\Index.cshtml" />
-    <EntityDeploy Include="Models\DataLayer\EShop.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EShop.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DataLayer\EShop.edmx.diagram">
-      <DependentUpon>EShop.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product_EShop\ProductProperty.cshtml" />
     <Content Include="Areas\UserPanel\Views\web.config" />
@@ -1336,6 +1336,14 @@
     <Content Include="Content\SiteFile\vendor\Vazir\vazir\Round-Dots\misc\UI\fonts\webfonts\Vazirmatn-RD-UI-Regular.woff2" />
     <Content Include="Content\SiteFile\vendor\Vazir\vazir\Round-Dots\misc\UI\fonts\webfonts\Vazirmatn-RD-UI-SemiBold.woff2" />
     <Content Include="Content\SiteFile\vendor\Vazir\vazir\Round-Dots\misc\UI\fonts\webfonts\Vazirmatn-RD-UI-Thin.woff2" />
+    <Content Include="Areas\Admin\Views\Product_Property\ListProperty.cshtml" />
+    <EntityDeploy Include="Models\DataLayer\EShop.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EShop.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DataLayer\EShop.edmx.diagram">
+      <DependentUpon>EShop.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery.modal.min.js" />
@@ -1348,7 +1356,6 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
@@ -1380,7 +1387,6 @@
     <Content Include="Views\Shared\Navbar.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Home\UserProfile.cshtml" />
-    <Content Include="Views\Home\ShowGroups.cshtml" />
     <Content Include="Views\Home\Slider.cshtml" />
     <Content Include="Views\Shared\_Product.cshtml" />
     <Content Include="Views\Product\LastProduct.cshtml" />
@@ -1388,6 +1394,9 @@
     <Content Include="Views\Product\ShowProduct.cshtml" />
     <Content Include="Views\Product\ShowComments.cshtml" />
     <Content Include="Views\Product\CreateComment.cshtml" />
+    <Content Include="Views\Home\EditProfile.cshtml" />
+    <Content Include="Views\Product\ShowGroups.cshtml" />
+    <Content Include="Views\Shared\_ProductArchive.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1395,7 +1404,6 @@
     <Folder Include="Areas\UserPanel\Data\" />
     <Folder Include="Content\SiteFile\vendor\font-awesome\less\" />
     <Folder Include="Content\SiteFile\vendor\font-awesome\scss\" />
-    <Folder Include="Images\UserImge\Thumbnail\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

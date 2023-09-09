@@ -5,52 +5,46 @@
 
 @foreach (var comment in Model.Where(c => c.Parent_Id == null))
 {
-    
     <hr/>
-    <li style="list-style-type: none;">
-        <div class="row comment">
-            <a class="nav-link" style="cursor: pointer" onclick="ReplayComment(@comment.Comment_Id)"><i class="fa fa-reply"></i>پاسخ</a>
-            <div class="col-md-3 col-lg-2 text-center text-md-center">
-                @{
-                    <p>
-                        <img style="width: 80px;" src="~/Images/UserImge/@comment.UserImage" alt="@comment.Email" class="img-fluid rounded-circle">
-                    </p>
-                }
+    <li style="" class="p-3 li-style">
+        <div class="comment">
+            <div>
+                <span>
+                    <img  src="~/Images/UserImge/@comment.UserImage" alt="@comment.Email" class="img-thumbnail rounded-circle comment-img mb-1">
+                </span>
+                <span class="m-4">
+                    @comment.Name
+                </span>
+                <a class="nav-link mt-1 replay d-inline" style="cursor: pointer" onclick="ReplayComment(@comment.Comment_Id)"><i class="fa fa-reply"></i>پاسخ</a>
+                <span class="posted mr-5 datespan" ><i class="fa fa-clock-o"></i> تاریخ : @comment.CommentDate.ToShamsi()</span>
+               
+                <p class="comment-show" style="">@comment.Comment</p>
             </div>
-            <div class="col-md-9 col-lg-10">
-                <h5>
-                    @comment.Name<span class="posted mr-5"><i class="fa fa-clock-o"></i> تاریخ : @comment.CommentDate.ToShamsi()</span>
-                </h5>
-                <p>@comment.Comment</p>
-            </div>
-
         </div>
-    </li>
-    if (Model.Any(c => { return c.Parent_Id == comment.Comment_Id; }))
-    {
-        foreach (var subComment in Model.Where(c => c.Parent_Id == comment.Comment_Id))
-        {
-            <ul>
-                <li style="list-style-type: none; " class="mt-3 mr-5">
-                    <div class="row comment">
-                        <div class="col-md-3 col-lg-2 text-center text-md-center">
-                            @{
-                                <p>
-                                    <img style="width: 80px;" src="~/Images/UserImge/@subComment.UserImage" alt="@subComment.Email" class="img-fluid rounded-circle">
-                                </p>
-                            }
-                        </div>
-                        <div class="col-md-9 col-lg-10">
-                            <h5>
-                                @subComment.Name<span class="posted mr-5"><i class="fa fa-clock-o"></i> تاریخ : @subComment.CommentDate.ToShamsi()</span>
-                            </h5>
-                            <p>@subComment.Comment</p>
-                        </div>
 
-                    </div>
-                </li>
-            </ul>
+        @if (Model.Any(c => c.Parent_Id == comment.Comment_Id))
+        {
+            foreach (var subComment in Model.Where(c => c.Parent_Id == comment.Comment_Id))
+            {
+                <ul>
+                    <li style="" class="p-3 usb-li-style">
+                        <div class="comment">
+                            <div>
+                                <span>
+                                    <img  src="~/Images/UserImge/@comment.UserImage" alt="@comment.Email" class="img-thumbnail rounded-circle comment-img mb-1">
+                                </span>
+                                <span class="m-4">
+                                    @comment.Name
+                                </span>
+                                <span class="posted  datespan" ><i class="fa fa-clock-o"></i> تاریخ : @comment.CommentDate.ToShamsi()</span>
+               
+                                <p class="comment-show" style="">@comment.Comment</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            }
         }
-    }
-    <hr />
+    </li>
+    <hr/>
 }

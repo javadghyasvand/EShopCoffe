@@ -13,6 +13,11 @@ namespace EShopCoffee.Controllers
     {
         private readonly EShopCoffe_DBEntities _dbEntities = new EShopCoffe_DBEntities();
 
+        public ActionResult ShowGroups()
+        {
+            var productGroups = _dbEntities.Product_Groups.Where(g => g.Parent_Id==null).ToList();
+            return PartialView(productGroups);
+        }
         public ActionResult LastProduct()
         {
             var products = _dbEntities.Product_EShop.OrderByDescending(p => p.Product_CreateDate).Take(10);
@@ -23,6 +28,7 @@ namespace EShopCoffee.Controllers
         public ActionResult ShowProduct(long id)
         {
             var product = _dbEntities.Product_EShop.Find(id);
+            ViewBag.tags = _dbEntities.Product_Tags.Where(t => t.Product_Id == product.Product_Id);
             ViewBag.ProductFeatuer = product.Product_Proerty_Select.DistinctBy(f => f.Product_Proerty_Id).Select(f =>
                 new ShowProductPropViewModel()
                 {
@@ -38,7 +44,7 @@ namespace EShopCoffee.Controllers
         }
         public ActionResult ShowComments(long id)
         {
-            return PartialView(_dbEntities.Product_Comments.Where(p => p.Product_Id == id));
+            return PartialView(_dbEntities.Product_Comments.Where(p => p.Product_Id == id).Take(10));
         }
         public ActionResult CreateComment(int id)
         {
@@ -67,17 +73,9 @@ namespace EShopCoffee.Controllers
 
             return PartialView(productComment);
         }
-
-
-
-
-
-
-
-
-
+        [Route("ArchiveProduct")]
         public ActionResult ArchiveProduct(int pageId = 1, string title = "", int minPrice = 0, int maxPrice = 0,
-            List<int> selectGroup = null)
+            List<int> selectGroup = null,string sortBy="")
         {
             ViewBag.groups = _dbEntities.Product_Groups.ToList();
             ViewBag.productTitle = title;
@@ -85,6 +83,7 @@ namespace EShopCoffee.Controllers
             ViewBag.maxPrice = maxPrice;
             ViewBag.selectGroup = selectGroup;
             ViewBag.pageId = pageId;
+            ViewBag.sortBy = sortBy;
             List<Product_EShop> list = new List<Product_EShop>();
             if (selectGroup != null && selectGroup.Any())
             {
@@ -115,11 +114,24 @@ namespace EShopCoffee.Controllers
             {
                 list = list.Where(p => p.Product_Price <= maxPrice).ToList();
             }
-
             //paging
             int take = 9;
             int skip = (pageId - 1) * take;
             ViewBag.pagecount = list.Count / take;
+           
+            if (sortBy != null)
+            {
+                switch (sortBy)
+                {
+                    case "LastProduct":
+                        return View(list.OrderByDescending(p => p.Product_CreateDate).Skip(skip).Take(take).ToList());
+                    case "LowPrice":
+                        return View(list.OrderBy(p => p.Product_Price).Skip(skip).Take(take).ToList());
+                    case "HightPrice":
+                        return View(list.OrderByDescending(p => p.Product_Price).Skip(skip).Take(take).ToList());
+                }
+            }
+
             return View(list.OrderByDescending(p => p.Product_CreateDate).Skip(skip).Take(take).ToList());
         }
 

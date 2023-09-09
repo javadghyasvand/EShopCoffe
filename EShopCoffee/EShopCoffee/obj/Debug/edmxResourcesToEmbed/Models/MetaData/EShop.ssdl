@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EShopCoffe_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Product_Comments">
+    <Key>
+      <PropertyRef Name="Comment_Id" />
+    </Key>
+    <Property Name="Comment_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_Id" Type="bigint" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="Parent_Id" Type="bigint" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="850" Nullable="false" />
+    <Property Name="CommentDate" Type="datetime" Nullable="false" />
+    <Property Name="UserImage" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product_EShop">
+    <Key>
+      <PropertyRef Name="Product_Id" />
+    </Key>
+    <Property Name="Product_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Proudct_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Product_Count" Type="bigint" Nullable="false" />
+    <Property Name="Product_IsInStock" Type="bit" Nullable="false" />
+    <Property Name="Product_Discription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Product_Price" Type="bigint" Nullable="false" />
+    <Property Name="Product_ImageName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Product_CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="Product_Is_Delete" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product_Galllery">
+    <Key>
+      <PropertyRef Name="Gallery_Id" />
+    </Key>
+    <Property Name="Gallery_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_Id" Type="bigint" Nullable="false" />
+    <Property Name="Gallery_Image_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Gallery_Image_Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Product_Groups">
+    <Key>
+      <PropertyRef Name="Group_Id" />
+    </Key>
+    <Property Name="Group_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Group_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Parent_Id" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Product_Proerty_Select">
+    <Key>
+      <PropertyRef Name="Product_Proerty_Id" />
+    </Key>
+    <Property Name="Product_Proerty_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_Id" Type="bigint" Nullable="false" />
+    <Property Name="Property_Id" Type="bigint" Nullable="false" />
+    <Property Name="Value" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product_Property">
+    <Key>
+      <PropertyRef Name="Property_Id" />
+    </Key>
+    <Property Name="Property_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Property_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product_Select_Groups">
+    <Key>
+      <PropertyRef Name="Pro_Gro_Id" />
+    </Key>
+    <Property Name="Pro_Gro_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_Id" Type="bigint" Nullable="false" />
+    <Property Name="Group_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product_Tags">
+    <Key>
+      <PropertyRef Name="Tag_Id" />
+    </Key>
+    <Property Name="Tag_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_Id" Type="bigint" Nullable="false" />
+    <Property Name="Tag" Type="nvarchar" MaxLength="350" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Role_Id" />
+    </Key>
+    <Property Name="Role_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_Details">
+    <Key>
+      <PropertyRef Name="User_Detail_Id" />
+    </Key>
+    <Property Name="User_Detail_Id" Type="bigint" Nullable="false" />
+    <Property Name="User_Id" Type="bigint" Nullable="false" />
+    <Property Name="User_Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="User_State" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="User_City" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="User_Postal_Code" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_Role_Id" Type="bigint" Nullable="false" />
+    <Property Name="User_Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="User_Email" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="User_Phone" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="User_Password" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="User_Active_Code" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="User_IsActive" Type="bit" Nullable="false" />
+    <Property Name="User_RegisterDate" Type="datetime" Nullable="false" />
+    <Property Name="User_Image" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <Association Name="FK_Product_Comments_Product_Comments">
+    <End Role="Product_Comments" Type="Self.Product_Comments" Multiplicity="0..1" />
+    <End Role="Product_Comments1" Type="Self.Product_Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Comments">
+        <PropertyRef Name="Comment_Id" />
+      </Principal>
+      <Dependent Role="Product_Comments1">
+        <PropertyRef Name="Parent_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Comments_Product_EShop">
+    <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+    <End Role="Product_Comments" Type="Self.Product_Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_EShop">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Product_Comments">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Comments_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Product_Comments" Type="Self.Product_Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="Product_Comments">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Galllery_Product_EShop">
+    <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+    <End Role="Product_Galllery" Type="Self.Product_Galllery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_EShop">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Product_Galllery">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Groups_Product_Groups">
+    <End Role="Product_Groups" Type="Self.Product_Groups" Multiplicity="0..1" />
+    <End Role="Product_Groups1" Type="Self.Product_Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Groups">
+        <PropertyRef Name="Group_Id" />
+      </Principal>
+      <Dependent Role="Product_Groups1">
+        <PropertyRef Name="Parent_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Proerty_Select_Product_EShop">
+    <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+    <End Role="Product_Proerty_Select" Type="Self.Product_Proerty_Select" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_EShop">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Product_Proerty_Select">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Proerty_Select_Product_Property">
+    <End Role="Product_Property" Type="Self.Product_Property" Multiplicity="1" />
+    <End Role="Product_Proerty_Select" Type="Self.Product_Proerty_Select" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Property">
+        <PropertyRef Name="Property_Id" />
+      </Principal>
+      <Dependent Role="Product_Proerty_Select">
+        <PropertyRef Name="Property_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Select_Groups_Product_EShop">
+    <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+    <End Role="Product_Select_Groups" Type="Self.Product_Select_Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_EShop">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Product_Select_Groups">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Select_Groups_Product_Groups">
+    <End Role="Product_Groups" Type="Self.Product_Groups" Multiplicity="1" />
+    <End Role="Product_Select_Groups" Type="Self.Product_Select_Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Groups">
+        <PropertyRef Name="Group_Id" />
+      </Principal>
+      <Dependent Role="Product_Select_Groups">
+        <PropertyRef Name="Group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Tags_Product_EShop">
+    <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+    <End Role="Product_Tags" Type="Self.Product_Tags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_EShop">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Product_Tags">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Details_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="User_Details" Type="Self.User_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="User_Details">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Role_Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="User_Role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EShopCoffe_DBModelStoreContainer">
+    <EntitySet Name="Product_Comments" EntityType="Self.Product_Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_EShop" EntityType="Self.Product_EShop" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Galllery" EntityType="Self.Product_Galllery" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Groups" EntityType="Self.Product_Groups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Proerty_Select" EntityType="Self.Product_Proerty_Select" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Property" EntityType="Self.Product_Property" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Select_Groups" EntityType="Self.Product_Select_Groups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Tags" EntityType="Self.Product_Tags" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Details" EntityType="Self.User_Details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Product_Comments_Product_Comments" Association="Self.FK_Product_Comments_Product_Comments">
+      <End Role="Product_Comments" EntitySet="Product_Comments" />
+      <End Role="Product_Comments1" EntitySet="Product_Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Comments_Product_EShop" Association="Self.FK_Product_Comments_Product_EShop">
+      <End Role="Product_EShop" EntitySet="Product_EShop" />
+      <End Role="Product_Comments" EntitySet="Product_Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Comments_Users" Association="Self.FK_Product_Comments_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Product_Comments" EntitySet="Product_Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Galllery_Product_EShop" Association="Self.FK_Product_Galllery_Product_EShop">
+      <End Role="Product_EShop" EntitySet="Product_EShop" />
+      <End Role="Product_Galllery" EntitySet="Product_Galllery" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Groups_Product_Groups" Association="Self.FK_Product_Groups_Product_Groups">
+      <End Role="Product_Groups" EntitySet="Product_Groups" />
+      <End Role="Product_Groups1" EntitySet="Product_Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Proerty_Select_Product_EShop" Association="Self.FK_Product_Proerty_Select_Product_EShop">
+      <End Role="Product_EShop" EntitySet="Product_EShop" />
+      <End Role="Product_Proerty_Select" EntitySet="Product_Proerty_Select" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Proerty_Select_Product_Property" Association="Self.FK_Product_Proerty_Select_Product_Property">
+      <End Role="Product_Property" EntitySet="Product_Property" />
+      <End Role="Product_Proerty_Select" EntitySet="Product_Proerty_Select" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Select_Groups_Product_EShop" Association="Self.FK_Product_Select_Groups_Product_EShop">
+      <End Role="Product_EShop" EntitySet="Product_EShop" />
+      <End Role="Product_Select_Groups" EntitySet="Product_Select_Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Select_Groups_Product_Groups" Association="Self.FK_Product_Select_Groups_Product_Groups">
+      <End Role="Product_Groups" EntitySet="Product_Groups" />
+      <End Role="Product_Select_Groups" EntitySet="Product_Select_Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Tags_Product_EShop" Association="Self.FK_Product_Tags_Product_EShop">
+      <End Role="Product_EShop" EntitySet="Product_EShop" />
+      <End Role="Product_Tags" EntitySet="Product_Tags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Details_Users" Association="Self.FK_User_Details_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="User_Details" EntitySet="User_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

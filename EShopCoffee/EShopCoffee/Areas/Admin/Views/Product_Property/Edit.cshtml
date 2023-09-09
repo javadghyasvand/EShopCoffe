@@ -1,40 +1,42 @@
 ﻿@model EShopCoffee.Models.DataLayer.Product_Property
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "EditProperty";
 }
 
-<h2>Edit</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        <h4>Product_Property</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Property_Id)
-
-        <div class="form-group">
-            <div class="input-group mb-3 ">
-                <div class="input-group-prepend ">
-                    @Html.LabelFor(model => model, "ویژگی", htmlAttributes: new { @class = "input-group-text Bg-backgrund text-light label" })
+<div class="container">
+    <div class="box">
+        <div class="text-center mb-3">
+            @using (Ajax.BeginForm("Edit", "Product_Property",FormMethod.Post,new AjaxOptions()
+            {
+                OnSuccess = "SuccessProperty",
+                UpdateTargetId = "ListProperty"
+            }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <div class="row" style="text-align: right;">
+                        <div class="col-lg-12">
+                            <h3 class="text-center color_defult">افزودن ویژگی</h3>
+                            <div>
+                                @Html.HiddenFor(model => model.Property_Id, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="form-group">
+                                    <label>عنوان ویژگی</label>
+                                    @Html.EditorFor(model => model.Property_Title, new { htmlAttributes = new { @class = "form-control" } })
+                                    <p>
+                                        @Html.ValidationMessageFor(model => model.Property_Title, "", new { @class = "text-danger" })
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="text-center col-lg-12 mt-3 mb-3">
+                                    <button type="submit" class="btn btn-primary w-25">ثبت<i class="fa fa-save"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                @Html.EditorFor(model => model.Property_Title, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-            <p class="text-center">
-                @Html.ValidationMessageFor(model => model.Property_Title, "", new { @class = "text-danger" })
-            </p>
-        </div>
-        <div class="form-group text-center">
-            <div class="text-center">
-                <button type="submit" title="ذخیره" class="btn btn-success btn-block">
-                    <i class="fa fa-save fa-2x"></i>
-                </button>
-                <a href="@Url.Action("Index")" class="btn btn-info btn-block" title="بازگشت">
-                    <i class="fa fa-arrow-circle-left fa-2x"></i>
-                </a>
-            </div>
+            } 
         </div>
     </div>
-}
+</div>

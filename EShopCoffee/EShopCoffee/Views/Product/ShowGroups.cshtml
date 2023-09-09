@@ -1,0 +1,31 @@
+﻿@model IEnumerable<EShopCoffee.Models.DataLayer.Product_Groups>
+<div id="hot">
+    <div class="box py-4 pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="mb-4">دسته بندی محصولات</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="text-box text-center">
+                <div class="card-columns text-center">
+                    @foreach (var item in Model)
+                    {
+                        <div class="card" style="height: 200px;width:200px">
+                            <figure class="HoverSnip_2 bg-light">
+                                <img style="width: 100%; height: 100%" src="~/Images/ProductGroups/@item.Group_Image" alt="@item.Group_Title">
+                                <figcaption>
+                                    <h3 class="font-FM">@item.Group_Title</h3>
+                                </figcaption>
+                                <a href="list_items.html"></a>
+                            </figure>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</div>

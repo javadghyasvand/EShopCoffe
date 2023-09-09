@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EShopCoffe_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Product_EShop">
+    <Key>
+      <PropertyRef Name="Product_Id" />
+    </Key>
+    <Property Name="Product_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Proudct_Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Product_Count" Type="Int64" Nullable="false" />
+    <Property Name="Product_IsInStock" Type="Boolean" Nullable="false" />
+    <Property Name="Product_Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Product_Price" Type="Int64" Nullable="false" />
+    <Property Name="Product_ImageName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Product_CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Product_Is_Delete" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Product_Galllery" Relationship="Self.FK_Product_Galllery_Product_EShop" FromRole="Product_EShop" ToRole="Product_Galllery" />
+    <NavigationProperty Name="Product_Select_Groups" Relationship="Self.FK_Product_Select_Groups_Product_EShop" FromRole="Product_EShop" ToRole="Product_Select_Groups" />
+    <NavigationProperty Name="Product_Tags" Relationship="Self.FK_Product_Tags_Product_EShop" FromRole="Product_EShop" ToRole="Product_Tags" />
+    <NavigationProperty Name="Product_Proerty_Select" Relationship="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_EShop" FromRole="Product_EShop" ToRole="Product_Proerty_Select" />
+    <NavigationProperty Name="Product_Comments" Relationship="EShopCoffe_DBModel.FK_Product_Comments_Product_EShop" FromRole="Product_EShop" ToRole="Product_Comments" />
+  </EntityType>
+  <EntityType Name="Product_Galllery">
+    <Key>
+      <PropertyRef Name="Gallery_Id" />
+    </Key>
+    <Property Name="Gallery_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Id" Type="Int64" Nullable="false" />
+    <Property Name="Gallery_Image_Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gallery_Image_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product_EShop" Relationship="Self.FK_Product_Galllery_Product_EShop" FromRole="Product_Galllery" ToRole="Product_EShop" />
+  </EntityType>
+  <EntityType Name="Product_Groups">
+    <Key>
+      <PropertyRef Name="Group_Id" />
+    </Key>
+    <Property Name="Group_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Group_Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Parent_Id" Type="Int64" />
+    <NavigationProperty Name="Product_Groups1" Relationship="Self.FK_Product_Groups_Product_Groups" FromRole="Product_Groups" ToRole="Product_Groups1" />
+    <NavigationProperty Name="Product_Groups2" Relationship="Self.FK_Product_Groups_Product_Groups" FromRole="Product_Groups1" ToRole="Product_Groups" />
+    <NavigationProperty Name="Product_Select_Groups" Relationship="Self.FK_Product_Select_Groups_Product_Groups" FromRole="Product_Groups" ToRole="Product_Select_Groups" />
+  </EntityType>
+  <EntityType Name="Product_Select_Groups">
+    <Key>
+      <PropertyRef Name="Pro_Gro_Id" />
+    </Key>
+    <Property Name="Pro_Gro_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Id" Type="Int64" Nullable="false" />
+    <Property Name="Group_Id" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Product_EShop" Relationship="Self.FK_Product_Select_Groups_Product_EShop" FromRole="Product_Select_Groups" ToRole="Product_EShop" />
+    <NavigationProperty Name="Product_Groups" Relationship="Self.FK_Product_Select_Groups_Product_Groups" FromRole="Product_Select_Groups" ToRole="Product_Groups" />
+  </EntityType>
+  <EntityType Name="Product_Tags">
+    <Key>
+      <PropertyRef Name="Tag_Id" />
+    </Key>
+    <Property Name="Tag_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Id" Type="Int64" Nullable="false" />
+    <Property Name="Tag" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Product_EShop" Relationship="Self.FK_Product_Tags_Product_EShop" FromRole="Product_Tags" ToRole="Product_EShop" />
+  </EntityType>
+  <Association Name="FK_Product_Galllery_Product_EShop">
+    <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+    <End Role="Product_Galllery" Type="Self.Product_Galllery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_EShop">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Product_Galllery">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Select_Groups_Product_EShop">
+    <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+    <End Role="Product_Select_Groups" Type="Self.Product_Select_Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_EShop">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Product_Select_Groups">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Tags_Product_EShop">
+    <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+    <End Role="Product_Tags" Type="Self.Product_Tags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_EShop">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Product_Tags">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Groups_Product_Groups">
+    <End Role="Product_Groups" Type="Self.Product_Groups" Multiplicity="0..1" />
+    <End Role="Product_Groups1" Type="Self.Product_Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Groups">
+        <PropertyRef Name="Group_Id" />
+      </Principal>
+      <Dependent Role="Product_Groups1">
+        <PropertyRef Name="Parent_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Select_Groups_Product_Groups">
+    <End Role="Product_Groups" Type="Self.Product_Groups" Multiplicity="1" />
+    <End Role="Product_Select_Groups" Type="Self.Product_Select_Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Groups">
+        <PropertyRef Name="Group_Id" />
+      </Principal>
+      <Dependent Role="Product_Select_Groups">
+        <PropertyRef Name="Group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EShopCoffe_DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Product_EShop" EntityType="Self.Product_EShop" />
+    <EntitySet Name="Product_Galllery" EntityType="Self.Product_Galllery" />
+    <EntitySet Name="Product_Groups" EntityType="Self.Product_Groups" />
+    <EntitySet Name="Product_Select_Groups" EntityType="Self.Product_Select_Groups" />
+    <EntitySet Name="Product_Tags" EntityType="Self.Product_Tags" />
+    <AssociationSet Name="FK_Product_Galllery_Product_EShop" Association="Self.FK_Product_Galllery_Product_EShop">
+      <End Role="Product_EShop" EntitySet="Product_EShop" />
+      <End Role="Product_Galllery" EntitySet="Product_Galllery" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Select_Groups_Product_EShop" Association="Self.FK_Product_Select_Groups_Product_EShop">
+      <End Role="Product_EShop" EntitySet="Product_EShop" />
+      <End Role="Product_Select_Groups" EntitySet="Product_Select_Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Tags_Product_EShop" Association="Self.FK_Product_Tags_Product_EShop">
+      <End Role="Product_EShop" EntitySet="Product_EShop" />
+      <End Role="Product_Tags" EntitySet="Product_Tags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Groups_Product_Groups" Association="Self.FK_Product_Groups_Product_Groups">
+      <End Role="Product_Groups" EntitySet="Product_Groups" />
+      <End Role="Product_Groups1" EntitySet="Product_Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Select_Groups_Product_Groups" Association="Self.FK_Product_Select_Groups_Product_Groups">
+      <End Role="Product_Groups" EntitySet="Product_Groups" />
+      <End Role="Product_Select_Groups" EntitySet="Product_Select_Groups" />
+    </AssociationSet>
+    <EntitySet Name="Product_Property" EntityType="EShopCoffe_DBModel.Product_Property" />
+    <EntitySet Name="Product_Proerty_Select" EntityType="EShopCoffe_DBModel.Product_Proerty_Select" />
+    <AssociationSet Name="FK_Product_Proerty_Select_Product_Property" Association="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_Property">
+      <End Role="Product_Property" EntitySet="Product_Property" />
+      <End Role="Product_Proerty_Select" EntitySet="Product_Proerty_Select" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Proerty_Select_Product_EShop" Association="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_EShop">
+      <End Role="Product_EShop" EntitySet="Product_EShop" />
+      <End Role="Product_Proerty_Select" EntitySet="Product_Proerty_Select" />
+    </AssociationSet>
+    <EntitySet Name="Roles" EntityType="EShopCoffe_DBModel.Roles" />
+    <EntitySet Name="Users" EntityType="EShopCoffe_DBModel.Users" />
+    <AssociationSet Name="FK_Users_Roles" Association="EShopCoffe_DBModel.FK_Users_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="User_Details" EntityType="EShopCoffe_DBModel.User_Details" />
+    <AssociationSet Name="FK_User_Details_Users" Association="EShopCoffe_DBModel.FK_User_Details_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="User_Details" EntitySet="User_Details" />
+    </AssociationSet>
+    <EntitySet Name="Product_Comments" EntityType="EShopCoffe_DBModel.Product_Comments" />
+    <AssociationSet Name="FK_Product_Comments_Product_Comments" Association="EShopCoffe_DBModel.FK_Product_Comments_Product_Comments">
+      <End Role="Product_Comments" EntitySet="Product_Comments" />
+      <End Role="Product_Comments1" EntitySet="Product_Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Comments_Product_EShop" Association="EShopCoffe_DBModel.FK_Product_Comments_Product_EShop">
+      <End Role="Product_EShop" EntitySet="Product_EShop" />
+      <End Role="Product_Comments" EntitySet="Product_Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Comments_Users" Association="EShopCoffe_DBModel.FK_Product_Comments_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Product_Comments" EntitySet="Product_Comments" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Product_Property">
+    <Key>
+      <PropertyRef Name="Property_Id" />
+    </Key>
+    <Property Name="Property_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Property_Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product_Proerty_Select" Relationship="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_Property" FromRole="Product_Property" ToRole="Product_Proerty_Select" />
+  </EntityType>
+  <EntityType Name="Product_Proerty_Select">
+    <Key>
+      <PropertyRef Name="Product_Proerty_Id" />
+    </Key>
+    <Property Name="Product_Proerty_Id" Type="Int64" Nullable="false" />
+    <Property Name="Product_Id" Type="Int64" Nullable="false" />
+    <Property Name="Property_Id" Type="Int64" Nullable="false" />
+    <Property Name="Value" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product_Property" Relationship="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_Property" FromRole="Product_Proerty_Select" ToRole="Product_Property" />
+    <NavigationProperty Name="Product_EShop" Relationship="EShopCoffe_DBModel.FK_Product_Proerty_Select_Product_EShop" FromRole="Product_Proerty_Select" ToRole="Product_EShop" />
+  </EntityType>
+  <Association Name="FK_Product_Proerty_Select_Product_Property">
+    <End Type="EShopCoffe_DBModel.Product_Property" Role="Product_Property" Multiplicity="1" />
+    <End Type="EShopCoffe_DBModel.Product_Proerty_Select" Role="Product_Proerty_Select" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Property">
+        <PropertyRef Name="Property_Id" />
+      </Principal>
+      <Dependent Role="Product_Proerty_Select">
+        <PropertyRef Name="Property_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Proerty_Select_Product_EShop">
+    <End Type="EShopCoffe_DBModel.Product_EShop" Role="Product_EShop" Multiplicity="1" />
+    <End Type="EShopCoffe_DBModel.Product_Proerty_Select" Role="Product_Proerty_Select" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_EShop">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Product_Proerty_Select">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Role_Id" />
+    </Key>
+    <Property Name="Role_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role_Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="EShopCoffe_DBModel.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="Int64" Nullable="false" />
+    <Property Name="User_Role_Id" Type="Int64" Nullable="false" />
+    <Property Name="User_Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="User_Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="User_Phone" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="User_Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="User_Active_Code" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="User_IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="User_RegisterDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Roles" Relationship="EShopCoffe_DBModel.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+    <Property Name="User_Image" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User_Details" Relationship="EShopCoffe_DBModel.FK_User_Details_Users" FromRole="Users" ToRole="User_Details" />
+    <NavigationProperty Name="Product_Comments" Relationship="EShopCoffe_DBModel.FK_Product_Comments_Users" FromRole="Users" ToRole="Product_Comments" />
+  </EntityType>
+  <Association Name="FK_Users_Roles">
+    <End Type="EShopCoffe_DBModel.Roles" Role="Roles" Multiplicity="1" />
+    <End Type="EShopCoffe_DBModel.Users" Role="Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Role_Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="User_Role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="User_Details">
+    <Key>
+      <PropertyRef Name="User_Detail_Id" />
+    </Key>
+    <Property Name="User_Detail_Id" Type="Int64" Nullable="false" />
+    <Property Name="User_Id" Type="Int64" Nullable="false" />
+    <Property Name="User_Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="User_State" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="User_City" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="User_Postal_Code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="EShopCoffe_DBModel.FK_User_Details_Users" FromRole="User_Details" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK_User_Details_Users">
+    <End Type="EShopCoffe_DBModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="EShopCoffe_DBModel.User_Details" Role="User_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="User_Details">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Product_Comments">
+    <Key>
+      <PropertyRef Name="Comment_Id" />
+    </Key>
+    <Property Name="Comment_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Id" Type="Int64" Nullable="false" />
+    <Property Name="Parent_Id" Type="Int64" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" Nullable="false" MaxLength="850" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product_Comments1" Relationship="EShopCoffe_DBModel.FK_Product_Comments_Product_Comments" FromRole="Product_Comments" ToRole="Product_Comments1" />
+    <NavigationProperty Name="Product_Comments2" Relationship="EShopCoffe_DBModel.FK_Product_Comments_Product_Comments" FromRole="Product_Comments1" ToRole="Product_Comments" />
+    <NavigationProperty Name="Product_EShop" Relationship="EShopCoffe_DBModel.FK_Product_Comments_Product_EShop" FromRole="Product_Comments" ToRole="Product_EShop" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="CommentDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Users" Relationship="EShopCoffe_DBModel.FK_Product_Comments_Users" FromRole="Product_Comments" ToRole="Users" />
+    <Property Name="UserImage" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Product_Comments_Product_Comments">
+    <End Type="EShopCoffe_DBModel.Product_Comments" Role="Product_Comments" Multiplicity="0..1" />
+    <End Type="EShopCoffe_DBModel.Product_Comments" Role="Product_Comments1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Comments">
+        <PropertyRef Name="Comment_Id" />
+      </Principal>
+      <Dependent Role="Product_Comments1">
+        <PropertyRef Name="Parent_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Comments_Product_EShop">
+    <End Type="EShopCoffe_DBModel.Product_EShop" Role="Product_EShop" Multiplicity="1" />
+    <End Type="EShopCoffe_DBModel.Product_Comments" Role="Product_Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_EShop">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Product_Comments">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Comments_Users">
+    <End Type="EShopCoffe_DBModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="EShopCoffe_DBModel.Product_Comments" Role="Product_Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="Product_Comments">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

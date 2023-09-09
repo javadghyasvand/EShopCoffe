@@ -1,0 +1,34 @@
+﻿@model EShopCoffee.Models.DataLayer.Product_EShop
+<div class="col-lg-4 col-md-6">
+    <div class="product">
+        <div class="flip-container">
+            <div class="flipper">
+                <div class="front">
+                    <a href="detail.html">
+                        <img src="~/Images/ProductImages/@Model.Product_ImageName" alt="" class="img-fluid">
+                    </a>
+                </div>
+                <div class="back">
+                    <a href="detail.html">
+                        <img src="~/Images/ProductImages/@Model.Product_ImageName" alt="" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <a href="detail.html" class="invisible">
+            <img src="~/Images/ProductImages/@Model.Product_ImageName" alt="@Model.Proudct_Title" class="img-fluid">
+        </a>
+        <div class="text mt-2 text-center">
+            <h3 class="text-center">
+                <a href="/ShowProduct/@Model.Product_Id">@Model.Proudct_Title</a>
+            </h3>
+            <div>
+                <label> <span>قیمت :</span>@Model.Product_Price.ToString("#,0") تومان</label>
+            </div>
+            <div class="m-3">
+                <a href="/ShowProduct/@Model.Product_Id" class="btn btn-outline-secondary btn-block">جزئیات محصول</a>
+                <a href="basket.html" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>افزودن به سبد خرید</a>
+            </div>
+        </div>
+    </div>
+</div>

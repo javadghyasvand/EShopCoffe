@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace EShopCoffee.Models
 {
+
     public class Users_MetaData
     {
         [Key]
@@ -34,5 +36,18 @@ namespace EShopCoffee.Models
         public System.DateTime User_RegisterDate { get; set; }
         [Display(Name = "تصویر")]
         public string User_Image { get; set; }
+        [DisplayName("آدرس")]
+        public string User_Address { get; set; }
+        [DisplayName("استان")]
+        public string User_State_Name { get; set; }
+        [DisplayName("شهر")]
+        public string User_City_Name { get; set; }
+        [DisplayName("کد پستی")]
+        [DataType(DataType.PostalCode)]
+        public string User_Postal_Code { get; set; }
+       
+        
+       
+        
     }
 }

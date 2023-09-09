@@ -9,77 +9,74 @@
         @Html.AntiForgeryToken()
         if (User.Identity.IsAuthenticated && queryString == true)
         {
-            <hr />
+            <hr/>
             <div class="alert alert-danger mt-1 text-center">
                 <p>شما مجور ورود به بخش درخواست شده را ندارید</p>
             </div>
         }
         if (Request.QueryString["recovery"] != null)
         {
-            <hr />
+            <hr/>
             <div class="alert alert-success mt-1 text-center">
                 <p>کلمه عبور شما با موفقیت تغییر کرد.</p>
             </div>
         }
-        if (!User.Identity.IsAuthenticated)
-        {
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="row" style="text-align: right;">
-                <div class="col-lg-12">
-                    <div class="box">
-                        <h3 class="text-center color_defult">ورود به حساب کاربری</h3>
-                        <hr />
-                        <div class="col-lg-12 text-center">
-                            <div dir="rtl">
-                                <img class="img-thumbnail rounded-circle bg-light" width="150px" max-width="150px" src="~/Content/SiteFile/img/LogoEN.png" alt="قهوه دوپیو">
-                                <p class="mt-2 font-weight-bolder">سلام !خوش آمدید. لطفا اطلاعات خود را وارد کنیدسلام ! لطفا شماره موبایل یا ایمیل خود را وارد کنید.</p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row" style="text-align: right;">
+            <div class="col-lg-12">
+                <div class="box">
+                    <h3 class="text-center color_defult">ورود به حساب کاربری</h3>
+                    <hr/>
+                    <div class="col-lg-12 text-center">
+                        <div dir="rtl">
+                            <img class="img-thumbnail rounded-circle bg-light" width="150px" max-width="150px" src="~/Content/SiteFile/img/LogoEN.png" alt="قهوه دوپیو">
+                            <p class="mt-2 font-weight-bolder">سلام !خوش آمدید. لطفا اطلاعات خود را وارد کنید.</p>
+                        </div>
+                        <div class="m-2 mt-3">
+                            <a href="/Register" class="m-4 mb-5">ایجاد حساب کاربری</a>
+                        </div>
+                        <div class="m-2 mt-3">
+                            <a href="/ForgotPassword" class="m-4 mb-5">رمز عبور را فراموش کرده ام؟</a>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <form action="customer-orders.html" method="post">
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                @Html.LabelFor(model => model.User_Password, htmlAttributes: new { @class = "text-dark label" })
+                                @Html.EditorFor(model => model.User_Password, new { htmlAttributes = new { @class = "form-control" } })
+                                <p class="text-center">
+                                    @Html.ValidationMessageFor(model => model.User_Password, "", new { @class = "text-danger" })
+                                </p>
                             </div>
-                            <div class="m-2 mt-3">
-                                <a href="/Register" class="m-4 mb-5">ایجاد حساب کاربری</a>
-                            </div>
-                            <div class="m-2 mt-3">
-                                <a href="/ForgotPassword" class="m-4 mb-5">رمز عبور را فراموش کرده ام؟</a>
+                            <div class="form-group col-lg-6">
+                                @Html.LabelFor(model => model.User_Email, htmlAttributes: new { @class = "text-dark label" })
+                                @Html.EditorFor(model => model.User_Email, new { htmlAttributes = new { @class = "form-control" } })
+                                <p class="text-center">
+                                    @Html.ValidationMessageFor(model => model.User_Email, "", new { @class = "text-danger" })
+                                </p>
                             </div>
                         </div>
+                        <div class="text-center">
 
-                        <hr>
-                        <form action="customer-orders.html" method="post">
-                            <div class="row">
-                                <div class="form-group col-lg-6">
-                                    @Html.LabelFor(model => model.User_Password, htmlAttributes: new { @class = "text-dark label" })
-                                    @Html.EditorFor(model => model.User_Password, new { htmlAttributes = new { @class = "form-control" } })
-                                    <p class="text-center">
-                                        @Html.ValidationMessageFor(model => model.User_Password, "", new { @class = "text-danger" })
-                                    </p>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    @Html.LabelFor(model => model.User_Email, htmlAttributes: new { @class = "text-dark label" })
-                                    @Html.EditorFor(model => model.User_Email, new { htmlAttributes = new { @class = "form-control" } })
-                                    <p class="text-center">
-                                        @Html.ValidationMessageFor(model => model.User_Email, "", new { @class = "text-danger" })
-                                    </p>
+                            <div class="form-group mt-3">
+                                @Html.CheckBoxFor(model => model.Remember, new { @class = "d-inline" })
+                                <label>
+                                    <span>
+                                        مرا به خاطرت نگه دار
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i>ورود</button>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-lg-6">
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i>ورود</button>
-                                    </div>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    @Html.CheckBoxFor(model => model.Remember, new { @class = "d-inline" })
-                                    <label>
-                                        <span>
-                                            مرا به خاطرت نگه دار
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        }
-
+        </div>
     }
 </div>
