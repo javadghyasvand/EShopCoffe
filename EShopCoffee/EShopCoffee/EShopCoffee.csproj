@@ -141,6 +141,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManegeEmailsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -158,6 +159,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EShop.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataLayer\PersntOff.cs">
+      <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataLayer\Product_Comments.cs">
       <DependentUpon>EShop.tt</DependentUpon>
@@ -192,9 +196,13 @@
     <Compile Include="Models\DataLayer\tblShahrestan.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataLayer\TotalSell.cs">
+      <DependentUpon>EShop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataLayer\Users.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MetaData\PersntOff_MetaData.cs" />
     <Compile Include="Models\MetaData\Product_Comments_MetaData.cs" />
     <Compile Include="Models\MetaData\Product_EShop_MetaData.cs" />
     <Compile Include="Models\MetaData\Product_Gallery_MetaData.cs" />
@@ -206,6 +214,7 @@
     <Compile Include="Models\MetaData\Roles_MetaData.cs" />
     <Compile Include="Models\MetaData\tblOstan_MetaData.cs" />
     <Compile Include="Models\MetaData\tblShahrestan_MetaData.cs" />
+    <Compile Include="Models\MetaData\TotalSell_MetaData.cs" />
     <Compile Include="Models\MetaData\Users_MetaData.cs" />
     <Compile Include="Models\ViewModels\ChangPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\ForgotPasswordViewModel.cs" />
@@ -885,6 +894,17 @@
     <Content Include="Images\Slider\b6eb2fe3-be25-4c25-a0ac-76d3aecd9a46.jpg" />
     <Content Include="Images\UserImge\no-photo.jpg" />
     <Content Include="Images\UserImge\Thumbnail\no-photo.jpg" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\DateTimePicker-Shamsi.html" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\DateTimePicker-Shamsi.jpg" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\Default\sprite.png" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fa-IR.js" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\BKoodakBold.svg" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\JalaliDate.js" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\jquery-1.9.1.min.js" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\jquery.min.js" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\kendo.common.min.css" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\kendo.default.min.css" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\kendo.web.js" />
     <Content Include="Models\DataLayer\EShop.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EShop.edmx</DependentUpon>
@@ -1344,6 +1364,17 @@
     <Content Include="Models\DataLayer\EShop.edmx.diagram">
       <DependentUpon>EShop.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Product_EShop\DiscountProduct.cshtml" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\BKoodakBold.afm" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\BKoodakBold.eot" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\BKoodakBold.ttf" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\BKoodakBold.woff" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\Wyekan.eot" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\Wyekan.ttf" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\Wyekan.woff" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\WyekanBold.eot" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\WyekanBold.ttf" />
+    <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\WyekanBold.woff" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery.modal.min.js" />
@@ -1397,6 +1428,9 @@
     <Content Include="Views\Home\EditProfile.cshtml" />
     <Content Include="Views\Product\ShowGroups.cshtml" />
     <Content Include="Views\Shared\_ProductArchive.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Product\BestSellerProduct.cshtml" />
+    <Content Include="Views\Product\DiscountProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using EShopCoffee.Models.DataLayer;
 using InsertShowImage;
 using KooyWebApp_MVC.Classes;
+using MyShop.Utilities;
 
 namespace EShopCoffee.Areas.Admin.Controllers
 {
@@ -260,7 +261,7 @@ namespace EShopCoffee.Areas.Admin.Controllers
             ViewBag.Gallery = _db.Product_Galllery.Where(g => g.Product_Id == id).ToList();
             return View(new Product_Galllery()
             {
-                Product_Id = id
+                Product_Id = id,
             });
         }
         [HttpPost]
@@ -321,6 +322,66 @@ namespace EShopCoffee.Areas.Admin.Controllers
             if (feature != null) _db.Product_Proerty_Select.Remove(feature);
             _db.SaveChanges();
 
+        }
+        #endregion
+
+        #region Discount
+
+        public ActionResult DiscountProduct(long id)
+        {
+            ViewBag.ProductTitle = _db.Product_EShop.Single(p => p.Product_Id == id).Proudct_Title;
+            if (_db.PersntOff.Any(g => g.Product_Id == id))
+            {
+                var discount = _db.PersntOff.Single(p => p.Product_Id == id);
+                ViewBag.Header = "ویرایش";
+                return View(new PersntOff()
+                {
+                    Product_Id =discount.Product_Id,
+                    Start_Date =discount.Start_Date ,
+                    End_Date = discount.End_Date,
+                    Persent_Off = discount.Persent_Off,
+                    Off_Id =discount.Off_Id,
+                    IsExpire = discount.IsExpire
+                });
+            }
+            ViewBag.Header = "افزودن";
+            return View(new PersntOff()
+            {
+                Product_Id = _db.Product_EShop.Single(p => p.Product_Id == id).Product_Id,
+                End_Date = DateTime.Today.Date,
+                Start_Date = DateTime.Today.Date,
+
+            });
+        }
+        [HttpPost]
+        public ActionResult DiscountProduct(PersntOff persntoff)
+        {
+            ViewBag.ProductTitle = _db.Product_EShop.Single(p => p.Product_Id == persntoff.Product_Id).Proudct_Title;
+            if (ModelState.IsValid)
+            {
+                if (persntoff.Persent_Off != 0)
+                {
+                    if (!_db.PersntOff.Any(p => p.Product_Id == persntoff.Product_Id))
+                    {
+                        ViewBag.Header = "افزودن";
+                        _db.PersntOff.Add(persntoff);
+                    }
+                    else
+                    {
+                        ViewBag.Header = "ویرایش";
+                        _db.Entry(persntoff).State = EntityState.Modified;
+                    }
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    ModelState.AddModelError("Persent_Off","درصد تخفیف نمی تواند 0 باشد");
+              
+                }
+                
+                
+            }
+            return View (persntoff);
         }
         #endregion
     }

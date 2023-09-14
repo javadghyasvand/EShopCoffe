@@ -260,7 +260,7 @@ h1 { font-weight: 700; }
     color: #4fbfa8;
     font-weight: 100;
     text-align: center;
-    border-bottom: 2px solid #4fbfa8;
+    border-bottom: 5px solid #4fbfa8;
     padding-bottom: 15px;
 }
 
@@ -501,13 +501,13 @@ h1 { font-weight: 700; }
     height: 0;
 }
 
-.ribbon .theribbon:after {
-    left: 0px;
-    top: 100%;
-    border-width: 5px 10px;
-    border-style: solid;
-    border-color: #2d7b6b #2d7b6b transparent transparent;
-}
+    .ribbon .theribbon:after {
+        left: 0px;
+        top: 100%;
+        border-width: 5px 10px;
+        border-style: solid;
+        border-color: #850606 #850606 transparent transparent;
+    }
 
 .ribbon.sale { top: 0; }
 
@@ -2831,7 +2831,7 @@ input {
 
 p {
     --fz: 14px;
-    --lh: 1.5;
+    --lh: 1.5 !important;
     --max-lines: 5;
     font-size: var(--fz);
     line-height: var(--lh);
@@ -3178,3 +3178,114 @@ input[type=range] {
         background: #a1d0ff;
         cursor: pointer;
     }
+
+
+    /* productcard */
+.p-card-title {
+    --fz: 14px;
+    --lh: 1.5;
+    --max-lines: 5;
+    font-size: var(--fz);
+    line-height: var(--lh);
+    -webkit-line-clamp: var(--max-lines);
+    max-height: calc(var(--fz) * var(--lh) * var(--max-lines));
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    transition: max-height 0.5s ease;
+}
+/* Swich */
+.switch-box {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 1em;
+    margin-top: 1em;
+}
+
+.switch-box input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    opacity: 0;
+    margin: 0;
+}
+
+.switch-box ul {
+    width: auto;
+    min-width: 2.3em;
+    height: 1.1em;
+    position: relative;
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 1.5em;
+    white-space: nowrap;
+    overflow: hidden;
+    background: #bcbcbc;
+    transition: all 250ms;
+}
+
+.switch-box ul li {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 1.1em;
+    text-align: center;
+    margin: 0;
+    color: #fff;
+    transition: all 250ms;
+}
+
+    .switch-box ul li.on {
+        position: relative;
+        background: #4FBFA8;
+        width: 0%;
+        padding: 0;
+        color: transparent;
+    }
+
+.switch-box ul li.on:after {
+    content: " ";
+    position: absolute;
+    z-index: 15;
+    pointer-events: none;
+    padding: 0;
+    margin: 0 -1.5em;
+    width: 0.8em;
+    height: 0.8em;
+    right: 0.45em;
+    top: 0.15em;
+    background: white;
+    border-radius: 50%;
+}
+
+.switch-box ul li.off {
+    margin-left: -0.2em;
+    width: 100%;
+    padding: 0 0.1em 0 1em;
+    color: #fff;
+}
+
+.switch-box input:checked + ul li.on {
+    width: 100%;
+    padding: 0 1em 0 0.1em;
+    color: #fff;
+}
+
+.switch-box input:checked + ul li.on:after {
+    right: 1.7em;
+}
+
+.switch-box input:checked + ul li.off {
+    width: 0%;
+    padding: 0;
+    color: transparent;
+    margin-left: 0;
+}

@@ -37,5 +37,7 @@ namespace EShopCoffee.Models.DataLayer
         public virtual DbSet<tblOstan> tblOstan { get; set; }
         public virtual DbSet<tblShahrestan> tblShahrestan { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<TotalSell> TotalSell { get; set; }
+        public virtual DbSet<PersntOff> PersntOff { get; set; }
     }
 }

@@ -1,0 +1,38 @@
+﻿
+@model IEnumerable<EShopCoffee.Models.DataLayer.Product_EShop>
+@if (Model != null)
+{
+    <div id="hot" >
+        <div class="box py-4 pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="mb-4 text-danger" style="border-bottom: solid #DC3545 !important">پیشنهاد ویژه</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="product-slider owl-carousel owl-theme owl-loaded owl-drag">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1776px;">
+                            @foreach (var item in Model)
+                            {
+                                @Html.Partial("_Product", item)
+                            }
+                        </div>
+                    </div>
+                    <div class="owl-nav disabled">
+                        <button type="button" role="presentation" class="owl-prev">
+                            <span aria-label="Previous">‹</span>
+                        </button>
+                        <button type="button" role="presentation" class="owl-next">
+                            <span aria-label="Next">›</span>
+                        </button>
+                    </div>
+                    <div class="owl-thumbs"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

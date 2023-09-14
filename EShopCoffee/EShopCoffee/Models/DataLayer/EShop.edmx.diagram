@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Proerty_Select" Width="1.5" PointX="3.375" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Property" Width="1.5" PointX="9.25" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Select_Groups" Width="1.5" PointX="13.25" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Tags" Width="1.5" PointX="0.875" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EShopCoffe_DBModel.Product_Tags" Width="1.5" PointX="1" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="EShopCoffe_DBModel.Roles" Width="1.5" PointX="7.25" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="EShopCoffe_DBModel.tblOstan" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EShopCoffe_DBModel.tblShahrestan" Width="1.5" PointX="7.625" PointY="9.125" IsExpanded="true" />
@@ -31,6 +31,10 @@
         <AssociationConnector Association="EShopCoffe_DBModel.FK_tblShahrestan_tblOstan" ManuallyRouted="false" />
         <AssociationConnector Association="EShopCoffe_DBModel.FK_Users_tblOstan" ManuallyRouted="false" />
         <AssociationConnector Association="EShopCoffe_DBModel.FK_Users_tblShahrestan" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EShopCoffe_DBModel.TotalSell" Width="1.5" PointX="3.125" PointY="3.25" />
+        <AssociationConnector Association="EShopCoffe_DBModel.FK_TotalSell_Product_EShop" />
+        <EntityTypeShape EntityType="EShopCoffe_DBModel.PersntOff" Width="1.5" PointX="2.875" PointY="10.5" />
+        <AssociationConnector Association="EShopCoffe_DBModel.FK_PersntOff_Product_EShop" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

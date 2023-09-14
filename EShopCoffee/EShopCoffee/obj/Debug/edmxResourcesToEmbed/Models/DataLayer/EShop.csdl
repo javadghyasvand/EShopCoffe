@@ -36,6 +36,8 @@
     <NavigationProperty Name="Product_Proerty_Select" Relationship="Self.FK_Product_Proerty_Select_Product_EShop" FromRole="Product_EShop" ToRole="Product_Proerty_Select" />
     <NavigationProperty Name="Product_Select_Groups" Relationship="Self.FK_Product_Select_Groups_Product_EShop" FromRole="Product_EShop" ToRole="Product_Select_Groups" />
     <NavigationProperty Name="Product_Tags" Relationship="Self.FK_Product_Tags_Product_EShop" FromRole="Product_EShop" ToRole="Product_Tags" />
+    <NavigationProperty Name="TotalSell" Relationship="EShopCoffe_DBModel.FK_TotalSell_Product_EShop" FromRole="Product_EShop" ToRole="TotalSell" />
+    <NavigationProperty Name="PersntOff" Relationship="EShopCoffe_DBModel.FK_PersntOff_Product_EShop" FromRole="Product_EShop" ToRole="PersntOff" />
   </EntityType>
   <EntityType Name="Product_Galllery">
     <Key>
@@ -386,5 +388,60 @@
       <End Role="tblShahrestan" EntitySet="tblShahrestan" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
+    <EntitySet Name="TotalSell" EntityType="EShopCoffe_DBModel.TotalSell" />
+    <AssociationSet Name="FK_TotalSell_Product_EShop" Association="EShopCoffe_DBModel.FK_TotalSell_Product_EShop">
+      <End Role="Product_EShop" EntitySet="Product_EShop" />
+      <End Role="TotalSell" EntitySet="TotalSell" />
+    </AssociationSet>
+    <EntitySet Name="PersntOff" EntityType="EShopCoffe_DBModel.PersntOff" />
+    <AssociationSet Name="FK_PersntOff_Product_EShop" Association="EShopCoffe_DBModel.FK_PersntOff_Product_EShop">
+      <End Role="Product_EShop" EntitySet="Product_EShop" />
+      <End Role="PersntOff" EntitySet="PersntOff" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="TotalSell">
+    <Key>
+      <PropertyRef Name="Total_Id" />
+    </Key>
+    <Property Name="Total_Id" Type="Int64" Nullable="false" />
+    <Property Name="Product_Id" Type="Int64" Nullable="false" />
+    <Property Name="Totals" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Product_EShop" Relationship="EShopCoffe_DBModel.FK_TotalSell_Product_EShop" FromRole="TotalSell" ToRole="Product_EShop" />
+  </EntityType>
+  <Association Name="FK_TotalSell_Product_EShop">
+    <End Type="EShopCoffe_DBModel.Product_EShop" Role="Product_EShop" Multiplicity="1" />
+    <End Type="EShopCoffe_DBModel.TotalSell" Role="TotalSell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_EShop">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="TotalSell">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PersntOff">
+    <Key>
+      <PropertyRef Name="Off_Id" />
+    </Key>
+    <Property Name="Off_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Id" Type="Int64" Nullable="false" />
+    <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Persent_Off" Type="Int32" Nullable="false" />
+    <Property Name="IsExpire" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Product_EShop" Relationship="EShopCoffe_DBModel.FK_PersntOff_Product_EShop" FromRole="PersntOff" ToRole="Product_EShop" />
+  </EntityType>
+  <Association Name="FK_PersntOff_Product_EShop">
+    <End Type="EShopCoffe_DBModel.Product_EShop" Role="Product_EShop" Multiplicity="1" />
+    <End Type="EShopCoffe_DBModel.PersntOff" Role="PersntOff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_EShop">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="PersntOff">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

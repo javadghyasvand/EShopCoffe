@@ -12,7 +12,7 @@
                 <img style="width: 100px;" src="~/Content/SiteFile/img/logo.png" alt="Doppio logo"class="d-inline-block d-md-none">
                 <span class="sr-only">Doppio - go to homepage</span>
             </a>
-            <div class="navbar-buttons">
+            <div>
                 <button type="button" data-toggle="collapse" data-target="#navigation" class="btn btn-outline-secondary navbar-toggler">
                     <span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i>
                 </button>
@@ -27,12 +27,12 @@
             <div id="navigation" class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">صفحه اصلی</a>
+                        <a href="/" class="nav-link">صفحه اصلی</a>
                     </li>
                     <li class="nav-item dropdown menu-large">
                         <a href="#" data-toggle="dropdown" data-hover="dropdown"
                            data-delay="200" class="dropdown-toggle nav-link">
-                            محصولات<b class="caret"></b>
+                            فروشگاه<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu megamenu">
                             <li>
@@ -42,7 +42,7 @@
                                     {
                                     <div class="col-md-6 col-lg-3 text-center">
                                         <h5>
-                                            <a class=" text-decoration-none" href="#">@groups.Group_Title</a>
+                                            <a class="text-decoration-none" href="/ArchiveProduct?pageId=1&sortBy=LastProduct&title=&minPrice=0&maxPrice=0&minPrice=0&maxPrice=0&selectGroup=@groups.Group_Id">@groups.Group_Title</a>
                                         </h5>
 
                                         @if (product_Groups.Any(g => g.Parent_Id == groups.Group_Id))
@@ -51,7 +51,7 @@
                                                 @foreach (var subgroup in product_Groups.Where(g => g.Parent_Id == groups.Group_Id))
                                                 {
                                                     <li class="nav-item">
-                                                        <a href="#" class="nav-link">@subgroup.Group_Title</a>
+                                                        <a href="/ArchiveProduct?pageId=1&sortBy=LastProduct&title=&minPrice=0&maxPrice=0&minPrice=0&maxPrice=0&selectGroup=@subgroup.Group_Id" class="nav-link">@subgroup.Group_Title</a>
                                                     </li>
                                                 }
                                             </ul>
@@ -164,7 +164,10 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link ">تماس با ما</a>
+                        <a href="/Home/Contact" class="nav-link ">تماس با ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Home/About" class="nav-link ">درباره ما</a>
                     </li>
                     @Html.Partial("LoggedInUser")
                 </ul>
@@ -187,11 +190,11 @@
     </nav>
     <div id="search" class="collapse">
         <div class="container">
-            <form role="search" class="ml-auto">
+            <form action="/Search" method="get" class="ml-auto">
                 <div class="input-group">
-                    <input type="text" placeholder="جستجو" class="form-control">
+                    <input type="text" placeholder="جستجو" class="form-control" name="q">
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" >
                             <i class="fa fa-search"></i>
                         </button>
                     </div>

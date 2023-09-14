@@ -13,34 +13,50 @@
         <div class="row">
             <div class="col-lg-3">
                 <form action="/ArchiveProduct" id="filterform">
+                    
                     <div class="card sidebar-menu mb-4">
                         <div class="card-header text-center">
                             <h3 class="h4 card-title">جستجو پیشرفته</h3>
                         </div>
-                       
+                        <div class="m-4">
+                            <button class="btn btn-block btn-primary" type="submit">اعمال فیلتر</button>
+                            <a href="/ArchiveProduct?pageId=1&sortBy=LastProduct&title=&minPrice=0&maxPrice=0&minPrice=0&maxPrice=0" class="btn btn-block btn-danger">حذف فیلتر</a>
+                        </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <input type="hidden" value="@ViewBag.pageId" id="pageId" name="pageId"/>
                                 <div class="products-sort-by text-center mt-2 mt-lg-0">
-                                    <span class="sort ml-2">مرتب‌سازی بر اساس</span>
+                                    <label class="textalign w-100 m-1">
+                                        مرتب‌سازی بر اساس
+                                    </label>
                                     <select onchange="Selectvalue()" name="sortBy" class="form-control sort">
-                                        <option value="LastProduct" @((ViewBag.sortBy=="LastProduct")?"selected":"") > آخرین محصولات</option>
-                                        <option value="LowPrice" @((ViewBag.sortBy=="LowPrice")?"selected":"")>ارزانترین</option>
-                                        <option value="HightPrice"  @((ViewBag.sortBy=="HightPrice")?"selected":"")  LowPrice>گرانترین</option>
+                                        <option value="LastProduct" @((ViewBag.sortBy == "LastProduct") ? "selected" : "")> آخرین محصولات</option>
+                                        <option value="LowPrice" @((ViewBag.sortBy == "LowPrice") ? "selected" : "")>ارزانترین</option>
+                                        <option value="HightPrice" @((ViewBag.sortBy == "HightPrice") ? "selected" : "")>گرانترین</option>
+                                        <option value="Offer" @((ViewBag.sortBy == "Offer") ? "selected" : "")>بیشترین تخفیف</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="textalign w-100">
+                                    <label class="textalign w-100 m-1">
                                         عنوان
                                         <input type="text" name="title" value="@ViewBag.productTitle" class="form-control mt-1"/>
                                     </label>
                                 </div>
+                                <p class="textalign m-1">فقط کالاهای موجود</p>
+                                <div class="switch-box ">
+                                    <input type="checkbox" onchange="onchangeProductCount()" id="productCount" name="productCount" @((ViewBag.productCount != "") ? "checked" : "")  class="form-control mt-1"/>
+                                    <ul>
+                                        <li class="on"></li>
+                                        <li class="off"></li>
+                                    </ul>
+                                </div>
+
                                 <div>
                                     <div class="range-slider">
                                         <input name="minPrice" min="0" max="50000000" step="10000" value="@ViewBag.minPrice" type="range" class="mt-3 font-weight-light"/>
                                         <input name="maxPrice" min="0" max="50000000" step="10000" value="@ViewBag.maxPrice" type="range" class="mt-3 font-weight-light"/>
                                         <span class="mb-4 d-block w-100">
-                                            <label class="textalign w-100">
+                                            <label class="textalign w-100 m-1">
                                                 بازه قیمت به تومان
                                                 <input type="number" name="minPrice" value="@ViewBag.minPrice" min="0" max="50000000" class="w-100"/>
                                                 <input type="number" name="maxPrice" value="@ViewBag.maxPrice" min="0" max="50000000" class="w-100"/>
@@ -50,7 +66,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-header">
+                        <div class="card-header m-1">
                             <h3 class="h4 card-title text-center">دسته بندی</h3>
                         </div>
                         <div class="card-body">
@@ -82,11 +98,6 @@
                             </ul>
                         </div>
                         <hr class="hr-articl"/>
-                        <div class="m-2">
-                            <button class="btn btn-block btn-primary" type="submit">اعمال فیلتر</button>
-                            <button onclick="ClearFilter()" class="btn btn-block btn-danger">حذف فیلتر</button>
-                        </div>
-
                     </div>
                 </form>
                 <div class="banner">
@@ -198,73 +209,3 @@
         }
     </script>
 }
-
-@* <div class="card sidebar-menu mb-4"> *@
-@*     <div class="card-header"> *@
-@*         <h3 class="h4 card-title">Brands <a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3> *@
-@*     </div> *@
-@*     <div class="card-body"> *@
-@*         <form> *@
-@*             <div class="form-group"> *@
-@*                 <div class="checkbox"> *@
-@*                     <label> *@
-@*                         <input type="checkbox"> Armani  (10) *@
-@*                     </label> *@
-@*                 </div> *@
-@*                 <div class="checkbox"> *@
-@*                     <label> *@
-@*                         <input type="checkbox"> Versace  (12) *@
-@*                     </label> *@
-@*                 </div> *@
-@*                 <div class="checkbox"> *@
-@*                     <label> *@
-@*                         <input type="checkbox"> Carlo Bruni  (15) *@
-@*                     </label> *@
-@*                 </div> *@
-@*                 <div class="checkbox"> *@
-@*                     <label> *@
-@*                         <input type="checkbox"> Jack Honey  (14) *@
-@*                     </label> *@
-@*                 </div> *@
-@*             </div> *@
-@*             <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button> *@
-@*         </form> *@
-@*     </div> *@
-@* </div> *@
-@* <div class="card sidebar-menu mb-4"> *@
-@*     <div class="card-header"> *@
-@*         <h3 class="h4 card-title">Colours <a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3> *@
-@*     </div> *@
-@*     <div class="card-body"> *@
-@*         <form> *@
-@*             <div class="form-group"> *@
-@*                 <div class="checkbox"> *@
-@*                     <label> *@
-@*                         <input type="checkbox"><span class="colour white"></span> White (14) *@
-@*                     </label> *@
-@*                 </div> *@
-@*                 <div class="checkbox"> *@
-@*                     <label> *@
-@*                         <input type="checkbox"><span class="colour blue"></span> Blue (10) *@
-@*                     </label> *@
-@*                 </div> *@
-@*                 <div class="checkbox"> *@
-@*                     <label> *@
-@*                         <input type="checkbox"><span class="colour green"></span>  Green (20) *@
-@*                     </label> *@
-@*                 </div> *@
-@*                 <div class="checkbox"> *@
-@*                     <label> *@
-@*                         <input type="checkbox"><span class="colour yellow"></span>  Yellow (13) *@
-@*                     </label> *@
-@*                 </div> *@
-@*                 <div class="checkbox"> *@
-@*                     <label> *@
-@*                         <input type="checkbox"><span class="colour red"></span>  Red (10) *@
-@*                     </label> *@
-@*                 </div> *@
-@*             </div> *@
-@*             <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button> *@
-@*         </form> *@
-@*     </div> *@
-@* </div> *@

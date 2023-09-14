@@ -18,7 +18,6 @@ namespace EShopCoffee.Areas.Admin.Controllers
     public class Product_GroupsController : Controller
     {
         private readonly EShopCoffe_DBEntities _db = new EShopCoffe_DBEntities ();
-
         // GET: Admin/Product_Groups
         public ActionResult Index()
         {

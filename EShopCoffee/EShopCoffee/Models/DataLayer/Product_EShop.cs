@@ -24,6 +24,8 @@ namespace EShopCoffee.Models.DataLayer
             this.Product_Proerty_Select = new HashSet<Product_Proerty_Select>();
             this.Product_Select_Groups = new HashSet<Product_Select_Groups>();
             this.Product_Tags = new HashSet<Product_Tags>();
+            this.TotalSell = new HashSet<TotalSell>();
+            this.PersntOff = new HashSet<PersntOff>();
         }
     
         public long Product_Id { get; set; }
@@ -46,5 +48,9 @@ namespace EShopCoffee.Models.DataLayer
         public virtual ICollection<Product_Select_Groups> Product_Select_Groups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_Tags> Product_Tags { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TotalSell> TotalSell { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PersntOff> PersntOff { get; set; }
     }
 }

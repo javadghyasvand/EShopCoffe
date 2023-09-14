@@ -1,45 +1,86 @@
-﻿@model EShopCoffee.Models.DataLayer.Product_EShop
-
-<div class="owl-item active" style="width:350px;">
+﻿@using EShopCoffee.Models.DataLayer
+@using MyShop.Utilities
+@model EShopCoffee.Models.DataLayer.Product_EShop
+@{
+    var dbEntities = new EShopCoffe_DBEntities();
+    DateTime dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+    var discount = new PersntOff();
+}
+<div class="owl-item active" style="width: 350px;">
     <div class="item">
         <div class="product">
             <div class="flip-container">
                 <div class="flipper">
                     <div class="front">
-                        <a  href="/ShowProduct/@Model.Product_Id" >
+                        <a href="/ShowProduct/@Model.Product_Id">
                             <img src="~/Images/ProductImages/@Model.Product_ImageName" alt="@Model.Proudct_Title" class="img-fluid">
                         </a>
                     </div>
                     <div class="back">
-                        <a  href="/ShowProduct/@Model.Product_Id">
+                        <a href="/ShowProduct/@Model.Product_Id">
                             <img src="~/Images/ProductImages/@Model.Product_ImageName" alt="@Model.Proudct_Title" class="img-fluid">
                         </a>
                     </div>
                 </div>
             </div>
-            <a  href="/ShowProduct/@Model.Product_Id" class="invisible">
+            <a href="/ShowProduct/@Model.Product_Id" class="invisible">
                 <img src="~/Images/ProductImages/@Model.Product_ImageName" alt="@Model.Proudct_Title" class="img-fluid">
             </a>
-            
             <div class="text mt-3">
-                <h3>
+                <h3 class="text-center w-100">
                     <a href="/ShowProduct/@Model.Product_Id">@Model.Proudct_Title</a>
                 </h3>
-                <hr />
-                @if (@Model.Product_Count > 0)
-                {
-                    <p class="price">
-                        <del></del><label>@Model.Product_Price.ToString("#,0")  تومان</label>
-                    </p>
-                }
-                else
-                {
-                    <p class="price">
-                        <del></del><label class="text-danger">ناموجود</label>
-                    </p>
-                }
+                <hr/>
+                @{
+                    if (@Model.Product_Count > 0)
+                    {
+                        if (dbEntities.PersntOff.Any(o => o.Product_Id == Model.Product_Id))
+                        {
+                            discount = dbEntities.PersntOff.Single(o => o.Product_Id == Model.Product_Id);
 
+                            if (discount.Start_Date <= dt && discount.End_Date >= dt && discount.Persent_Off != 0)
+                            {
+                                <div class="text-center mt-3 mb-3">
+                                    @{
+                                        var price = DateConverter.DiscountCalc(Model.Product_Price, discount.Persent_Off);
+
+                                    }
+                                    <del class="mr-1">@Model.Product_Price.ToString("#,0")</del><span>@price.ToString("#,0") </span>
+                                                                                                <span class="d-block">تومان</span>
+                                </div>
+                            }
+                            else
+                            {
+            <div class="text-center mt-3 mb-3">
+                <span> @Model.Product_Price.ToString("#,0")</span>
+                <span class="d-block">تومان</span>
             </div>
+                            }
+                        }
+                        else
+                        {
+            <div class="text-center mt-3 mb-3">
+                <span> @Model.Product_Price.ToString("#,0")</span>
+                <span class="d-block">تومان</span>
+            </div>
+                        }
+                    }
+                    else
+                    {
+            <div class="text-center mt-3 mb-3">
+                <span class="text-danger">اتمام موجودی</span>
+                <span class="d-block"></span>
+            </div>
+                    }
+                }
+            </div>
+            @if(discount!=null && discount.Start_Date <= dt && discount.End_Date >= dt && discount.Persent_Off != 0)
+            {
+                <div class="ribbon sale text-center">
+                    <div class="theribbon bg-danger">%@discount.Persent_Off</div>
+                    <div class="ribbon-background"></div>
+                </div>
+            }
 
         </div>
     </div>

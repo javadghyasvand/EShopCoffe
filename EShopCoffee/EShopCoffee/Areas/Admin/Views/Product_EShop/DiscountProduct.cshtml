@@ -1,0 +1,129 @@
+﻿@using EShopCoffee.Models.DataLayer
+@using MyShop.Utilities
+@model EShopCoffee.Models.DataLayer.PersntOff
+
+@{
+    PersntOff persntOff = ViewBag.Discount;
+    ViewBag.Title = "Create";
+}
+<div class="container">
+    @using (Html.BeginForm("DiscountProduct", "Product_EShop", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Off_Id)
+        @Html.HiddenFor(model => model.Product_Id)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row" style="text-align: right;">
+            <div class="col-lg-12">
+                <div class="box" dir="rtl">
+                    <h3 class="text-center color_defult">@ViewBag.Header درصد تخفیف</h3>
+                    <hr />
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.Persent_Off, htmlAttributes: new { @class = "text-dark label" })
+                            @Html.EditorFor(model => model.Persent_Off, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Persent_Off, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group col-lg-6 text-center mt-3">
+                            @Html.EditorFor(model => model.IsExpire, new { @class = "checkbox" })
+                            @Html.LabelFor(model => model.IsExpire, new { @class = "form-check-label" })
+                            @Html.ValidationMessageFor(model => model.IsExpire, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.Start_Date, htmlAttributes: new { @class = "text-dark label d-block" })
+                            <input class="text-center" type="text" name="Start_Date" id="Start_Date" value="@Model.Start_Date.ToShortDateString()">
+                            @Html.ValidationMessageFor(model => model.Start_Date, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.End_Date, htmlAttributes: new { @class = "text-dark label d-block" })
+                            <input class="text-center" type="text" name="End_Date" id="End_Date" value="@Model.End_Date.ToShortDateString()">
+                            @Html.ValidationMessageFor(model => model.End_Date, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="text-center col-lg-12 mt-3 mb-3">
+                            <a href="@Url.Action("Index")" class="btn btn-danger w-25">
+                                <i class="fa fa-arrow-left"> </i>بازگشت
+                            </a>
+                            <button type="submit" class="btn btn-primary w-25"><i class="fa fa-sign-in"></i>ثبت</button>
+                        </div>
+                    </div>
+                    @if (Model != null && Model.Persent_Off != 0)
+                    {
+                        <div id="accordionTow" class="mt-4">
+                            <div class="card border-primary mb-3">
+                                <div id="headingTow" class="card-header p-0 border-0">
+                                    <h4 class="mb-0">
+                                        <a href="#" data-toggle="collapse" data-target="#collapseTow" aria-expanded="true" aria-controls="collapseTow" class="textalign btn btn-primary d-block text-left rounded-0">گالری تصاویر</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTow" aria-labelledby="headingTow" data-parent="#accordionTow" class="collapse show">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover text-center">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>نام محصول</th>
+                                                        <th>درصد تخفیف</th>
+                                                        <th>تاریخ شروع</th>
+                                                        <th>تاریخ اتمام</th>
+                                                        <th>وضعیت تخفیف</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            @ViewBag.ProductTitle
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.Persent_Off)
+                                                        </td>
+                                                        <td>
+                                                            @Model.Start_Date.ToShamsi()
+                                                           
+                                                        </td>
+                                                        <td>
+                                                            @Model.End_Date.ToShamsi()
+                                                        </td>
+                                                        <td>
+                                                            @Html.EditorFor(model => model.IsExpire)
+                                                        </td>
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts
+{
+    <script src="~/Content/SiteFile/Kendo UI v2014.1.318 - ShamsiDatePicker/jquery-1.9.1.min.js"></script>
+    <script src="~/Content/SiteFile/Kendo UI v2014.1.318 - ShamsiDatePicker/JalaliDate.js"></script>
+    <script src="~/Content/SiteFile/Kendo UI v2014.1.318 - ShamsiDatePicker/kendo.web.js"></script>
+    <script src="~/Content/SiteFile/Kendo UI v2014.1.318 - ShamsiDatePicker/fa-IR.js"></script>
+    <!--create DatePicker from input HTML element-->
+    <script>
+    $(document).ready(function () {
+        $("#Start_Date").kendoDatePicker();
+        $("#End_Date").kendoDatePicker();
+    });
+    </script>
+}

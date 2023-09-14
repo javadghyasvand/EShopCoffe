@@ -1,0 +1,40 @@
+﻿@using EShopCoffee.Models.DataLayer
+@model IEnumerable<Product_EShop>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="box py-4 pt-5 col-lg-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h2 class="mb-4 text-primary ">جستجو</h2>
+                            <hr/>
+                            @if (!String.IsNullOrEmpty(ViewBag.search))
+                            {
+                                <p class="mb-4"> تعداد @Model.Count() محصول با کلمه @ViewBag.search یافت شد</p>
+                                <hr/>
+                            }
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="row">
+
+
+                        @foreach (var item in Model)
+                        {
+                            @Html.Partial("_ProductArchive", item)
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

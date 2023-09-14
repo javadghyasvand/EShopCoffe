@@ -17,26 +17,22 @@
                     <div class="row">
                         <div class="col-md-6 col-lg-4">
                             <h5>اطلاعات کاربری</h5>
-                            <ul class="list-unstyled mb-3">
+                            <ul class="list-unstyled mb-3 textalign">
                                 <li class="nav-item">
-                                    <p class="nav-link">
-                                        <img class="img-thumbnail rounded-circle" style="width: 150px" src="~/Images/UserImge/@user.User_Image"/>
+                                    <p> 
+                                        <img class="img-thumbnail rounded-circle" style="height:75px!important" src="~/Images/UserImge/@user.User_Image"/>
                                     </p>
 
                                 </li>
-                                <li class="nav-item">
-                                    <p class="nav-link">
+                                <li class="text-center font-weight-bolder mt-2">
+                                    <a href="/Home/UserProfile/@user.User_Id">
                                         <span>نام کاربری:</span> @user.User_Name
-                                    </p>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
-
                         <div class="col-md-6 col-lg-8">
-
-
                             <ul class="list-unstyled mb-3 mr-1">
-
                                 @if (user.User_Role_Id == 2)
                                 {
                                     <li class="nav-item">

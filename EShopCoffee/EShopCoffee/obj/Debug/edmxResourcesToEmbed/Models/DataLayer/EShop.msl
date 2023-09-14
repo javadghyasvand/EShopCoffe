@@ -134,5 +134,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TotalSell">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.TotalSell">
+        <MappingFragment StoreEntitySet="TotalSell">
+          <ScalarProperty Name="Totals" ColumnName="Totals" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="Total_Id" ColumnName="Total_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersntOff">
+      <EntityTypeMapping TypeName="EShopCoffe_DBModel.PersntOff">
+        <MappingFragment StoreEntitySet="PersntOff">
+          <ScalarProperty Name="IsExpire" ColumnName="IsExpire" />
+          <ScalarProperty Name="Persent_Off" ColumnName="Persent_Off" />
+          <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+          <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="Off_Id" ColumnName="Off_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
