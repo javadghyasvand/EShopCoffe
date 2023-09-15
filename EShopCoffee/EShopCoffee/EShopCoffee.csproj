@@ -1459,6 +1459,7 @@
     <Content Include="Views\ShopItems\ShowCart.cshtml" />
     <Content Include="Views\ShopItems\Index.cshtml" />
     <Content Include="Views\ShopItems\Order.cshtml" />
+    <Content Include="Views\Home\Advantages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

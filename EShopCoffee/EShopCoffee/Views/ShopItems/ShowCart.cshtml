@@ -7,10 +7,10 @@
         <div class="table-responsive">
             <table class="table">
                 <thead>
+
                 <tr>
                     <th class="text-center" colspan="2">محصول</th>
                     <th>تعداد</th>
-                    <th></th>
                 </tr>
                 </thead>
 
@@ -22,20 +22,16 @@
                             <img style="width: 50px;" src="~/Images/ProductImages/Thumbnail/@item.Product_Image" alt="@item.Product_Title">
                         </td>
                         <td>
-                            <a href="#">@item.Product_Title</a>
+                            <a href="/ShowProduct/@item.Product_Id">@item.Product_Title</a>
                         </td>
                         <td>
                             @item.Count
-                        </td>
-                        <td>
-                            <a href="#">
-                                <i class="fa fa-trash-o"></i>
-                            </a>
                         </td>
                     </tr>
                 }
                 </tbody>
             </table>
+
         </div>
     </li>
 }
@@ -47,3 +43,4 @@ else
         سبد خرید خالی است
     </div>
 }
+

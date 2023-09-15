@@ -20,7 +20,10 @@ namespace EShopCoffee.Controllers
         {
             return PartialView();
         }
-
+        public ActionResult Advantages()
+        {
+            return PartialView();
+        }
         public ActionResult Footer()
         {
             return PartialView();

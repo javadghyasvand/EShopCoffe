@@ -27,6 +27,7 @@
     <div id="content">
         <div class="container">
             @RenderSection("Slider", false)
+            @RenderSection("Advantages", false)
         </div>
 
         @RenderBody()
@@ -123,9 +124,11 @@
          function UpdateShopCart() { 
            $("#ShowCart").load("/ShopItems/ShowCart");
     }
-    setInterval(function () {
-        UpdateShopCart();
-        countShopCart();
-    }, 2000);
+    
 
     </script>
+
+@* setInterval(function () { *@
+@* UpdateShopCart(); *@
+@* countShopCart(); *@
+@* }, 2000); *@
