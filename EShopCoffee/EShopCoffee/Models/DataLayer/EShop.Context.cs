@@ -39,5 +39,8 @@ namespace EShopCoffee.Models.DataLayer
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<TotalSell> TotalSell { get; set; }
         public virtual DbSet<PersntOff> PersntOff { get; set; }
+        public virtual DbSet<ShopCard> ShopCard { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
     }
 }

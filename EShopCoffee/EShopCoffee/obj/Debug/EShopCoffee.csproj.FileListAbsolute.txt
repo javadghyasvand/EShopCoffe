@@ -247,3 +247,9 @@ C:\Users\JavadGhyasvand\source\repos\EShopCoffe\EShopCoffee\EShopCoffee\obj\Debu
 C:\Users\JavadGhyasvand\source\repos\EShopCoffe\EShopCoffee\EShopCoffee\obj\Debug\EShopCoffee.csproj.CopyComplete
 C:\Users\JavadGhyasvand\source\repos\EShopCoffe\EShopCoffee\EShopCoffee\obj\Debug\EShopCoffee.dll
 C:\Users\JavadGhyasvand\source\repos\EShopCoffe\EShopCoffee\EShopCoffee\obj\Debug\EShopCoffee.pdb
+C:\Users\JavadGhyasvand\source\repos\EShopCoffe\EShopCoffee\EShopCoffee\bin\System.Net.Http.Formatting.dll
+C:\Users\JavadGhyasvand\source\repos\EShopCoffe\EShopCoffee\EShopCoffee\bin\System.Web.Http.dll
+C:\Users\JavadGhyasvand\source\repos\EShopCoffe\EShopCoffee\EShopCoffee\bin\System.Web.Http.WebHost.dll
+C:\Users\JavadGhyasvand\source\repos\EShopCoffe\EShopCoffee\EShopCoffee\bin\System.Net.Http.Formatting.xml
+C:\Users\JavadGhyasvand\source\repos\EShopCoffe\EShopCoffee\EShopCoffee\bin\System.Web.Http.xml
+C:\Users\JavadGhyasvand\source\repos\EShopCoffe\EShopCoffee\EShopCoffee\bin\System.Web.Http.WebHost.xml

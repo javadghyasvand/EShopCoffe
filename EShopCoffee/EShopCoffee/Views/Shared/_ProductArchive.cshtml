@@ -59,18 +59,24 @@
                             <span> @Model.Product_Price.ToString("#,0") تومان</span>
                         </div>
                     }
+                    <div class="m-3">
+                        <a href="/ShowProduct/@Model.Product_Id" class="btn btn-outline-secondary btn-block">جزئیات محصول</a>
+                        <a onclick="AddToCart(@Model.Product_Id)" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>افزودن به سبد خرید</a>
+                    </div>
                 }
                 else
                 {
                     <div class="text-center mt-3 mb-3">
                         <span class="text-danger">اتمام موجودی</span>
                     </div>
+                    <div class="m-3">
+                        <a href="/ShowProduct/@Model.Product_Id" class="btn btn-outline-secondary btn-block ">جزئیات محصول</a>
+                        <a onclick="AddToCart(@Model.Product_Id)" class="btn btn-danger btn-block disabled"><i class="fa fa-shopping-cart"></i>اتمام موجودی</a>
+                    </div>
                 }
+
             }
-            <div class="m-3">
-                <a href="/ShowProduct/@Model.Product_Id" class="btn btn-outline-secondary btn-block">جزئیات محصول</a>
-                <a href="basket.html" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>افزودن به سبد خرید</a>
-            </div>
+           
         </div>
         @if(discount!=null && discount.Start_Date <= dt && discount.End_Date >= dt && discount.Persent_Off != 0)
         {

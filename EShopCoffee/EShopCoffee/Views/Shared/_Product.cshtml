@@ -46,35 +46,35 @@
 
                                     }
                                     <del class="mr-1">@Model.Product_Price.ToString("#,0")</del><span>@price.ToString("#,0") </span>
-                                                                                                <span class="d-block">تومان</span>
+                                    <span class="d-block">تومان</span>
                                 </div>
                             }
                             else
                             {
-            <div class="text-center mt-3 mb-3">
-                <span> @Model.Product_Price.ToString("#,0")</span>
-                <span class="d-block">تومان</span>
-            </div>
+                                <div class="text-center mt-3 mb-3">
+                                    <span> @Model.Product_Price.ToString("#,0")</span>
+                                    <span class="d-block">تومان</span>
+                                </div>
                             }
                         }
                         else
                         {
-            <div class="text-center mt-3 mb-3">
-                <span> @Model.Product_Price.ToString("#,0")</span>
-                <span class="d-block">تومان</span>
-            </div>
+                            <div class="text-center mt-3 mb-3">
+                                <span> @Model.Product_Price.ToString("#,0")</span>
+                                <span class="d-block">تومان</span>
+                            </div>
                         }
                     }
                     else
                     {
-            <div class="text-center mt-3 mb-3">
-                <span class="text-danger">اتمام موجودی</span>
-                <span class="d-block"></span>
-            </div>
+                        <div class="text-center mt-3 mb-3">
+                            <span class="text-danger">اتمام موجودی</span>
+                            <span class="d-block"></span>
+                        </div>
                     }
                 }
             </div>
-            @if(discount!=null && discount.Start_Date <= dt && discount.End_Date >= dt && discount.Persent_Off != 0)
+            @if (discount != null && discount.Start_Date <= dt && discount.End_Date >= dt && discount.Persent_Off != 0)
             {
                 <div class="ribbon sale text-center">
                     <div class="theribbon bg-danger">%@discount.Persent_Off</div>

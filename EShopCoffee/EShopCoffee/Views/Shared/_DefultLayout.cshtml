@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <title>Doppio Cofeee Store</title>
     <!--Icon-->
-    <link rel="shortcut icon" alt="Doppio Cofeee Store" href="~/Content/SiteFile/img/LogoEN.png" type="image/x-icon" />
+    <link rel="shortcut icon" alt="Doppio Cofeee Store" href="~/Content/SiteFile/img/LogoEN.png" type="image/x-icon"/>
     <!-- Bootstrap CSS-->
     @Styles.Render("~/Content/SiteFile/vendor/bootstrap/css/bootstrap.min.css")
     <!-- Font Awesome CSS-->
@@ -22,71 +22,69 @@
 
 </head>
 <body>
-    <!-- navbar-->
-    @Html.Partial("Navbar")
-    <div id="all">
-
-        <div id="content">
-            <div class="container">
-                @RenderSection("Slider", false)
-            </div>
-            <!-- GET INSPIRED-->
-            @RenderBody()
-            <!--BLOG HOMEPAGE-->
-            @* <div class="box text-center"> *@
-            @*     <div class="container"> *@
-            @*         <div class="col-md-12"> *@
-            @*             <h3 class="text-uppercase">From our blog</h3> *@
-            @*             <p class="lead mb-0">What's new in the world of fashion? <a href="blog.html">Check our blog!</a></p> *@
-            @*         </div> *@
-            @*     </div> *@
-            @* </div> *@
-            @* <div class="container"> *@
-            @*     <div class="col-md-12"> *@
-            @*         <div id="blog-homepage" class="row"> *@
-            @*             <div class="col-sm-6"> *@
-            @*                 <div class="post"> *@
-            @*                     <h4> *@
-            @*                         <a href="post.html">Fashion now</a> *@
-            @*                     </h4> *@
-            @*                     <p class="author-category">By <a href="#">John Slim</a> in <a href="">Fashion and style</a></p> *@
-            @*                     <hr> *@
-            @*                     <p class="intro"> *@
-            @*                         Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis *@
-            @*                         egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero *@
-            @*                         sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. *@
-            @*                     </p> *@
-            @*                     <p class="read-more"> *@
-            @*                         <a href="post.html" class="btn btn-primary">Continue reading</a> *@
-            @*                     </p> *@
-            @*                 </div> *@
-            @*             </div> *@
-            @*             <div class="col-sm-6"> *@
-            @*                 <div class="post"> *@
-            @*                     <h4> *@
-            @*                         <a href="post.html">Who is who - example blog post</a> *@
-            @*                     </h4> *@
-            @*                     <p class="author-category">By <a href="#">John Slim</a> in <a href="">About Minimal</a></p> *@
-            @*                     <hr> *@
-            @*                     <p class="intro"> *@
-            @*                         Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis *@
-            @*                         egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero *@
-            @*                         sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. *@
-            @*                     </p> *@
-            @*                     <p class="read-more"> *@
-            @*                         <a href="post.html" class="btn btn-primary">Continue reading</a> *@
-            @*                     </p> *@
-            @*                 </div> *@
-            @*             </div> *@
-            @*         </div> *@
-            @*         <!-- /#blog-homepage--> *@
-            @*     </div> *@
-            @* </div> *@
-            <!-- /.container-->
-            <!-- *** BLOG HOMEPAGE END ***-->
-            @Html.Partial("Footer")
+@Html.Partial("Navbar")
+<div id="all">
+    <div id="content">
+        <div class="container">
+            @RenderSection("Slider", false)
         </div>
+
+        @RenderBody()
+        <!--BLOG HOMEPAGE-->
+        @* <div class="box text-center"> *@
+        @*     <div class="container"> *@
+        @*         <div class="col-md-12"> *@
+        @*             <h3 class="text-uppercase">From our blog</h3> *@
+        @*             <p class="lead mb-0">What's new in the world of fashion? <a href="blog.html">Check our blog!</a></p> *@
+        @*         </div> *@
+        @*     </div> *@
+        @* </div> *@
+        @* <div class="container"> *@
+        @*     <div class="col-md-12"> *@
+        @*         <div id="blog-homepage" class="row"> *@
+        @*             <div class="col-sm-6"> *@
+        @*                 <div class="post"> *@
+        @*                     <h4> *@
+        @*                         <a href="post.html">Fashion now</a> *@
+        @*                     </h4> *@
+        @*                     <p class="author-category">By <a href="#">John Slim</a> in <a href="">Fashion and style</a></p> *@
+        @*                     <hr> *@
+        @*                     <p class="intro"> *@
+        @*                         Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis *@
+        @*                         egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero *@
+        @*                         sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. *@
+        @*                     </p> *@
+        @*                     <p class="read-more"> *@
+        @*                         <a href="post.html" class="btn btn-primary">Continue reading</a> *@
+        @*                     </p> *@
+        @*                 </div> *@
+        @*             </div> *@
+        @*             <div class="col-sm-6"> *@
+        @*                 <div class="post"> *@
+        @*                     <h4> *@
+        @*                         <a href="post.html">Who is who - example blog post</a> *@
+        @*                     </h4> *@
+        @*                     <p class="author-category">By <a href="#">John Slim</a> in <a href="">About Minimal</a></p> *@
+        @*                     <hr> *@
+        @*                     <p class="intro"> *@
+        @*                         Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis *@
+        @*                         egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero *@
+        @*                         sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. *@
+        @*                     </p> *@
+        @*                     <p class="read-more"> *@
+        @*                         <a href="post.html" class="btn btn-primary">Continue reading</a> *@
+        @*                     </p> *@
+        @*                 </div> *@
+        @*             </div> *@
+        @*         </div> *@
+        @*         <!-- /#blog-homepage--> *@
+        @*     </div> *@
+        @* </div> *@
+        <!-- /.container-->
+        <!-- *** BLOG HOMEPAGE END ***-->
+        @Html.Partial("Footer")
     </div>
+</div>
 </body>
 </html>
 <!-- JavaScript files-->
@@ -106,4 +104,28 @@
 
 
 @RenderSection("scripts", required: false)
+@RenderSection("Script", false)
+<script>
+        $(function () {
+            countShopCart();
+        });
+        function countShopCart() {
+            $.get("/api/ShopCart", function (res) {
+                $("#countShopCart").html(res);
+            });
+        }
+        function AddToCart(id) {
+            $.get("/api/ShopCart/" + id, function (res) {
+                $("#countShopCart").html(res);
+                UpdateShopCart();
+            });
+        }
+         function UpdateShopCart() { 
+           $("#ShowCart").load("/ShopItems/ShowCart");
+    }
+    setInterval(function () {
+        UpdateShopCart();
+        countShopCart();
+    }, 2000);
 
+    </script>

@@ -56,6 +56,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -64,6 +67,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -129,6 +138,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\Product_EShopController.cs" />
@@ -142,6 +152,8 @@
     <Compile Include="Controllers\ManegeEmailsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\ShopCartController.cs" />
+    <Compile Include="Controllers\ShopItemsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -159,6 +171,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EShop.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataLayer\Order.cs">
+      <DependentUpon>EShop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataLayer\OrderDetails.cs">
+      <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataLayer\PersntOff.cs">
       <DependentUpon>EShop.tt</DependentUpon>
@@ -190,6 +208,9 @@
     <Compile Include="Models\DataLayer\Roles.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataLayer\ShopCard.cs">
+      <DependentUpon>EShop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataLayer\tblOstan.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
@@ -202,6 +223,8 @@
     <Compile Include="Models\DataLayer\Users.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MetaData\OrderDetails_MetaData.cs" />
+    <Compile Include="Models\MetaData\Order_MetaData.cs" />
     <Compile Include="Models\MetaData\PersntOff_MetaData.cs" />
     <Compile Include="Models\MetaData\Product_Comments_MetaData.cs" />
     <Compile Include="Models\MetaData\Product_EShop_MetaData.cs" />
@@ -212,6 +235,7 @@
     <Compile Include="Models\MetaData\Product_Tags_MetaData.cs" />
     <Compile Include="Models\MetaData\Product_Property_MetaData.cs" />
     <Compile Include="Models\MetaData\Roles_MetaData.cs" />
+    <Compile Include="Models\MetaData\ShopCard_MetaData.cs" />
     <Compile Include="Models\MetaData\tblOstan_MetaData.cs" />
     <Compile Include="Models\MetaData\tblShahrestan_MetaData.cs" />
     <Compile Include="Models\MetaData\TotalSell_MetaData.cs" />
@@ -222,6 +246,7 @@
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\RecoveryPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="Models\ViewModels\ShopCardViewModel.cs" />
     <Compile Include="Models\ViewModels\ShowproductFeatuerViewModel.cs" />
     <Compile Include="Models\ViewModels\UserProfileViewModel.cs" />
     <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
@@ -1431,6 +1456,9 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Product\BestSellerProduct.cshtml" />
     <Content Include="Views\Product\DiscountProduct.cshtml" />
+    <Content Include="Views\ShopItems\ShowCart.cshtml" />
+    <Content Include="Views\ShopItems\Index.cshtml" />
+    <Content Include="Views\ShopItems\Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

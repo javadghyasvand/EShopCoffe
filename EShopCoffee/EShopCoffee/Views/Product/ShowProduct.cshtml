@@ -1,10 +1,15 @@
-﻿@using EShopCoffee.Models.ViewModels
+﻿@using EShopCoffee.Models.DataLayer
+@using EShopCoffee.Models.ViewModels
+@using MyShop.Utilities
 @model EShopCoffee.Models.DataLayer.Product_EShop
 @{
     ViewBag.Title = Model.Proudct_Title;
 
+    var dbEntities = new EShopCoffe_DBEntities();
+    DateTime dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+    var discount = new PersntOff();
 }
-<div id="all">
+     <div id="all">
     <div id="content">
         <div class="container">
             <div class="row">
@@ -27,15 +32,67 @@
                         <div class="col-md-6">
                             <div class="box">
                                 <h1 class="text-center">@Model.Proudct_Title</h1>
-                                <p class="goToDescription">
+                                <hr/>
+                                <div class="goToDescription text-center">
                                     <a href="#details" class="scroll-to">برو به مشخصات محصول</a>
-                                </p>
-                                <p class="price"> قیمت : @Model.Product_Price.ToString("#,0") تومان</p>
-                                <p class="text-center buttons">
-                                    <a onclick="AddToCart(@Model.Product_Id)" class="btn btn-primary">
-                                        <i class="fa fa-shopping-cart"></i>افزودن به سبد خرید
-                                    </a>
-                                </p>
+                                </div>
+                                @{
+                                    if (@Model.Product_Count > 0)
+                                    {
+                                        if (dbEntities.PersntOff.Any(o => o.Product_Id == Model.Product_Id))
+                                        {
+                                            discount = dbEntities.PersntOff.Single(o => o.Product_Id == Model.Product_Id);
+
+                                            if (discount.Start_Date <= dt && discount.End_Date >= dt && discount.Persent_Off != 0)
+                                            {
+                                                <div class="text-center mt-3 mb-3">
+                                                    @{
+                                                        var price = DateConverter.DiscountCalc(Model.Product_Price, discount.Persent_Off);
+
+                                                    }
+                                                    <div>
+                                                        <del class="mr-1 float-left">@Model.Product_Price.ToString("#,0")</del>
+                                                        <p class="price d-block mt-3">  قیمت : @price.ToString("#,0") تومان</p>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div>
+                                                    <del class="mr-1 float-left"></del>
+                                                    <p class="price d-block mt-3">  قیمت :@Model.Product_Price.ToString("#,0") تومان</p>
+                                                </div>
+                                          
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div>
+                                                <del class="mr-1 float-left"></del>
+                                                <p class="price d-block mt-3">  قیمت :@Model.Product_Price.ToString("#,0") تومان</p>
+                                            </div>
+                                         
+                                        }
+                                        <div>
+                                            <a onclick="AddToCart(@Model.Product_Id)" class="btn d-block btn-primary text-center">
+                                                <i class="fa fa-shopping-cart"></i>افزودن به سبد خرید
+                                            </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            <del class="mr-1 float-left"></del>
+                                            <p class="price d-block mt-3 text-danger">  اتمام موجودی</p>
+                                        </div>
+                                        <div>
+                                            <a onclick="AddToCart(@Model.Product_Id)" class="btn d-block btn-danger text-center disabled">
+                                                <i class="fa fa-shopping-cart"></i>اتمام موجودی
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                                <hr/>
                             </div>
                             @if (Model.Product_Galllery.Any())
                             {
@@ -49,8 +106,15 @@
                                     }
                                 </div>
                             }
-
+                            @if(discount!=null && discount.Start_Date <= dt && discount.End_Date >= dt && discount.Persent_Off != 0)
+                            {
+                                <div class="ribbon sale text-center">
+                                    <div class="theribbon bg-danger">%@discount.Persent_Off</div>
+                                    <div class="ribbon-background"></div>
+                                </div>
+                            }
                         </div>
+                       
                     </div>
                     <div id="details" class="box" dir="rtl">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -119,8 +183,7 @@
                             <div class="text-center">
                                 @foreach (var tag in Model.Product_Tags)
                                 {
-                                    <a class="badge badge-primary text-light m-1 p-2" style="border-radius:10px" href="/Search/@tag.Tag"># @tag.Tag</a>
-
+                                    <a class="badge badge-primary text-light m-1 p-2" style="border-radius: 10px" href="/Search/@tag.Tag"># @tag.Tag</a>
                                 }
                             </div>
                         </div>

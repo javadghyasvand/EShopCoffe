@@ -1,0 +1,49 @@
+﻿@model IEnumerable<EShopCoffee.Models.ViewModels.ShopCartItemViewModel>
+
+@if (Model.Any())
+{
+    <li>
+        <h4 class="text-center">سبد خرید</h4>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="text-center" colspan="2">محصول</th>
+                    <th>تعداد</th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img style="width: 50px;" src="~/Images/ProductImages/Thumbnail/@item.Product_Image" alt="@item.Product_Title">
+                        </td>
+                        <td>
+                            <a href="#">@item.Product_Title</a>
+                        </td>
+                        <td>
+                            @item.Count
+                        </td>
+                        <td>
+                            <a href="#">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </li>
+}
+else
+{
+    <h4 class="text-center">سبد خرید</h4>
+    <hr/>
+    <div class="alert alert-danger text-center">
+        سبد خرید خالی است
+    </div>
+}

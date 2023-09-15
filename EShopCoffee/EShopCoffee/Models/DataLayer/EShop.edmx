@@ -5,6 +5,25 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="EShopCoffe_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="IsFinaly" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="DetailId" />
+          </Key>
+          <Property Name="DetailId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="bigint" Nullable="false" />
+          <Property Name="ProductID" Type="bigint" Nullable="false" />
+          <Property Name="Price" Type="bigint" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="PersntOff">
           <Key>
             <PropertyRef Name="Off_Id" />
@@ -101,6 +120,14 @@
           <Property Name="Role_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Role_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
+        <EntityType Name="ShopCard">
+          <Key>
+            <PropertyRef Name="ShopCard_Id" />
+          </Key>
+          <Property Name="ShopCard_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Id" Type="bigint" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblOstan">
           <Key>
             <PropertyRef Name="id" />
@@ -145,6 +172,42 @@
           <Property Name="User_State_ID" Type="int" />
           <Property Name="User_City_ID" Type="int" />
         </EntityType>
+        <Association Name="FK_Order_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Product_EShop">
+          <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_EShop">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PersntOff_Product_EShop">
           <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
           <End Role="PersntOff" Type="Self.PersntOff" Multiplicity="*" />
@@ -277,6 +340,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ShopCard_Product_EShop">
+          <End Role="Product_EShop" Type="Self.Product_EShop" Multiplicity="1" />
+          <End Role="ShopCard" Type="Self.ShopCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_EShop">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="ShopCard">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblShahrestan_tblOstan">
           <End Role="tblOstan" Type="Self.tblOstan" Multiplicity="1" />
           <End Role="tblShahrestan" Type="Self.tblShahrestan" Multiplicity="*" />
@@ -338,6 +413,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EShopCoffe_DBModelStoreContainer">
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersntOff" EntityType="Self.PersntOff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Comments" EntityType="Self.Product_Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_EShop" EntityType="Self.Product_EShop" Schema="dbo" store:Type="Tables" />
@@ -348,10 +425,23 @@
           <EntitySet Name="Product_Select_Groups" EntityType="Self.Product_Select_Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Tags" EntityType="Self.Product_Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShopCard" EntityType="Self.ShopCard" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOstan" EntityType="Self.tblOstan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblShahrestan" EntityType="Self.tblShahrestan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TotalSell" EntityType="Self.TotalSell" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Order_Users" Association="Self.FK_Order_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Order" Association="Self.FK_OrderDetails_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Product_EShop" Association="Self.FK_OrderDetails_Product_EShop">
+            <End Role="Product_EShop" EntitySet="Product_EShop" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_PersntOff_Product_EShop" Association="Self.FK_PersntOff_Product_EShop">
             <End Role="Product_EShop" EntitySet="Product_EShop" />
             <End Role="PersntOff" EntitySet="PersntOff" />
@@ -395,6 +485,10 @@
           <AssociationSet Name="FK_Product_Tags_Product_EShop" Association="Self.FK_Product_Tags_Product_EShop">
             <End Role="Product_EShop" EntitySet="Product_EShop" />
             <End Role="Product_Tags" EntitySet="Product_Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopCard_Product_EShop" Association="Self.FK_ShopCard_Product_EShop">
+            <End Role="Product_EShop" EntitySet="Product_EShop" />
+            <End Role="ShopCard" EntitySet="ShopCard" />
           </AssociationSet>
           <AssociationSet Name="FK_tblShahrestan_tblOstan" Association="Self.FK_tblShahrestan_tblOstan">
             <End Role="tblOstan" EntitySet="tblOstan" />
@@ -459,6 +553,8 @@
           <NavigationProperty Name="Product_Tags" Relationship="Self.FK_Product_Tags_Product_EShop" FromRole="Product_EShop" ToRole="Product_Tags" />
           <NavigationProperty Name="TotalSell" Relationship="EShopCoffe_DBModel.FK_TotalSell_Product_EShop" FromRole="Product_EShop" ToRole="TotalSell" />
           <NavigationProperty Name="PersntOff" Relationship="EShopCoffe_DBModel.FK_PersntOff_Product_EShop" FromRole="Product_EShop" ToRole="PersntOff" />
+          <NavigationProperty Name="ShopCard" Relationship="EShopCoffe_DBModel.FK_ShopCard_Product_EShop" FromRole="Product_EShop" ToRole="ShopCard" />
+          <NavigationProperty Name="OrderDetails" Relationship="EShopCoffe_DBModel.FK_OrderDetails_Product_EShop" FromRole="Product_EShop" ToRole="OrderDetails" />
         </EntityType>
         <EntityType Name="Product_Galllery">
           <Key>
@@ -571,6 +667,7 @@
           <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
           <NavigationProperty Name="tblOstan" Relationship="Self.FK_Users_tblOstan" FromRole="Users" ToRole="tblOstan" />
           <NavigationProperty Name="tblShahrestan" Relationship="Self.FK_Users_tblShahrestan" FromRole="Users" ToRole="tblShahrestan" />
+          <NavigationProperty Name="Order" Relationship="EShopCoffe_DBModel.FK_Order_Users" FromRole="Users" ToRole="Order" />
         </EntityType>
         <Association Name="FK_Product_Comments_Product_Comments">
           <End Role="Product_Comments" Type="Self.Product_Comments" Multiplicity="0..1" />
@@ -819,6 +916,25 @@
             <End Role="Product_EShop" EntitySet="Product_EShop" />
             <End Role="PersntOff" EntitySet="PersntOff" />
           </AssociationSet>
+          <EntitySet Name="ShopCard" EntityType="EShopCoffe_DBModel.ShopCard" />
+          <AssociationSet Name="FK_ShopCard_Product_EShop" Association="EShopCoffe_DBModel.FK_ShopCard_Product_EShop">
+            <End Role="Product_EShop" EntitySet="Product_EShop" />
+            <End Role="ShopCard" EntitySet="ShopCard" />
+          </AssociationSet>
+          <EntitySet Name="Order" EntityType="EShopCoffe_DBModel.Order" />
+          <EntitySet Name="OrderDetails" EntityType="EShopCoffe_DBModel.OrderDetails" />
+          <AssociationSet Name="FK_Order_Users" Association="EShopCoffe_DBModel.FK_Order_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Order" Association="EShopCoffe_DBModel.FK_OrderDetails_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Product_EShop" Association="EShopCoffe_DBModel.FK_OrderDetails_Product_EShop">
+            <End Role="Product_EShop" EntitySet="Product_EShop" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="TotalSell">
           <Key>
@@ -862,6 +978,86 @@
             </Principal>
             <Dependent Role="PersntOff">
               <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ShopCard">
+          <Key>
+            <PropertyRef Name="ShopCard_Id" />
+          </Key>
+          <Property Name="ShopCard_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Id" Type="Int64" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product_EShop" Relationship="EShopCoffe_DBModel.FK_ShopCard_Product_EShop" FromRole="ShopCard" ToRole="Product_EShop" />
+        </EntityType>
+        <Association Name="FK_ShopCard_Product_EShop">
+          <End Type="EShopCoffe_DBModel.Product_EShop" Role="Product_EShop" Multiplicity="1" />
+          <End Type="EShopCoffe_DBModel.ShopCard" Role="ShopCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_EShop">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="ShopCard">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsFinaly" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="EShopCoffe_DBModel.FK_Order_Users" FromRole="Order" ToRole="Users" />
+          <NavigationProperty Name="OrderDetails" Relationship="EShopCoffe_DBModel.FK_OrderDetails_Order" FromRole="Order" ToRole="OrderDetails" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="DetailId" />
+          </Key>
+          <Property Name="DetailId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int64" Nullable="false" />
+          <Property Name="ProductID" Type="Int64" Nullable="false" />
+          <Property Name="Price" Type="Int64" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="EShopCoffe_DBModel.FK_OrderDetails_Order" FromRole="OrderDetails" ToRole="Order" />
+          <NavigationProperty Name="Product_EShop" Relationship="EShopCoffe_DBModel.FK_OrderDetails_Product_EShop" FromRole="OrderDetails" ToRole="Product_EShop" />
+        </EntityType>
+        <Association Name="FK_Order_Users">
+          <End Type="EShopCoffe_DBModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="EShopCoffe_DBModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Order">
+          <End Type="EShopCoffe_DBModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="EShopCoffe_DBModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Product_EShop">
+          <End Type="EShopCoffe_DBModel.Product_EShop" Role="Product_EShop" Multiplicity="1" />
+          <End Type="EShopCoffe_DBModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_EShop">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1022,6 +1218,36 @@
                 <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
                 <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
                 <ScalarProperty Name="Off_Id" ColumnName="Off_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShopCard">
+            <EntityTypeMapping TypeName="EShopCoffe_DBModel.ShopCard">
+              <MappingFragment StoreEntitySet="ShopCard">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="ShopCard_Id" ColumnName="ShopCard_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="EShopCoffe_DBModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="IsFinaly" ColumnName="IsFinaly" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="EShopCoffe_DBModel.OrderDetails">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="DetailId" ColumnName="DetailId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

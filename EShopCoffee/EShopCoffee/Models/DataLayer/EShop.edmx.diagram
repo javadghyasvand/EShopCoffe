@@ -35,6 +35,13 @@
         <AssociationConnector Association="EShopCoffe_DBModel.FK_TotalSell_Product_EShop" />
         <EntityTypeShape EntityType="EShopCoffe_DBModel.PersntOff" Width="1.5" PointX="2.875" PointY="10.5" />
         <AssociationConnector Association="EShopCoffe_DBModel.FK_PersntOff_Product_EShop" />
+        <EntityTypeShape EntityType="EShopCoffe_DBModel.ShopCard" Width="1.5" PointX="3.125" PointY="14.5" />
+        <AssociationConnector Association="EShopCoffe_DBModel.FK_ShopCard_Product_EShop" />
+        <EntityTypeShape EntityType="EShopCoffe_DBModel.Order" Width="1.5" PointX="3.875" PointY="17.625" />
+        <EntityTypeShape EntityType="EShopCoffe_DBModel.OrderDetails" Width="1.5" PointX="6.125" PointY="12.5" />
+        <AssociationConnector Association="EShopCoffe_DBModel.FK_Order_Users" />
+        <AssociationConnector Association="EShopCoffe_DBModel.FK_OrderDetails_Order" />
+        <AssociationConnector Association="EShopCoffe_DBModel.FK_OrderDetails_Product_EShop" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
