@@ -21,6 +21,8 @@ namespace EShopCoffee.Models.ViewModels
         public string Product_Image { get; set; }
         public int Count { get; set; }
         public long Product_Price { get; set; }
+        public long DisCount { get; set; }
         public long Sum { get; set; }
+        public long PriceTotal { get; set; }
     }
 }

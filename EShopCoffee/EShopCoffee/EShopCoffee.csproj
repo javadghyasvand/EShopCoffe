@@ -316,6 +316,7 @@
     <Content Include="Content\Asset\Images\Logo\Login1.png" />
     <Content Include="Content\Asset\Images\Logo\Login2.jpg" />
     <Content Include="Content\Asset\Images\Logo\Logo.ico" />
+    <Content Include="Content\SiteFile\img\cart-empty.gif" />
     <Content Include="Content\SiteFile\img\LogoEN.png" />
     <Content Include="Content\Asset\Images\Logo\Mug.ico" />
     <Content Include="Content\Asset\Images\Logo\NotFound.jpg" />
