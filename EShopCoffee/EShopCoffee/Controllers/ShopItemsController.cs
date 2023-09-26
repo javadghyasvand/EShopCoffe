@@ -24,17 +24,17 @@ namespace MyShop.Controllers
                 List<ShopCartItem> shopCartItems = (List<ShopCartItem>)Session["ShopCart"];
                 foreach (var item in shopCartItems)
                 {
-                    var product = _dbEntities.Product_EShop.Where(p => p.Product_Id == item.Product_Id).Select(p => new
+                    var product = _dbEntities.Product_EShop.Where(p => p.Product_Id == item.ProductId).Select(p => new
                     {
                         p.Product_ImageName,
                         p.Proudct_Title
                     }).Single();
                     sales.Add(new ShopCartItemViewModel()
                     {
-                        Product_Id = item.Product_Id,
+                        ProductId = item.ProductId,
                         Count = item.Count,
-                        Product_Title = product.Proudct_Title,
-                        Product_Image = product.Product_ImageName
+                        ProductTitle = product.Proudct_Title,
+                        ProductImage = product.Product_ImageName
                     });
                 }
             }
@@ -56,58 +56,58 @@ namespace MyShop.Controllers
             if (Session["ShopCart"] != null)
             {
                 List<ShopCartItem> listShopCart = Session["ShopCart"] as List<ShopCartItem>;
-                foreach (var item in listShopCart)
-                {
-                    long disCount = 0;
-                    var product = _dbEntities.Product_EShop.Single(P => P.Product_Id == item.Product_Id);
-                    if (_dbEntities.PersntOff.Any(o => o.Product_Id == product.Product_Id))
+                if (listShopCart != null)
+                    foreach (var item in listShopCart)
                     {
-                        discount = _dbEntities.PersntOff.Single(o => o.Product_Id == item.Product_Id);
-                        if (discount.Start_Date <= dt && discount.End_Date >= dt && discount.Persent_Off != 0)
+                        long disCount = 0;
+                        var product = _dbEntities.Product_EShop.Single(P => P.Product_Id == item.ProductId);
+                        if (_dbEntities.PersntOff.Any(o => o.Product_Id == product.Product_Id))
                         {
-                            disCount = DateConverter.DiscountPrice(product.Product_Price, discount.Persent_Off);
-                            showOrders.Add(new ShowOrderViewModel()
+                            discount = _dbEntities.PersntOff.Single(o => o.Product_Id == item.ProductId);
+                            if (discount.Start_Date <= dt && discount.End_Date >= dt && discount.Persent_Off != 0)
                             {
-                                Product_Id = item.Product_Id,
-                                Count = item.Count,
-                                Product_Image = product.Product_ImageName,
-                                Product_Title = product.Proudct_Title,
-                                Product_Price = product.Product_Price,
-                                DisCount = disCount*item.Count,
-                                Sum = item.Count * (product.Product_Price - disCount),
-                               
-                            });
+                                disCount = DateConverter.DiscountPrice(product.Product_Price, discount.Persent_Off);
+                                showOrders.Add(new ShowOrderViewModel()
+                                {
+                                    ProductId = item.ProductId,
+                                    Count = item.Count,
+                                    ProductImage = product.Product_ImageName,
+                                    ProductTitle = product.Proudct_Title,
+                                    ProductPrice = product.Product_Price,
+                                    DisCount = disCount * item.Count,
+                                    Sum = item.Count * (product.Product_Price - disCount),
+                                });
+                            }
+                            else
+                            {
+                                showOrders.Add(new ShowOrderViewModel()
+                                {
+                                    ProductId = item.ProductId,
+                                    Count = item.Count,
+                                    ProductImage = product.Product_ImageName,
+                                    ProductTitle = product.Proudct_Title,
+                                    ProductPrice = product.Product_Price,
+                                    DisCount = disCount,
+                                    Sum = item.Count * product.Product_Price
+                                });
+                            }
                         }
                         else
                         {
                             showOrders.Add(new ShowOrderViewModel()
                             {
-                                Product_Id = item.Product_Id,
+                                ProductId = item.ProductId,
                                 Count = item.Count,
-                                Product_Image = product.Product_ImageName,
-                                Product_Title = product.Proudct_Title,
-                                Product_Price = product.Product_Price,
+                                ProductImage = product.Product_ImageName,
+                                ProductTitle = product.Proudct_Title,
+                                ProductPrice = product.Product_Price,
                                 DisCount = disCount,
                                 Sum = item.Count * product.Product_Price
                             });
                         }
-                    }
-                    else
-                    {
-                        showOrders.Add(new ShowOrderViewModel()
-                        {
-                            Product_Id = item.Product_Id,
-                            Count = item.Count,
-                            Product_Image = product.Product_ImageName,
-                            Product_Title = product.Proudct_Title,
-                            Product_Price = product.Product_Price,
-                            DisCount = disCount,
-                            Sum = item.Count * product.Product_Price
-                        });
-                    }
 
-                    ViewBag.TotalPrice = ViewBag.TotalPrice + (product.Product_Price - disCount)* item.Count;
-                }
+                        ViewBag.TotalPrice = ViewBag.TotalPrice + (product.Product_Price - disCount) * item.Count;
+                    }
             }
           
 
@@ -122,7 +122,7 @@ namespace MyShop.Controllers
         public ActionResult CommandOrder(int id, int count)
         {
             List<ShopCartItem> listShopCart = Session["ShopCart"] as List<ShopCartItem>;
-            int indx = listShopCart.FindIndex(p => p.Product_Id == id);
+            int indx = listShopCart.FindIndex(p => p.ProductId == id);
             if (count == 0)
             {
                 listShopCart.RemoveAt(indx);
@@ -140,33 +140,40 @@ namespace MyShop.Controllers
         public ActionResult Payment()
         {
             var userId = _dbEntities.Users.Single(u => u.User_Email == User.Identity.Name);
-            if (userId.User_Address !=null && userId.)
+            if (string.IsNullOrEmpty(userId.User_Address) != true && userId.User_State_ID !=null && userId.User_City_ID !=null && string.IsNullOrEmpty(userId.User_Postal_Code) != true)
             {
-                
-            }
-           
-            Order orders = new Order()
-            {
-                UserID = userId.User_Id,
-                OrderDate = DateTime.Now,
-                IsFinaly = false,
-            };
-            _dbEntities.Order.Add(orders);
-            var detailList = GetListOrder();
-            foreach (var item in detailList)
-            {
-                _dbEntities.OrderDetails.Add(new OrderDetails()
+                Order orders = new Order()
                 {
-                    Count = item.Count,
-                    OrderId = orders.OrderID,
-                    ProductID = item.Product_Id,
-                    Price = item.Product_Price,
-                });
+                    UserID = userId.User_Id,
+                    OrderDate = DateTime.Now,
+                    IsFinaly = false,
+                };
+                _dbEntities.Order.Add(orders);
+                var detailList = GetListOrder();
+                foreach (var item in detailList)
+                {
+                    _dbEntities.OrderDetails.Add(new OrderDetails()
+                    {
+                        Count = item.Count,
+                        OrderId = orders.OrderID,
+                        ProductID = item.ProductId,
+                        Price = item.ProductPrice,
+                        TotalPrice = item.Sum,
+                        Discountprice = item.DisCount,
+                        ProductImage = item.ProductImage,
+                        ProductTitle = item.ProductTitle
+                    });
+                }
+
+                //Online Payment
+                _dbEntities.SaveChanges();
+                return null;
             }
 
-            //Online Payment
-            _dbEntities.SaveChanges();
-            return null;
+            return RedirectToAction("EditProfile", "Home",new {id=userId.User_Id});
+
+
+
         }
     }
 }

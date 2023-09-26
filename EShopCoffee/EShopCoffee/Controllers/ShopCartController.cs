@@ -29,16 +29,16 @@ namespace EShopCoffee.Controllers
             {
                 list = session["ShopCart"] as List<ShopCartItem>;
             }
-            if (list.Any(p => p.Product_Id == id))
+            if (list.Any(p => p.ProductId == id))
             {
-                int index = list.FindIndex(p => p.Product_Id == id);
+                int index = list.FindIndex(p => p.ProductId == id);
                 list[index].Count += 1;
             }
             else
             {
                 list.Add(new ShopCartItem()
                 {
-                    Product_Id = id,
+                    ProductId = id,
                     Count = 1
                 });
             }

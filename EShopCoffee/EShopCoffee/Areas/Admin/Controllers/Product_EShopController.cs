@@ -56,7 +56,7 @@ namespace EShopCoffee.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(
             [Bind(Include =
-                "Product_Id,Proudct_Title,Product_Count,Product_IsInStock,Product_Discription,Product_Price,Product_ImageName,Product_CreateDate,Product_Is_Delete")]
+                "ProductId,Proudct_Title,Product_Count,Product_IsInStock,Product_Discription,ProductPrice,Product_ImageName,Product_CreateDate,Product_Is_Delete")]
             Product_EShop productEShop, HttpPostedFileBase imageProduct, string tags, List<int> selectedGroup)
         {
             if (ModelState.IsValid)
@@ -144,7 +144,7 @@ namespace EShopCoffee.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(
             [Bind(Include =
-                "Product_Id,Proudct_Title,Product_Count,Product_IsInStock,Product_Discription,Product_Price,Product_ImageName,Product_CreateDate,Product_Is_Delete")]
+                "ProductId,Proudct_Title,Product_Count,Product_IsInStock,Product_Discription,ProductPrice,Product_ImageName,Product_CreateDate,Product_Is_Delete")]
             Product_EShop productEShop, HttpPostedFileBase imageProduct, string tags, List<int> selectedGroup)
 
         {

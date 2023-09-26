@@ -34,21 +34,21 @@
                                         {
                                             <tr>
                                                 <td>
-                                                    <a href="/ShowProduct/@item.Product_Id">
-                                                        <img src="~/Images/ProductImages/Thumbnail/@item.Product_Image" alt="@item.Product_Title">
+                                                    <a href="/ShowProduct/@item.ProductId">
+                                                        <img src="~/Images/ProductImages/Thumbnail/@item.ProductImage" alt="@item.ProductTitle">
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="/ShowProduct/@item.Product_Id">@item.Product_Title</a>
+                                                    <a href="/ShowProduct/@item.ProductId">@item.ProductTitle</a>
                                                 </td>
                                                 <td>
-                                                    <input style="width: 50px; text-align: center; height: 30px;" type="text" name="points" class="form-control input-number" value="@item.Count" min="0" max="100" onchange="commandOrder(@item.Product_Id,$(this).val())">
+                                                    <input style="width: 50px; text-align: center; height: 30px;" type="text" name="points" class="form-control input-number" value="@item.Count" min="0" max="100" onchange="commandOrder(@item.ProductId,$(this).val())">
                                                 </td>
-                                                <td>@item.Product_Price.ToString("#,0") تومان</td>
+                                                <td>@item.ProductPrice.ToString("#,0") تومان</td>
                                                 <td>@item.DisCount.ToString("#,0") تومان</td>
                                                 <td> @item.Sum.ToString("#,0") تومان</td>
                                                 <td>
-                                                    <a onclick="commandOrder(@item.Product_Id,0)">
+                                                    <a onclick="commandOrder(@item.ProductId,0)">
                                                         <i class="fa fa-trash-o"></i>
                                                     </a>
                                                 </td>

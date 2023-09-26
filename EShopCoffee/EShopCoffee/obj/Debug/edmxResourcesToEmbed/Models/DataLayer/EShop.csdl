@@ -509,6 +509,10 @@
     <Property Name="Count" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Order" Relationship="EShopCoffe_DBModel.FK_OrderDetails_Order" FromRole="OrderDetails" ToRole="Order" />
     <NavigationProperty Name="Product_EShop" Relationship="EShopCoffe_DBModel.FK_OrderDetails_Product_EShop" FromRole="OrderDetails" ToRole="Product_EShop" />
+    <Property Name="Discountprice" Type="Int64" Nullable="false" />
+    <Property Name="TotalPrice" Type="Int64" Nullable="false" />
+    <Property Name="ProductImage" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ProductTitle" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Order_Users">
     <End Type="EShopCoffe_DBModel.Users" Role="Users" Multiplicity="1" />

@@ -1,0 +1,64 @@
+﻿@using MyShop.Utilities
+@model EShopCoffee.Models.ViewModels.AllOrderListViewModel
+
+<div class="box">
+    <table class="table p-0 table-borderless m-0 ">
+        <thead class="thead-light p-0">
+        @{
+            long totalPrice = 0;
+            long totalDiscount = 0;
+            foreach (var price in Model.TotalPrice)
+            {
+                totalPrice = totalPrice + price;
+            }
+            foreach (var discount in Model.TotalDiscount)
+            {
+                totalDiscount = totalDiscount + discount;
+            }
+        }
+        @if (Model.IsFinaly == true)
+        {
+            <p class="mr-5 text-danger">وضعیت :تکمیل شده</p>
+        }
+        else
+        {
+            <p class="mr-5  text-danger">وضعیت :در حال پردازش</p>
+        }
+
+        <tr>
+            <td>
+                <i class="fa fa-calendar"></i> تاریخ سفارش :@Model.OrderDate.ToShamsi()
+
+            </td>
+            <td>
+
+                کد سفارش شما<strong>: @Model.OrderId</strong>
+            </td>
+
+            <td>
+                مبلغ کل : @totalPrice.ToString("#,0") تومان
+            </td>
+            <td class="text-danger">
+                تخفیف شما : @totalDiscount.ToString("#,0") تومان
+            </td>
+            <td rowspan="2" class="h-100 p-1 " style="border-right: 2px solid #4FBFA8 !important;">
+                <a href="/Orders/OrderShow/@Model.OrderId" class="nav-link text-center w-100 h-100 p-0 w-auto" style="font-size: xx-large">
+                    <i class="fa fa-caret-left fa-5x m-0" aria-hidden="true"></i>
+                </a>
+            </td>
+
+        </tr>
+        <tr>
+            <td colspan="4" class="text-center">
+                @foreach (var pictuer in Model.PictuerList)
+                {
+                    <img class="img-thumbnail img-fluid" style="width: 50px" src="~/Images/ProductImages/Thumbnail/@pictuer"/>
+                }
+            </td>
+
+        </tr>
+        </thead>
+
+    </table>
+
+</div>

@@ -21,6 +21,10 @@ namespace EShopCoffee.Models.DataLayer
         public long ProductID { get; set; }
         public long Price { get; set; }
         public int Count { get; set; }
+        public long Discountprice { get; set; }
+        public long TotalPrice { get; set; }
+        public string ProductImage { get; set; }
+        public string ProductTitle { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual Product_EShop Product_EShop { get; set; }

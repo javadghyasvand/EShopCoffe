@@ -18,6 +18,10 @@
     <Property Name="ProductID" Type="bigint" Nullable="false" />
     <Property Name="Price" Type="bigint" Nullable="false" />
     <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="Discountprice" Type="bigint" Nullable="false" />
+    <Property Name="TotalPrice" Type="bigint" Nullable="false" />
+    <Property Name="ProductImage" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="ProductTitle" Type="nvarchar" MaxLength="550" Nullable="false" />
   </EntityType>
   <EntityType Name="PersntOff">
     <Key>

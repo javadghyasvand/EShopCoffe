@@ -23,6 +23,10 @@
           <Property Name="ProductID" Type="bigint" Nullable="false" />
           <Property Name="Price" Type="bigint" Nullable="false" />
           <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Discountprice" Type="bigint" Nullable="false" />
+          <Property Name="TotalPrice" Type="bigint" Nullable="false" />
+          <Property Name="ProductImage" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ProductTitle" Type="nvarchar" MaxLength="550" Nullable="false" />
         </EntityType>
         <EntityType Name="PersntOff">
           <Key>
@@ -1024,6 +1028,10 @@
           <Property Name="Count" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="EShopCoffe_DBModel.FK_OrderDetails_Order" FromRole="OrderDetails" ToRole="Order" />
           <NavigationProperty Name="Product_EShop" Relationship="EShopCoffe_DBModel.FK_OrderDetails_Product_EShop" FromRole="OrderDetails" ToRole="Product_EShop" />
+          <Property Name="Discountprice" Type="Int64" Nullable="false" />
+          <Property Name="TotalPrice" Type="Int64" Nullable="false" />
+          <Property Name="ProductImage" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ProductTitle" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Order_Users">
           <End Type="EShopCoffe_DBModel.Users" Role="Users" Multiplicity="1" />
@@ -1243,6 +1251,10 @@
           <EntitySetMapping Name="OrderDetails">
             <EntityTypeMapping TypeName="EShopCoffe_DBModel.OrderDetails">
               <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
+                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Discountprice" ColumnName="Discountprice" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />

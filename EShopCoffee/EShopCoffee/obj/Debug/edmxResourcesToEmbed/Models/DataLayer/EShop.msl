@@ -177,6 +177,10 @@
     <EntitySetMapping Name="OrderDetails">
       <EntityTypeMapping TypeName="EShopCoffe_DBModel.OrderDetails">
         <MappingFragment StoreEntitySet="OrderDetails">
+          <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
+          <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="Discountprice" ColumnName="Discountprice" />
           <ScalarProperty Name="Count" ColumnName="Count" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
