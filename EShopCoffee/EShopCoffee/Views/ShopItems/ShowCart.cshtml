@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<EShopCoffee.Models.ViewModels.ShopCartItemViewModel>
-@{
-    var totalPrice = ViewBag.TotalPrice;
-}
+
 @if (Model.Any())
 {
     <li>
@@ -21,10 +19,10 @@
                 {
                     <tr>
                         <td>
-                            <img style="width: 50px;" src="~/Images/ProductImages/Thumbnail/@item.ProductImage" alt="@item.ProductTitle">
+                            <img style="width: 50px;" src="~/Images/ProductImages/Thumbnail/@item.Product_Image" alt="@item.Product_Title">
                         </td>
                         <td>
-                            <a href="/ShowProduct/@item.ProductId">@item.ProductTitle</a>
+                            <a href="/ShowProduct/@item.Product_Id">@item.Product_Title</a>
                         </td>
                         <td>
                             @item.Count
@@ -45,3 +43,4 @@ else
         سبد خرید خالی است
     </div>
 }
+

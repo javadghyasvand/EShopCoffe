@@ -1,0 +1,39 @@
+﻿@model IEnumerable<EShopCoffee.Models.DataLayer.Blog_Post>
+
+<table class="table table-hover text-center" dir="rtl">
+    <thead>
+        <tr>
+            <th>عنوان</th>
+            <th>توضیح کوتاه  </th>
+            <th>تعداد بازید</th>
+            <th>تاریخ ایجاد</th>
+            <th>عکس</th>
+            <th>ویرایش/حذف</th>
+
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr id="Prop_@item.postId">
+            <td>@item.post_Title</td>
+            <td>@item.post_ShortDiscription</td>
+            <td>@item.post_Visit</td>
+            <td>@item.post_datetime</td>
+            <td>@item.post_Image</td>
+           
+
+            <td>
+                <a onclick="EditPost(@item.postId)" class="btn btn-sm btn-warning" title="ویرایش ویژگی">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a onclick="DeletePost(@item.postId)" class="btn btn-sm btn-danger" title="ویرایش ویژگی">
+                    <i class="fa fa-trash"></i>
+                </a>
+
+            </td>
+        </tr>
+
+    }
+    </tbody>
+</table>

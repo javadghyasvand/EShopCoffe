@@ -1,0 +1,90 @@
+﻿@model EShopCoffee.Models.DataLayer.Blog_Post
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Blog_Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.groupId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.groupId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.post_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.post_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.post_ShortDiscription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.post_ShortDiscription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.post_Discription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.post_Discription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.post_Visit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.post_Visit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.post_datetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.post_datetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.post_Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.post_Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.post_Video)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.post_Video)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Blog_Group.GroupName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Blog_Group.GroupName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.postId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

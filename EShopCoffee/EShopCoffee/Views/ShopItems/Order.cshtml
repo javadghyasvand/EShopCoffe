@@ -1,98 +1,59 @@
-﻿@using System.Linq
-@using EShopCoffee.Models.DataLayer
-@using MyShop.Utilities
-@model IEnumerable<EShopCoffee.Models.ViewModels.ShowOrderViewModel>
-@{
-    var totalPrice = ViewBag.TotalPrice;
-}
-<div id="all" dir="rtl">
-    <div id="content">
-        <div class="container">
-            <div class="row">
-                <div id="basket" class="col-lg-12">
-                    <div class="box">
+﻿@model IEnumerable<EShopCoffee.Models.ViewModels.ShowOrderViewModel>
 
-                        <h1>سبد خرید</h1>
-
-                        @if (Model.Count() > 0)
-                        {
-                            <p class="text-muted text-center">شما در حال حاضر @Model.Count() مورد در سبد خرید خود دارید.</p>
-                            <form method="post" action="checkout1.html">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th colspan="2">محصول</th>
-                                            <th>تعداد</th>
-                                            <th>قیمت واحد </th>
-                                            <th>مبلغ تخفیف</th>
-                                            <th colspan="2">مجموع</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    <a href="/ShowProduct/@item.ProductId">
-                                                        <img src="~/Images/ProductImages/Thumbnail/@item.ProductImage" alt="@item.ProductTitle">
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a href="/ShowProduct/@item.ProductId">@item.ProductTitle</a>
-                                                </td>
-                                                <td>
-                                                    <input style="width: 50px; text-align: center; height: 30px;" type="text" name="points" class="form-control input-number" value="@item.Count" min="0" max="100" onchange="commandOrder(@item.ProductId,$(this).val())">
-                                                </td>
-                                                <td>@item.ProductPrice.ToString("#,0") تومان</td>
-                                                <td>@item.DisCount.ToString("#,0") تومان</td>
-                                                <td> @item.Sum.ToString("#,0") تومان</td>
-                                                <td>
-                                                    <a onclick="commandOrder(@item.ProductId,0)">
-                                                        <i class="fa fa-trash-o"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        }
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <th colspan="5">جمع کل</th>
-                                            <th colspan="2">@totalPrice.ToString("#,0") تومان</th>
-                                        </tr>
-                                        </tfoot>
-
-
-                                    </table>
-                                </div>
-                                <!-- /.table-responsive-->
-                                <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
-                                    <div class="left">
-                                        <a href="/" class="btn btn-outline-secondary"><i class="fa fa-chevron-right"></i>ادامه خرید</a>
-                                    </div>
-                                    <div class="right">
-                                        <a href="/ShopItems/Payment" class="btn btn-primary">تاییدوپرداخت<i class="fa fa-chevron-left"></i></a>
-                                    </div>
-                                </div>
-                            </form>
-                        }
-                        else
-                        {
-                            <div class="text-center">
-                                <div>
-                                    <center>
-                                        <img src="~/Content/SiteFile/img/cart-empty.gif" loading="lazy" width="500" height="285">
-                                    </center>
-
-                                    <div class="alert alert-danger">
-                                        سبد خرید شما خالی است
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
+<div class="row basket-style">
+    <section class="border-radius">
+        <div class="tbl-head">
+            <ul>
+                <li> شرح محصول </li>
+                <li> تعداد و وزن </li>
+                <li> قیمت واحد </li>
+                <li> قیمت کل </li>
+            </ul>
         </div>
-    </div>
+        <div class="hidden-head">
+            سبد خرید شما
+        </div>
+        <div class="tbl-body">
+            @foreach (var item in Model)
+            {
+                <!-- Each Row -->
+                <ul>
+                    <li>
+                        <a href="" class="product-image">
+                            <img class="border-radius" src="~/Images/ProductImages/Thumbnail/@item.Product_Image">
+                        </a>
+                        <div class="product-info-left-side">
+                            <a href="" class="product-title">
+                                <p> @item.Product_Title </p>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <p>
+                            <input type="number" name="points" min="1" max="30" step="1" value="@item.Count" onchange="commandOrder(@item.Product_Id,$(this).val())">
+                        </p>
+                    </li>
+                    <li>
+                        <label class="lbl-hidden"> قیمت واحد : </label> <span class="lbl-price"> @item.Product_Price.ToString("#,0") تومان </span>
+                    </li>
+                    <li>
+                        <label class="lbl-hidden"> قیمت کل : </label> <span class="lbl-price"> @item.Sum.ToString("#,0") تومان </span>
+
+                        <a onclick="commandOrder(@item.Product_Id,0)">
+                            <i class="delete-button">X</i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- End Each Row -->
+            }
+        </div>
+        <div class="tbl-footer">
+            <ul>
+                <li> قیمت کل : <span> @Model.Sum(p => p.Sum).ToString("#,0") تومان </span></li>
+                <li class="total-price"> مبلغ قابل پرداخت : <span> @Model.Sum(p => p.Sum).ToString("#,0") تومان </span></li>
+            </ul>
+        </div>
+        <a href="/ShopItems/Payment" type="button" class="border-radius submit-basket-button"> تایید وپرداخت </a>
+        <div class="clearfix"></div>
+    </section>
 </div>

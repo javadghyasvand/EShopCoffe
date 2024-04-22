@@ -1,0 +1,51 @@
+﻿@using System.Web.UI.WebControls
+@model IEnumerable<EShopCoffee.Models.DataLayer.Blog_Group>
+
+<table class="table table-hover text-center" dir="rtl">
+    <thead>
+        <tr>
+            <th>دسته بندی وبلاگ</th>
+            <th>وضعیت</th>
+            <th>ویرایش/عدم نمایش</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="Prop_@item.GroupId">
+                <td>@item.GroupName</td>
+                @if (item.IsDeleted)
+                {
+                    <td>عدم نمایش</td>
+                }
+                else
+                {
+                    <td> نمایش</td>
+                }
+
+            <td>
+                <a onclick="EditBlog(@item.GroupId)" class="btn btn-sm btn-warning" title="ویرایش ویژگی">
+                    <i class="fa fa-edit"></i>
+                </a>
+                @if (item.IsDeleted)
+                {
+                    <a onclick="ShowBlog(@item.GroupId)" class="btn btn-sm btn-success" title="حذف ویژگی">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                }
+                else
+                {
+
+                    <a onclick="DeleteBlog(@item.GroupId)" class="btn btn-sm btn-danger" title="حذف ویژگی">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                 
+                }
+
+            </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

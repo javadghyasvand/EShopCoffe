@@ -17,11 +17,5 @@ namespace MyShop.Utilities
             var result = price * (100-discount) / 100;
             return result;
         }
-        public static long DiscountPrice(long price, int discount)
-        {
-            var result = DiscountCalc(price, discount);
-            result = price - result;
-            return result;
-        }
     }
 }

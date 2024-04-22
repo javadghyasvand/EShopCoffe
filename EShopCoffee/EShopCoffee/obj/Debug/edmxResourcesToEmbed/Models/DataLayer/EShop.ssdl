@@ -1,5 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="EShopCoffe_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Blog_Group">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="GroupShortDescription" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Blog_Post">
+    <Key>
+      <PropertyRef Name="postId" />
+    </Key>
+    <Property Name="postId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="groupId" Type="int" Nullable="false" />
+    <Property Name="post_Title" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="post_ShortDiscription" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="post_Discription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="post_Visit" Type="int" />
+    <Property Name="post_datetime" Type="datetime" />
+    <Property Name="post_Image" Type="nvarchar" MaxLength="550" />
+    <Property Name="post_Video" Type="nvarchar" MaxLength="550" />
+  </EntityType>
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="OrderID" />
@@ -18,10 +41,6 @@
     <Property Name="ProductID" Type="bigint" Nullable="false" />
     <Property Name="Price" Type="bigint" Nullable="false" />
     <Property Name="Count" Type="int" Nullable="false" />
-    <Property Name="Discountprice" Type="bigint" Nullable="false" />
-    <Property Name="TotalPrice" Type="bigint" Nullable="false" />
-    <Property Name="ProductImage" Type="nvarchar" MaxLength="250" Nullable="false" />
-    <Property Name="ProductTitle" Type="nvarchar" MaxLength="550" Nullable="false" />
   </EntityType>
   <EntityType Name="PersntOff">
     <Key>
@@ -42,7 +61,7 @@
     <Property Name="Product_Id" Type="bigint" Nullable="false" />
     <Property Name="UserId" Type="bigint" Nullable="false" />
     <Property Name="Parent_Id" Type="bigint" />
-    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" />
     <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="Comment" Type="nvarchar" MaxLength="850" Nullable="false" />
     <Property Name="CommentDate" Type="datetime" Nullable="false" />
@@ -127,6 +146,16 @@
     <Property Name="Product_Id" Type="bigint" Nullable="false" />
     <Property Name="Count" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="tblOstan">
     <Key>
       <PropertyRef Name="id" />
@@ -171,6 +200,18 @@
     <Property Name="User_State_ID" Type="int" />
     <Property Name="User_City_ID" Type="int" />
   </EntityType>
+  <Association Name="FK_Blog_Post_Blog_Group">
+    <End Role="Blog_Group" Type="Self.Blog_Group" Multiplicity="1" />
+    <End Role="Blog_Post" Type="Self.Blog_Post" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Blog_Group">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="Blog_Post">
+        <PropertyRef Name="postId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Order_Users">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="Order" Type="Self.Order" Multiplicity="*" />
@@ -412,6 +453,8 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="EShopCoffe_DBModelStoreContainer">
+    <EntitySet Name="Blog_Group" EntityType="Self.Blog_Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Blog_Post" EntityType="Self.Blog_Post" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PersntOff" EntityType="Self.PersntOff" Schema="dbo" store:Type="Tables" />
@@ -425,10 +468,15 @@
     <EntitySet Name="Product_Tags" EntityType="Self.Product_Tags" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShopCard" EntityType="Self.ShopCard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOstan" EntityType="Self.tblOstan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblShahrestan" EntityType="Self.tblShahrestan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TotalSell" EntityType="Self.TotalSell" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Blog_Post_Blog_Group" Association="Self.FK_Blog_Post_Blog_Group">
+      <End Role="Blog_Group" EntitySet="Blog_Group" />
+      <End Role="Blog_Post" EntitySet="Blog_Post" />
+    </AssociationSet>
     <AssociationSet Name="FK_Order_Users" Association="Self.FK_Order_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Order" EntitySet="Order" />

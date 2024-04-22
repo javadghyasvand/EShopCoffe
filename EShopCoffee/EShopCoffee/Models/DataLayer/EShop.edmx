@@ -5,6 +5,29 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="EShopCoffe_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Blog_Group">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="GroupShortDescription" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Blog_Post">
+          <Key>
+            <PropertyRef Name="postId" />
+          </Key>
+          <Property Name="postId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="groupId" Type="int" Nullable="false" />
+          <Property Name="post_Title" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="post_ShortDiscription" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="post_Discription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="post_Visit" Type="int" />
+          <Property Name="post_datetime" Type="datetime" />
+          <Property Name="post_Image" Type="nvarchar" MaxLength="550" />
+          <Property Name="post_Video" Type="nvarchar" MaxLength="550" />
+        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderID" />
@@ -23,10 +46,6 @@
           <Property Name="ProductID" Type="bigint" Nullable="false" />
           <Property Name="Price" Type="bigint" Nullable="false" />
           <Property Name="Count" Type="int" Nullable="false" />
-          <Property Name="Discountprice" Type="bigint" Nullable="false" />
-          <Property Name="TotalPrice" Type="bigint" Nullable="false" />
-          <Property Name="ProductImage" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="ProductTitle" Type="nvarchar" MaxLength="550" Nullable="false" />
         </EntityType>
         <EntityType Name="PersntOff">
           <Key>
@@ -47,7 +66,7 @@
           <Property Name="Product_Id" Type="bigint" Nullable="false" />
           <Property Name="UserId" Type="bigint" Nullable="false" />
           <Property Name="Parent_Id" Type="bigint" />
-          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
           <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="850" Nullable="false" />
           <Property Name="CommentDate" Type="datetime" Nullable="false" />
@@ -132,6 +151,16 @@
           <Property Name="Product_Id" Type="bigint" Nullable="false" />
           <Property Name="Count" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="tblOstan">
           <Key>
             <PropertyRef Name="id" />
@@ -176,6 +205,18 @@
           <Property Name="User_State_ID" Type="int" />
           <Property Name="User_City_ID" Type="int" />
         </EntityType>
+        <Association Name="FK_Blog_Post_Blog_Group">
+          <End Role="Blog_Group" Type="Self.Blog_Group" Multiplicity="1" />
+          <End Role="Blog_Post" Type="Self.Blog_Post" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Blog_Group">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="Blog_Post">
+              <PropertyRef Name="postId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Order_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
@@ -417,6 +458,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EShopCoffe_DBModelStoreContainer">
+          <EntitySet Name="Blog_Group" EntityType="Self.Blog_Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Blog_Post" EntityType="Self.Blog_Post" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersntOff" EntityType="Self.PersntOff" Schema="dbo" store:Type="Tables" />
@@ -430,10 +473,15 @@
           <EntitySet Name="Product_Tags" EntityType="Self.Product_Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShopCard" EntityType="Self.ShopCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOstan" EntityType="Self.tblOstan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblShahrestan" EntityType="Self.tblShahrestan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TotalSell" EntityType="Self.TotalSell" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Blog_Post_Blog_Group" Association="Self.FK_Blog_Post_Blog_Group">
+            <End Role="Blog_Group" EntitySet="Blog_Group" />
+            <End Role="Blog_Post" EntitySet="Blog_Post" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_Users" Association="Self.FK_Order_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Order" EntitySet="Order" />
@@ -527,7 +575,7 @@
           <Property Name="Product_Id" Type="Int64" Nullable="false" />
           <Property Name="UserId" Type="Int64" Nullable="false" />
           <Property Name="Parent_Id" Type="Int64" />
-          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="850" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CommentDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -939,7 +987,14 @@
             <End Role="Product_EShop" EntitySet="Product_EShop" />
             <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="sysdiagrams" EntityType="EShopCoffe_DBModel.sysdiagrams" />
+          <EntitySet Name="Blog_Group" EntityType="EShopCoffe_DBModel.Blog_Group" />
+          <EntitySet Name="Blog_Post" EntityType="EShopCoffe_DBModel.Blog_Post" />
+          <AssociationSet Name="FK_Blog_Post_Blog_Group" Association="EShopCoffe_DBModel.FK_Blog_Post_Blog_Group">
+            <End Role="Blog_Group" EntitySet="Blog_Group" />
+            <End Role="Blog_Post" EntitySet="Blog_Post" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="TotalSell">
           <Key>
             <PropertyRef Name="Total_Id" />
@@ -1028,10 +1083,6 @@
           <Property Name="Count" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="EShopCoffe_DBModel.FK_OrderDetails_Order" FromRole="OrderDetails" ToRole="Order" />
           <NavigationProperty Name="Product_EShop" Relationship="EShopCoffe_DBModel.FK_OrderDetails_Product_EShop" FromRole="OrderDetails" ToRole="Product_EShop" />
-          <Property Name="Discountprice" Type="Int64" Nullable="false" />
-          <Property Name="TotalPrice" Type="Int64" Nullable="false" />
-          <Property Name="ProductImage" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ProductTitle" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Order_Users">
           <End Type="EShopCoffe_DBModel.Users" Role="Users" Multiplicity="1" />
@@ -1069,7 +1120,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Blog_Group">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GroupShortDescription" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Blog_Post" Relationship="EShopCoffe_DBModel.FK_Blog_Post_Blog_Group" FromRole="Blog_Group" ToRole="Blog_Post" />
+        </EntityType>
+        <EntityType Name="Blog_Post">
+          <Key>
+            <PropertyRef Name="postId" />
+          </Key>
+          <Property Name="postId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="groupId" Type="Int32" Nullable="false" />
+          <Property Name="post_Title" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="post_ShortDiscription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="post_Discription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="post_Visit" Type="Int32" />
+          <Property Name="post_datetime" Type="DateTime" Precision="3" />
+          <Property Name="post_Image" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="post_Video" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Blog_Group" Relationship="EShopCoffe_DBModel.FK_Blog_Post_Blog_Group" FromRole="Blog_Post" ToRole="Blog_Group" />
+        </EntityType>
+        <Association Name="FK_Blog_Post_Blog_Group">
+          <End Type="EShopCoffe_DBModel.Blog_Group" Role="Blog_Group" Multiplicity="1" />
+          <End Type="EShopCoffe_DBModel.Blog_Post" Role="Blog_Post" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Blog_Group">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="Blog_Post">
+              <PropertyRef Name="postId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1251,15 +1349,47 @@
           <EntitySetMapping Name="OrderDetails">
             <EntityTypeMapping TypeName="EShopCoffe_DBModel.OrderDetails">
               <MappingFragment StoreEntitySet="OrderDetails">
-                <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
-                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="Discountprice" ColumnName="Discountprice" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="DetailId" ColumnName="DetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EShopCoffe_DBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blog_Group">
+            <EntityTypeMapping TypeName="EShopCoffe_DBModel.Blog_Group">
+              <MappingFragment StoreEntitySet="Blog_Group">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="GroupShortDescription" ColumnName="GroupShortDescription" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blog_Post">
+            <EntityTypeMapping TypeName="EShopCoffe_DBModel.Blog_Post">
+              <MappingFragment StoreEntitySet="Blog_Post">
+                <ScalarProperty Name="post_Video" ColumnName="post_Video" />
+                <ScalarProperty Name="post_Image" ColumnName="post_Image" />
+                <ScalarProperty Name="post_datetime" ColumnName="post_datetime" />
+                <ScalarProperty Name="post_Visit" ColumnName="post_Visit" />
+                <ScalarProperty Name="post_Discription" ColumnName="post_Discription" />
+                <ScalarProperty Name="post_ShortDiscription" ColumnName="post_ShortDiscription" />
+                <ScalarProperty Name="post_Title" ColumnName="post_Title" />
+                <ScalarProperty Name="groupId" ColumnName="groupId" />
+                <ScalarProperty Name="postId" ColumnName="postId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

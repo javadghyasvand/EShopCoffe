@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -26,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,14 +47,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -65,17 +66,14 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -120,6 +118,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -141,6 +140,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Blog_GroupController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Blog_PostController.cs" />
     <Compile Include="Areas\Admin\Controllers\Product_EShopController.cs" />
     <Compile Include="Areas\Admin\Controllers\Product_GroupsController.cs" />
     <Compile Include="Areas\Admin\Controllers\Product_PropertyController.cs" />
@@ -150,7 +151,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManegeEmailsController.cs" />
-    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ShopCartController.cs" />
@@ -158,6 +158,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataLayer\Blog_Group.cs">
+      <DependentUpon>EShop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataLayer\Blog_Post.cs">
+      <DependentUpon>EShop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\Blog_Post_MetaData.cs" />
     <Compile Include="Models\DataLayer\EShop.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -212,6 +219,9 @@
     <Compile Include="Models\DataLayer\ShopCard.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataLayer\sysdiagrams.cs">
+      <DependentUpon>EShop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataLayer\tblOstan.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
@@ -224,6 +234,7 @@
     <Compile Include="Models\DataLayer\Users.cs">
       <DependentUpon>EShop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MetaData\Blog_Group_MetaData.cs" />
     <Compile Include="Models\MetaData\OrderDetails_MetaData.cs" />
     <Compile Include="Models\MetaData\Order_MetaData.cs" />
     <Compile Include="Models\MetaData\PersntOff_MetaData.cs" />
@@ -237,6 +248,7 @@
     <Compile Include="Models\MetaData\Product_Property_MetaData.cs" />
     <Compile Include="Models\MetaData\Roles_MetaData.cs" />
     <Compile Include="Models\MetaData\ShopCard_MetaData.cs" />
+    <Compile Include="Models\MetaData\sysdiagrams_MetaData.cs" />
     <Compile Include="Models\MetaData\tblOstan_MetaData.cs" />
     <Compile Include="Models\MetaData\tblShahrestan_MetaData.cs" />
     <Compile Include="Models\MetaData\TotalSell_MetaData.cs" />
@@ -317,7 +329,6 @@
     <Content Include="Content\Asset\Images\Logo\Login1.png" />
     <Content Include="Content\Asset\Images\Logo\Login2.jpg" />
     <Content Include="Content\Asset\Images\Logo\Logo.ico" />
-    <Content Include="Content\SiteFile\img\cart-empty.gif" />
     <Content Include="Content\SiteFile\img\LogoEN.png" />
     <Content Include="Content\Asset\Images\Logo\Mug.ico" />
     <Content Include="Content\Asset\Images\Logo\NotFound.jpg" />
@@ -1402,6 +1413,18 @@
     <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\WyekanBold.eot" />
     <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\WyekanBold.ttf" />
     <Content Include="Content\SiteFile\Kendo UI v2014.1.318 - ShamsiDatePicker\fonts\WyekanBold.woff" />
+    <Content Include="Areas\Admin\Views\Blog_Group\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog_Group\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog_Group\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog_Group\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog_Group\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog_Group\BlogGroupsList.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog_Post\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog_Post\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog_Post\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog_Post\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog_Post\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog_Post\BlogPostList.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery.modal.min.js" />
@@ -1462,9 +1485,6 @@
     <Content Include="Views\ShopItems\Index.cshtml" />
     <Content Include="Views\ShopItems\Order.cshtml" />
     <Content Include="Views\Home\Advantages.cshtml" />
-    <Content Include="Views\Orders\OrderShow.cshtml" />
-    <Content Include="Views\Orders\Index.cshtml" />
-    <Content Include="Views\Orders\OrderList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1522,10 +1542,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

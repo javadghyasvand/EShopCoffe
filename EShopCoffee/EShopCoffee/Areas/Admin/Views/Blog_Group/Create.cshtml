@@ -1,0 +1,56 @@
+﻿@model EShopCoffee.Models.DataLayer.Blog_Group
+
+@{
+    ViewBag.Title = "CreateBlogGroup";
+}
+
+<div class="container">
+    <div class="box">
+        <div class="text-center mb-3">
+            @using (Ajax.BeginForm("Create", "Blog_Group",FormMethod.Post,new AjaxOptions()
+            {
+                OnSuccess = "SuccessProperty",
+                UpdateTargetId = "ListBlogGroup"
+            }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <div class="row" style="text-align: right;">
+                        <div class="col-lg-12">
+                            <h3 class="text-center color_defult">افزودن گروه </h3>
+                            <div>
+                                <div class="form-group">
+                                    <label>عنوان گروه</label>
+                                    @Html.EditorFor(model => model.GroupName, new { htmlAttributes = new { @class = "form-control" } })
+                                    <p>
+                                        @Html.ValidationMessageFor(model => model.GroupName, "", new { @class = "text-danger" })
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <label>توضیحات </label>
+                                    @Html.EditorFor(model => model.GroupShortDescription, new { htmlAttributes = new { @class = "form-control" } })
+                                    <p>
+                                        @Html.ValidationMessageFor(model => model.GroupShortDescription, "", new { @class = "text-danger" })
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <label>عدم نمایش </label>
+                                    @Html.EditorFor(model => model.IsDeleted, new { htmlAttributes = new { @class = "form-control" } })
+                                    <p>
+                                        @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="text-center col-lg-12 mt-3 mb-3">
+                                    <button type="submit" class="btn btn-primary w-25">ثبت<i class="fa fa-save"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            } 
+        </div>
+    </div>
+</div>

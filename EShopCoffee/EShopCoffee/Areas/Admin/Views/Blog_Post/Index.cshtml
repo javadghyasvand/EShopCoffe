@@ -1,0 +1,21 @@
+﻿@model IEnumerable<EShopCoffee.Models.DataLayer.Blog_Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="customer-orders" class="container">
+    <div class="box">
+        <h3 class="text-center color_defult">وبلاگ</h3>
+        <hr />
+        <div class="text-center mb-3">
+            <a href="/Admin/Blog_Post/Create" class="btn btn-primary">
+                 افزودن بلاگ
+                <i class="fa fa-plus-circle"></i>
+            </a>
+        </div>
+        <div class="table-responsive" id="ListBlogPost">
+            @Html.Action("BlogPostList", "Blog_Post")
+        </div>
+    </div>
+</div>
